@@ -1,0 +1,984 @@
+﻿Bug Fix,Game,Update Date,Update ID,Category,is_2D
+fixed a worldgen issue with the temple's doors not being accessible,Terraria,2020-06-04,0,bounds,True
+fixed an issue where tax collector fell out of the bottom of the map but didn’t die,Terraria,2020-05-16,5,bounds,True
+fixed an issue where some goblins would get stuck in doors and sink into the floor,Terraria,2020-05-20,2,collision,True
+fixed an issue where lightning sentries that were placed on sloped blocks underwater would sink into the ground,Terraria,2020-05-16,5,collision,True
+fixed an issue where waterfalls would fall through thin ice,Terraria,2020-05-16,5,collision,True
+fixed an issue where waterfalls running down a slope would sometimes tunnel through a block and come out the other side,Terraria,2020-05-16,5,collision,True
+fixed an issue where sroller’s hitbox was off center,Terraria,2020-05-16,5,collision,True
+fixed a visual issue where large zombies would slightly clip into the ground,Terraria,2020-05-16,5,collision,True
+fixed an issue where wall-crawling blood crawlers and sand poachers had an off center hitbox,Terraria,2020-05-16,5,collision,True
+"fixed flame trap's flames hitting targets behind, below, and on top the flame trap",Terraria,2020-05-16,5,collision,True
+fixed an issue where chain guillotine had a really weird hitbox,Terraria,2020-05-16,5,collision,True
+fixed a collision issue where yoyos could get stuck in blocks when underwater,Terraria,2020-05-16,5,collision,True
+fixed an issue where falling stars would clip through conveyor belts and end up embedded in the dirt,Terraria,2020-05-16,5,collision,True
+fixed a rare bug in bubble tag that could change your hurtbox shape while in a bubble,Brawlhalla,2019-12-18,7,collision,True
+bow down air: fixed a case where the aerial version could hit too close to the user,Brawlhalla,2019-08-08,14,collision,True
+fixed an issue where the toy tank mount was too tall,Terraria,2020-06-04,0,graphical,True
+"fixed some npc smoothing issues with king/queen slime, golem, wall of flesh and teleporting casters",Terraria,2020-06-04,0,graphical,True
+fixed a visual issue with several very tall hats displaying pixels by the player's feet,Terraria,2020-06-04,0,graphical,True
+fixed certain back accessories/outfits not drawing properly in the character selection menu,Terraria,2020-06-04,0,graphical,True
+fixed a minor pixel issue with the gato pet,Terraria,2020-06-04,0,graphical,True
+fixed a minor frame animation issue with the large volcano decorative item,Terraria,2020-06-04,0,graphical,True
+fixed on of the forest backgrounds having a pixel artifact,Terraria,2020-06-04,0,graphical,True
+fixed a sprite issue with bowl of soup,Terraria,2020-05-23,1,graphical,True
+fixed flail chains drawing incorrectly while on some mounts,Terraria,2020-05-20,2,graphical,True
+fixed an issue where texture packs would not work for tiles without a game restart,Terraria,2020-05-20,2,graphical,True
+fixed some visual effects acting unusually when time is sped up with journey mode/sleeping/sundials,Terraria,2020-05-20,2,graphical,True
+fixed mini minotaur not animating properly while flying,Terraria,2020-05-20,2,graphical,True
+"the stone slab had the wrong blending, preventing it from being used nicely with most other blocks, and this has been fixed. however, we listened to your concerns, and have added an accent stone slab block, which will function the same as the old stone slab did",Terraria,2020-05-16,5,graphical,True
+fixed an issue where some wings would produce light even in vanity slots,Terraria,2020-05-16,5,graphical,True
+fixed an issue where flying mounts would very slowly increase in height over time,Terraria,2020-05-16,5,graphical,True
+fixed a background issue where black borders could be seen at the bottom of the underworld’s background,Terraria,2020-05-16,5,graphical,True
+fixed some issues with black bars at the bottom of the sky right at the edge of the underground layer,Terraria,2020-05-16,5,graphical,True
+fixed an issue where the top edge of the the underground layer’s backwall would flicker into visibility on screen instead of off screen,Terraria,2020-05-16,5,graphical,True
+fixed a number of visual issues with space creature costume,Terraria,2020-05-16,5,graphical,True
+fixed some spriting issues on the raincoat,Terraria,2020-05-16,5,graphical,True
+fixed a stray blue pixel on the eater of worlds mask,Terraria,2020-05-16,5,graphical,True
+"fixed a wide variety of cape related transparency issues, which should result in capes looking better overall",Terraria,2020-05-16,5,graphical,True
+fixed a number of issues with and dramatically improved the way shields and capes draw/layer in relation to each other,Terraria,2020-05-16,5,graphical,True
+fixed a visual issue where the kimono would appear in front of shoes accessories,Terraria,2020-05-16,5,graphical,True
+fixed a visual issue where players with lamia/mermaid tail would somehow visually wear boots despite having no feet,Terraria,2020-05-16,5,graphical,True
+fixed an issue where blindfolds drew over the player’s hair instead of under,Terraria,2020-05-16,5,graphical,True
+fixed an issue where dyes for face accessories and the familiar wig would not show up properly on the player’s map head icon,Terraria,2020-05-16,5,graphical,True
+fixed an issue where twilight hair dye only looked right when also using twilight armor dye,Terraria,2020-05-16,5,graphical,True
+"fixed an issue where a number of armors (aaron’s, vortex, nebula, obsidian) had an unsightly band of graphical issues around the waist",Terraria,2020-05-16,5,graphical,True
+fixed an issue where shield of cthulhu would be slightly cut off graphically when dashing,Terraria,2020-05-16,5,graphical,True
+fixed some issues with the way belt accessories display on the player during various animation frames,Terraria,2020-05-16,5,graphical,True
+fixed an issue where wearing a full set of lunar armor would cause party hair dye to generate excessive amounts of confetti,Terraria,2020-05-16,5,graphical,True
+"fixed an issue where master ninja gear, tabi, and blackbelt created smoke that reacted oddly to dyes",Terraria,2020-05-16,5,graphical,True
+fixed an issue where forbidden armor’s set bonus could create a spammy spray of sparks,Terraria,2020-05-16,5,graphical,True
+"fixed several hundred pet/dye combinations that came out either broken, invisible, or showing no dye at all, most famously, zephyr fish and any hades dye",Terraria,2020-05-16,5,graphical,True
+"fixed a visual issue related to holding up while grappling to platforms, and then using weapons",Terraria,2020-05-16,5,graphical,True
+fixed a sprite issue that caused some crimson and underground background walls to not loop smoothly when moving horizontally,Terraria,2020-05-16,5,graphical,True
+fixed some stray pixels in a surface crimson background,Terraria,2020-05-16,5,graphical,True
+fixed a stray pixel that would flicker off and on in the goldfish bowl,Terraria,2020-05-16,5,graphical,True
+fixed a stray pixel on pumpkin doors,Terraria,2020-05-16,5,graphical,True
+fixed an issue where pumpkin blocks were missing some pixels,Terraria,2020-05-16,5,graphical,True
+fixed the waterleaf sprout sprite so that it isn’t so hard to see,Terraria,2020-05-16,5,graphical,True
+"fixed a subtle issue that almost no one noticed, where ancient manipulator’s glow effect was off center by a few pixels",Terraria,2020-05-16,5,graphical,True
+fixed an issue where goblin tinkerer’s sprite looked blurry/distorted,Terraria,2020-05-16,5,graphical,True
+fixed a spriting issue where a number of bipedal enemies had subtly broken walking animations,Terraria,2020-05-16,5,graphical,True
+fixed some extremely subtle stray pixels floating near crimson axe enemies,Terraria,2020-05-16,5,graphical,True
+fixed a number of minor sprite issues where pixels did not use the proper 2x2 format,Terraria,2020-05-16,5,graphical,True
+"fixed a visual issue that happened if a player went underground during a blood moon, which would break the blood moon shader effect for the rest of that gameplay session",Terraria,2020-05-16,5,graphical,True
+fixed a layering issue where fishing line draw in front of money trough but the fishing rod drew behind it,Terraria,2020-05-16,5,graphical,True
+fixed an issue where dryad’s blessing leaves would turn black on certain lighting settings,Terraria,2020-05-16,5,graphical,True
+fixed an issue where meteorite ore flashed oddly and turned transparent when using spelunker potion,Terraria,2020-05-16,5,graphical,True
+fixed an issue where a number of half-blocks put alongside a column of another block would have graphical issues,Terraria,2020-05-16,5,graphical,True
+fixed a visual issue where unhammered dirt blocks surrounded by hammered dirt blocks on both sides would display incorrectly,Terraria,2020-05-16,5,graphical,True
+fixed an issue where rainbow bricks lost their rainbow effect when hammered,Terraria,2020-05-16,5,graphical,True
+fixed an issue where large blocks of placed spikes would turn black in the center,Terraria,2020-05-16,5,graphical,True
+fixed an issue where sloped rain/snow clouds did not show rain/snow in the sloped corner,Terraria,2020-05-16,5,graphical,True
+fixed a very hard to encounter issue where placing a ton of christmas trees at various light levels would result in some of them glowing,Terraria,2020-05-16,5,graphical,True
+fixed a visual issue where prickly pear flowers always looked cactus green even on infected variants of cacti,Terraria,2020-05-16,5,graphical,True
+fixed a visual issue on dungeon tile walls that made it look like solid chunks of walls were not fully filled in,Terraria,2020-05-16,5,graphical,True
+fixed an issue where player-placed obsidian brick walls were dramatically darker than natural obsidian brick walls,Terraria,2020-05-16,5,graphical,True
+fixed a framing issue with marble walls that caused them to have unwanted lines,Terraria,2020-05-16,5,graphical,True
+fixed a visual issue with bone walls sometimes being very big and layering improperly,Terraria,2020-05-16,5,graphical,True
+fixed an issue where deep sky blue paint was actually deep green on some tiles,Terraria,2020-05-16,5,graphical,True
+fixed a multiplayer issue where king slime would sometimes be too large,Terraria,2020-05-16,5,graphical,True
+"fixed an issue where angry tumblers would visually draw behind doors and actuated blocks, which made it hard to see them",Terraria,2020-05-16,5,graphical,True
+fixed an issue where stardust cells would sometimes be incredibly huge,Terraria,2020-05-16,5,graphical,True
+fixed an issue where ''ghost mode'' old one's army enemies would cause unusual water ripples,Terraria,2020-05-16,5,graphical,True
+fixed an issue where daybreak and bone javelin spears would layer incorrectly behind flying dutchmen,Terraria,2020-05-16,5,graphical,True
+fixed an issue where the book of skulls projectile flashed excessively in high lighting situations,Terraria,2020-05-16,5,graphical,True
+"fixed an issue where throwing dozens of spelunker glowsticks would make sparkles for every glowstick, making treasure sparkle way too much",Terraria,2020-05-16,5,graphical,True
+potentially fixed a rare issue where flying pygmy minions that were submerged in lava would turn into a straight black line while attacking enemies,Terraria,2020-05-16,5,graphical,True
+fixed an issue where minions would cut various tiles like cobwebs or grass with their body,Terraria,2020-05-16,5,graphical,True
+fixed a visual issue where the old one’s army pets had rough edges/scaling when they were floating at an angle,Terraria,2020-05-16,5,graphical,True
+fixed the cursed sapling pet not showing dyes if summoned via its item,Terraria,2020-05-16,5,graphical,True
+fixed an issue where 6th accessory slot dye in normal mode would rarely cause dye issues on other accessories,Terraria,2020-05-16,5,graphical,True
+"fixed an issue where the dresser ui interface would only show generic hair, not your current hair",Terraria,2020-05-16,5,graphical,True
+fixed an issue where quitting a world while holding a torch would result in your player menu character holding their hand out,Terraria,2020-05-16,5,graphical,True
+fixed an issue where celestial backgrounds would remain visible for an extended time on the main menu after quitting out when the background was visible,Terraria,2020-05-16,5,graphical,True
+fixed a multiplayer issue where brand of the inferno’s special animations and sounds would not show for other players,Terraria,2020-05-16,5,graphical,True
+fixed an issue where animated blasters’ weapon skins wouldn’t animate during wall cling,Brawlhalla,2020-06-10,0,graphical,True
+fixed an issue where animated blasters’ weapon skins wouldn’t animate during a ground pound,Brawlhalla,2020-06-10,0,graphical,True
+fixed some body part layering issues in the flex taunt,Brawlhalla,2020-06-10,0,graphical,True
+fixed an issue where isaiah’s blaster signatures were showing the wrong hand assets,Brawlhalla,2020-05-20,1,graphical,True
+fixed a problem where onyx’s wing dissipation didn’t show up for the neutral gauntlet and added the missing fx to onyx’s wing,Brawlhalla,2020-05-20,1,graphical,True
+fixed an issue where one of caspian’s katar skins wouldn’t swap correctly for a few frames during his down signature,Brawlhalla,2020-05-20,1,graphical,True
+fixed some body layering issues with the gauntlet platforming & base kit animation,Brawlhalla,2020-03-16,3,graphical,True
+fixed layering issues on charged cannon throw animation,Brawlhalla,2020-03-16,3,graphical,True
+"fixed some animation & body part layering issues with unarmed neutral, side, & down light attacks",Brawlhalla,2020-03-16,3,graphical,True
+fixed character asset layering issues with the flex and facepalm taunts,Brawlhalla,2020-03-16,3,graphical,True
+fixed a visual bug where a squiggle appears on diana’s neutral bow on hit,Brawlhalla,2020-02-26,4,graphical,True
+fixed a bug that would cause animated skins to stop playing when picking up a gadget,Brawlhalla,2020-02-05,5,graphical,True
+fixed an issue where kaya’s hit effects would result in bubble effects instead of ice effects when brawling against a pearl,Brawlhalla,2019-12-18,7,graphical,True
+fixed a bug where some skin displays in the store would be frozen on a single frame,Brawlhalla,2019-12-04,8,graphical,True
+fixed a bug where epic crossovers didn’t use their correct idle animation on the meet the legends page,Brawlhalla,2019-10-10,11,graphical,True
+rayman down axe: fixed a case that could incorrectly prevent the ground collision from playing,Brawlhalla,2019-09-20,12,graphical,True
+fixed a visual bug on xavier woods that would cause big e to disappear for 1 frame,Brawlhalla,2019-08-29,13,graphical,True
+fixed a shadow that would flip on a forearm in the rock’s character select animation,Brawlhalla,2019-08-29,13,graphical,True
+fixed a bug causing princess bubblegum’s blasters to not correctly animate inside the ui,Brawlhalla,2019-07-17,15,graphical,True
+ulgrim side lance: fixed a case where ulgrim’s side lance dissipation fx would play at the wrong time,Brawlhalla,2019-07-17,15,graphical,True
+added bent foot views to skins missing them. fixes certain skins sometimes having gray toes in switch craft,Brawlhalla,2019-06-26,16,graphical,True
+"technically a fix, changed a very long running code typo that made crate potion have an entirely incorrect recipe. now takes amber, moonglow, shiverthorn, and waterleaf",Terraria,2020-06-04,0,info,True
+fixed a noun/verb issue with a death message,Terraria,2020-06-04,0,info,True
+fixed some item tooltips,Terraria,2020-06-04,0,info,True
+fixed some punctuation issues with town happiness text,Terraria,2020-06-04,0,info,True
+fixed light lamia's bestiary entry not showing them as being in the hallow desert,Terraria,2020-06-04,0,info,True
+fixed coral and seashells not matching their tile placement preview,Terraria,2020-06-04,0,info,True
+fixed santa claus having a traveling merchant party quote instead of his own,Terraria,2020-06-04,0,info,True
+fixed team nameplates no longer showing the healthbars of damaged teammates,Terraria,2020-05-23,1,info,True
+fixed an issue where a lot of non-gore objects were hidden by blood/gore settings,Terraria,2020-05-23,1,info,True
+fixed a couple of tooltip typos,Terraria,2020-05-23,1,info,True
+fixed some consistency issues with ninja gear tooltips,Terraria,2020-05-23,1,info,True
+fixed certain cases of text getting random newlines,Terraria,2020-05-23,1,info,True
+fixed obsidian sinks using only obsidian instead of hellstone,Terraria,2020-05-20,2,info,True
+fixed depth meter displaying incorrect height biome when using camera-moving items,Terraria,2020-05-20,2,info,True
+fixed some item spelling concerns and grammatical issues with npc happiness text,Terraria,2020-05-20,2,info,True
+fixed a number of edge cases where things like mount damage or shield of cthulhu dashing would not register on the dps meter,Terraria,2020-05-16,5,info,True
+"fixed an issue where stopwatch wouldn’t correctly display player speed while on some mounts, like while falling with the slime mount",Terraria,2020-05-16,5,info,True
+fixed an issue where smart select did not suggest desert fossil for extractinator,Terraria,2020-05-16,5,info,True
+"fixed a number of crafting inconsistencies with required crafting stations for different types of platforms. most are by hand now, but a handful require special stations",Terraria,2020-05-16,5,info,True
+fixed a bunch of crafting station inconsistencies with furniture sets,Terraria,2020-05-16,5,info,True
+"fixed an issue where picking up a lot of coins would give the correct amount of money, but the money displayed on screen was incorrect",Terraria,2020-05-16,5,info,True
+fixed a message about slime rain ending when quitting out of a slime raining world and joining one that has no slime rain,Terraria,2020-05-16,5,info,True
+fixed a layering issue where a female character’s bare hand would be visible even when covered by gloves and shields,Terraria,2020-05-16,5,info,True
+fixed an issue where the keybrand wasn’t actually in your hand when you swung it,Terraria,2020-05-16,5,info,True
+fixed an issue where blocks would not be visible at all in extremely dark locations in the underworld on trippy/retro lighting,Terraria,2020-05-16,5,info,True
+fixed a multiplayer issue where opening a trap door so that it overlapped with stairs would permanently make that part of the stairs invisible until the server was reset,Terraria,2020-05-16,5,info,True
+fixed an issue where two different worm enemies of the same species would show a single health bar in the space between them that was an average of their total health,Terraria,2020-05-16,5,info,True
+fixed an issue where solar selenians did not show up on tally counter,Terraria,2020-05-16,5,info,True
+"spoiler: inventory, menu, and tooltips/text bugs",Terraria,2020-05-16,5,info,True
+fixed a tooltip issue where shroomite breastplate had an unlisted 13% increased range damage,Terraria,2020-05-16,5,info,True
+fixed a tooltip issue where paladin’s shield had knockback immunity but did not indicate that it did,Terraria,2020-05-16,5,info,True
+fixed a tooltip inaccuracy on spider armor indicating that it gave the wrong damage %,Terraria,2020-05-16,5,info,True
+fixed suspicious looking tentacle not using the ''expert'' exclusive tag and rarity color,Terraria,2020-05-16,5,info,True
+"fixed and clarified hundreds of other item and armor tooltips to give more specific numbers, explanations, and use more consistent terminology across the game",Terraria,2020-05-16,5,info,True
+"fixed a ton of incorrect/inconsistent item rarities, while acknowledging that item rarities across 5000 items are a rough science and there will always be some inconsistencies",Terraria,2020-05-16,5,info,True
+"fixed tons of typos, spelling errors, spacing issues, punctuation issues, and general tooltip, dialogue, and text polish across the entirety of the game",Terraria,2020-05-16,5,info,True
+"fixed a number of projectiles having incorrect names, displaying internal naming ids in death messages when they kill the player",Terraria,2020-05-16,5,info,True
+"fixed an issue where hardened sand was a crafting material but did not display as a material, and made infected hardened sands craftable into glass as well",Terraria,2020-05-16,5,info,True
+fixed an issue where glass clocks had two recipes,Terraria,2020-05-16,5,info,True
+fixed an issue where tax collector’s vanity set was sold from two different npcs,Terraria,2020-05-16,5,info,True
+fixed tavernkeep’s special progression messages displaying out of order,Terraria,2020-05-16,5,info,True
+fixed an issue where the angler would not say most of his dialogue,Terraria,2020-05-16,5,info,True
+fixed a multiplayer issue with angler dialogue where the world name would not be listed at all,Terraria,2020-05-16,5,info,True
+fixed some inconsistent or inaccurate fishing quest dialogue text,Terraria,2020-05-16,5,info,True
+fixed a number of continuing issues with npcs referring to corruption/demon altars while in crimson worlds,Terraria,2020-05-16,5,info,True
+fixed an issue where special text code (item icons and color) did not work on chest text,Terraria,2020-05-16,5,info,True
+fixed an issue where a number of pre-existing projectiles would not be visible to players joining a server,Terraria,2020-05-16,5,info,True
+fixed a long standing multiplayer issue where signs and gravestones would not show mouseover text for other players if they were created within that session,Terraria,2020-05-16,5,info,True
+fixed a multiplayer issue where players couldn’t see each other swinging old one’s army sentry staves,Terraria,2020-05-16,5,info,True
+"fixed an issue where being killed in pvp by inferno potion announces that you were killed by whatever was in the killer’s hand, such as a cell phone",Terraria,2020-05-16,5,info,True
+fixed an issue where the stylist’s menu had no visible indicator of which hairstyle you were selecting when using a gamepad,Terraria,2020-05-16,5,info,True
+fixed some inaccurate on-screen button help text relating to grappling when using a gamepad,Terraria,2020-05-16,5,info,True
+fixed an issue where the on screen gamepad zoom in/out text was using reversed buttons,Terraria,2020-05-16,5,info,True
+fixed a display bug on consoles where certain attacks would show the wrong hurtbox at the end of their animation in training mode and replays,Brawlhalla,2019-12-18,7,info,True
+fixed the names for the level lists of “big” and “3v3.”,Brawlhalla,2019-12-18,7,info,True
+fixed a bug where it would sometimes take an extra game to see updated progress for some missions,Brawlhalla,2019-12-18,7,info,True
+fixed a bug where the time shown for replay files would show “00” for the hour instead of “12” for games that occurred during the noon or midnight hours,Brawlhalla,2019-12-04,8,info,True
+fixed a bug where tournament mode high scores were not being displayed,Brawlhalla,2019-11-04,10,info,True
+fixed a rare bug that would cause collector’s bödvar to show up as not owned,Brawlhalla,2019-09-20,12,info,True
+fixed a bug where players’ earnings in the esports menu were sometimes displaying as $0.01 below their actual earnings,Brawlhalla,2019-08-08,14,info,True
+fixed a bug where spectators did not see the matchup numbers in ranked games,Brawlhalla,2019-08-08,14,info,True
+fixed a bug where custom kung foot games with team damage off would be listed as having team damage on,Brawlhalla,2019-07-17,15,info,True
+fixed trees not dropping acorns when grown on golf grass,Terraria,2020-06-04,0,persistence,True
+fixed an issue where several new items in fishing crates (mostly pets) were not dropping in multiplayer,Terraria,2020-06-04,0,persistence,True
+fixed an issue where sand traps would generate over furniture in worldgen,Terraria,2020-06-04,0,persistence,True
+fixed an issue where snake ropes would never vanish if the summoning player quits out of the server,Terraria,2020-06-04,0,persistence,True
+fixed dirt blocks not producing dirt when exploding on half-slabs,Terraria,2020-06-04,0,persistence,True
+fixed some falling blocks duplicating when dropping them on actuated half-slabs,Terraria,2020-06-04,0,persistence,True
+"fixed explosives counting as pvp damage, resulting in it not dropping coins when you were killed by them",Terraria,2020-05-23,1,persistence,True
+"fixed an issue where if the entire top of your world was covered with platforms, it would prevent meteors from spawning",Terraria,2020-05-23,1,persistence,True
+fixed an issue where hallowed trees on mowed hallow grass would drop normal wood,Terraria,2020-05-20,2,persistence,True
+fixed an issue where coin sparkles weren't appearing,Terraria,2020-05-20,2,persistence,True
+fixed an issue where wearing moon lord legs and frog legs at the same time would give you no legs at all,Terraria,2020-05-20,2,persistence,True
+fixed an issue where you could summon multiple queen slimes,Terraria,2020-05-20,2,persistence,True
+fixed an issue where having pickup text off and using a sonar potion would delete the item you get,Terraria,2020-05-20,2,persistence,True
+fixed an issue where key of light/night spawned mimics left behind phantom ghost chest tiles,Terraria,2020-05-20,2,persistence,True
+fixed cool whip's snowflake not despawning when a player dies or quits,Terraria,2020-05-20,2,persistence,True
+fixed ocean critters spawning in deep caves below the ocean,Terraria,2020-05-20,2,persistence,True
+"fixed an issue with kicking players not actually being fully removed, preventing players from rejoining",Terraria,2020-05-16,3,persistence,True
+fixed an issue where spawn points at the ocean of large worlds would constantly reset themselves,Terraria,2020-05-16,5,persistence,True
+"dramatically improved sky island house/furniture generation, fixing houses generating with no furniture or doors",Terraria,2020-05-16,5,persistence,True
+fixed an issue where cobwebs in worldgen would sometimes delete naturally generated wires,Terraria,2020-05-16,5,persistence,True
+fixed a minor worldgen quirk where a single platform would spawn at the edge of the dungeon’s stairs,Terraria,2020-05-16,5,persistence,True
+fixed an issue where naturally generated statue traps would not have a statue,Terraria,2020-05-16,5,persistence,True
+fixed an issue where gold chests were unable to generate outside of underground cabins in the cavern layer,Terraria,2020-05-16,5,persistence,True
+fixed the vast majority of situations where underground explosive rigged ore minibiomes would generate without the detonator,Terraria,2020-05-16,5,persistence,True
+"fixed an issue where crimson vines would spawn in unviable locations, and break spontaneously when the player approached them",Terraria,2020-05-16,5,persistence,True
+fixed an issue where hardmode world generation would fill caves with unusual background walls,Terraria,2020-05-16,5,persistence,True
+"fixed a number of worldgen issues that ultimately resulted in beaches being way too small, especially on the right side or when the jungle was too close",Terraria,2020-05-16,5,persistence,True
+fixed a subtle worldgen issue in the dungeon where marble/granite biomes that had generated under it would still leave some of the dungeon bricks hammered in the same shape they were when before the dungeon generated,Terraria,2020-05-16,5,persistence,True
+fixed a worldgen issue where sometimes sky lakes would take priority at the expense of regular sky islands,Terraria,2020-05-16,5,persistence,True
+fixed a worldgen issue where altars of the opposite world evil would sometimes generate in your world,Terraria,2020-05-16,5,persistence,True
+fixed an issue where demon/crimson altars would spawn in large clusters at the edge of the ocean,Terraria,2020-05-16,5,persistence,True
+fixed a long running issue where “tall oceans” would appear in worldgen,Terraria,2020-05-16,5,persistence,True
+fixed a worldgen issue where queen bee’s hive should have been full of natural honeyfalls but they weren’t working,Terraria,2020-05-16,5,persistence,True
+fixed an issue where corrupt/crimson chasms generated over the dungeon and blocked its entrance,Terraria,2020-05-16,5,persistence,True
+"fixed an issue where large clumps of underground sand would generate near spawn, subjecting the player to an immediate desert biome",Terraria,2020-05-16,5,persistence,True
+fixed an issue where worlds would not use all of the background variants available,Terraria,2020-05-16,5,persistence,True
+fixed an issue where sometimes the hallway leading into the temple would be full of mud instead of lihzahrd walls,Terraria,2020-05-16,5,persistence,True
+fixed a very rare issue where a pyramid entrance overlapping a grassy cave would fill the entire pyramid with grass,Terraria,2020-05-16,5,persistence,True
+fixed an issue where instantly destroying moss with explosives would drop no stone,Terraria,2020-05-16,5,persistence,True
+fixed a method of duplicating armors off of mannequins,Terraria,2020-05-16,5,persistence,True
+fixed an issue where a significant number of platforms in the game generated the wrong dust when broken,Terraria,2020-05-16,5,persistence,True
+"fixed an issue where green, blue, and pink dungeon walls made dirt dust when broken",Terraria,2020-05-16,5,persistence,True
+fixed an wall issue that caused the corner of luminite walls to vanish if they had a block over them,Terraria,2020-05-16,5,persistence,True
+"fixed an issue where water would continue to be destroyed by lava that overlapped a minecart track. obsidian (and honey/crispy honey) will now form appropriately, destroying the track, in such scenarios",Terraria,2020-05-16,5,persistence,True
+fixed an issue where bunnies spawned from statues during parties would not wear party hats,Terraria,2020-05-16,5,persistence,True
+fixing a number of npcs not being properly summoned by king/queen statues,Terraria,2020-05-16,5,persistence,True
+fixed an exploit where king slime’s minions would drop souls of light/night when underground,Terraria,2020-05-16,5,persistence,True
+fixed an issue where breaking more orbs/hearts after summoning eater of worlds/brain of cthulhu would summon a second one,Terraria,2020-05-16,5,persistence,True
+"fixed an issue where flying dutchmen parts would despawn at different distances from the player, resulting in it spontaneously dying sometimes",Terraria,2020-05-16,5,persistence,True
+fixed an issue where running from an enraged skeletron prime might cause his arms to despawn,Terraria,2020-05-16,5,persistence,True
+fixed an issue where stray antlion sand balls would land in the dungeon and prevent cultists from spawning,Terraria,2020-05-16,5,persistence,True
+fixed a rare issue where celestial pillars would spawn high in the sky,Terraria,2020-05-16,5,persistence,True
+fixed an issue where celestial invasion enemies would not spawn on a giant arena comprised entirely of player-placed walls,Terraria,2020-05-16,5,persistence,True
+fixed an issue where red pigrons could not spawn on crimson ice,Terraria,2020-05-16,5,persistence,True
+fixed a multiplayer issue where mothron had a tendency to despawn mid-fight,Terraria,2020-05-16,5,persistence,True
+"fixed an issue where antlions would spawn anywhere, if the background was sandstone",Terraria,2020-05-16,5,persistence,True
+fixed an issue where conveyor belts overrode biome spawns,Terraria,2020-05-16,5,persistence,True
+"fixed an issue where rainbow slimes could not spawn on hallow blocks, even though they can only spawn in the hallow. they are now much more common",Terraria,2020-05-16,5,persistence,True
+"fixed an issue where only lost girl could drop coins, not nymph. also applied to slimer and several other form changing enemies",Terraria,2020-05-16,5,persistence,True
+"fixed an issue where enemies that can change form (spiders, slimer, lost girl) and had picked up money in expert would lose that money upon changing form",Terraria,2020-05-16,5,persistence,True
+fixed an issue where clown and skeleton merchant were not rare enemies,Terraria,2020-05-16,5,persistence,True
+fixed an issue where drakanians did not drop the drakomire rider banner,Terraria,2020-05-16,5,persistence,True
+fixed an issue where stardust dragon would leave the edge of the screen and despawn,Terraria,2020-05-16,5,persistence,True
+"improved and hopefully fixed boss bag not dropping for everyone in multiplayer, particularly king slime and eater of worlds",Terraria,2020-05-16,5,persistence,True
+"fixed a multiplayer issue where placing a block over, harvesting with staff of regrowth, replacing with seeds, or otherwise harvesting alchemy herbs would not provide all of the expected seeds and herbs",Terraria,2020-05-16,5,persistence,True
+fixed a multiplayer issue where signs placed above trapdoors would duplicate and behave oddly when opening the trapdoor,Terraria,2020-05-16,5,persistence,True
+fixed a bug that made it impossible for the sidekick summoner to be the first gadget spawned,Brawlhalla,2019-08-29,13,persistence,True
+fixed an issue where players could not move properly on some computers,Terraria,2020-06-04,0,position,True
+fixed an issue where haemorrhaxe's item size was incorrectly allowing it to fall through the world,Terraria,2020-06-04,0,position,True
+fixed an issue where most demon eye variants could not descend through platforms,Terraria,2020-06-04,0,position,True
+fixed an issue where finches sometimes could not descend through platforms,Terraria,2020-06-04,0,position,True
+fixed an issue where the ocean pylon was sold below ground where it wasn't usable,Terraria,2020-06-04,0,position,True
+fixed an npc smoothing issue where town npcs in portal gun portals would float around oddly,Terraria,2020-06-04,0,position,True
+fixed an issue where dungeon pits could generate at the surface,Terraria,2020-06-04,0,position,True
+fixed a visual issue with guitars and capes being held awkwardly,Terraria,2020-06-04,0,position,True
+fixed some hardmode dungeon enemies drawing into the floor slightly in their animation,Terraria,2020-05-23,1,position,True
+fixed an issue where minions would be summoned at an inverted position when in reverse gravity,Terraria,2020-05-20,2,position,True
+fixed an issue where firing tome of infinite wisdom on a sloping minecart track would cause the pages to fire in all directions,Terraria,2020-05-16,5,position,True
+fixed an issue where having two types of dash abilities and removing one of them mid dash would unexpectedly double your dash distance,Terraria,2020-05-16,5,position,True
+fixed a similar issue where removing a dash accessory mid dash would prevent hermes-type boots from letting you run until you put the dash accessory back on,Terraria,2020-05-16,5,position,True
+"fixed an issue where several wings (fin, bat, mothron) had a faulty acceleration speed",Terraria,2020-05-16,5,position,True
+fixed an inconsistency with how cloud in a bottle behaved differently with wings than other jump bottles,Terraria,2020-05-16,5,position,True
+fixed an issue where flying mounts could descend through lowered platforms,Terraria,2020-05-16,5,position,True
+fixed an extra double jump only when jumping out of water while riding the slime mount,Terraria,2020-05-16,5,position,True
+fixed a minecart issue where tracks that ran directly into conveyor belts would cause the minecart to derail,Terraria,2020-05-16,5,position,True
+fixed an issue that made jumps fail sometimes in fast moving minecarts,Terraria,2020-05-16,5,position,True
+"fixed a worldgen issue where mushroom cabins had mushrooms occupying the same place as other furniture, which tended to break them",Terraria,2020-05-16,5,position,True
+fixed an issue where minecart tracks would generate over life crystals and chests,Terraria,2020-05-16,5,position,True
+fixed the infamous “drunken dungeon” where worldgen has the dungeon sticking high up out of the ground,Terraria,2020-05-16,5,position,True
+fixed an issue where lihzahrd altars would sometimes spawn on top of breakable spikes and traps,Terraria,2020-05-16,5,position,True
+"partially fixed an issue where multiple crimson caverns would spawn over top of each other, rending their hearts too easy to reach. they should now be encased in crimstone even when it does happen",Terraria,2020-05-16,5,position,True
+fixed a visual issue where background clouds would appear “impossibly low” in the ocean,Terraria,2020-05-16,5,position,True
+fixed an issue where valhalla knight’s helmet and tam o' shanter would bob awkwardly while moving,Terraria,2020-05-16,5,position,True
+fixed a visual issue where vortex armor had a weird bobbing effect,Terraria,2020-05-16,5,position,True
+fixed a visual issue where head accessories on the map would be offset and jitter slightly when you moved,Terraria,2020-05-16,5,position,True
+fixed an issue where the player’s head appeared in the wrong position on the map when riding some mounts,Terraria,2020-05-16,5,position,True
+fixed an issue where backpacks and other such things drew at incorrect heights when on mounts,Terraria,2020-05-16,5,position,True
+fixed an issue where the slime mount was drawing offset by one half pixel,Terraria,2020-05-16,5,position,True
+fixed a visual issue where betsy’s wrath would hover outside of the player’s hand when shooting it in some directions,Terraria,2020-05-16,5,position,True
+fixed a visual issue where some magic weapons would shake in the player’s hand when you used them while moving,Terraria,2020-05-16,5,position,True
+"reduced the chances and hopefully fixed a visual dust bug most often seen when using the last prism in a sandstorm, where spinning white crosses would float in place",Terraria,2020-05-16,5,position,True
+fixed an issue where the glowing parts of meteorite and martian platforms would not change position to match when they were hammered,Terraria,2020-05-16,5,position,True
+fixed a sprite issue with several pianos where standing on them or placing items on them looked like they were floating,Terraria,2020-05-16,5,position,True
+fixed an issue where celestial pillars that were hovering “in” a small puddle or pond would have the pond appear in front of them,Terraria,2020-05-16,5,position,True
+fixed a visual issue where tortoise-type enemies would be pushed down into the ground slightly,Terraria,2020-05-16,5,position,True
+fixed an issue where miner’s wobble hasn’t been working for a while,Terraria,2020-05-16,5,position,True
+fixed an issue with falling blocks floating in the air in multiplayer,Terraria,2020-05-16,5,position,True
+"fixed an issue where luminite brick’s art was not framed correctly, resulting in the tiles not visually connecting to each other",Terraria,2020-05-16,5,position,True
+fixed an issue where ice stalactites were offset slightly from their proper position,Terraria,2020-05-16,5,position,True
+"fixed a number of tiles that were drawing a few pixels too low/to the side, such as some clocks, chandeliers, green mushrooms, and chairs",Terraria,2020-05-16,5,position,True
+fixed an issue where torches placed on blocks directly above a door would “wobble” when opening the door,Terraria,2020-05-16,5,position,True
+"fixed an issue where npcs walking on a platform directly above blocks would bounce up and down on the platform, but only while walking left",Terraria,2020-05-16,5,position,True
+fixed an issue where npcs could not teleport home if their housing flag was over half-blocks,Terraria,2020-05-16,5,position,True
+fixed a more common issue where celestial pillars would sink into the ground a bit more every time you loaded your world,Terraria,2020-05-16,5,position,True
+fixed an issue where dripplers and ravens would not descend through platforms,Terraria,2020-05-16,5,position,True
+fixed an issue where pirate parrots could not fly down through platforms,Terraria,2020-05-16,5,position,True
+fixed an issue where goblin warriors and several other similar enemies would fall through the floor in 3-block tall hallways,Terraria,2020-05-16,5,position,True
+fixed an issue where some quadruped enemies would fall through blocks when running into certain dead ends,Terraria,2020-05-16,5,position,True
+fixed an issue where stardust cells couldn’t move through platforms,Terraria,2020-05-16,5,position,True
+fixed an issue where enemy archers who were confused would run away at high speeds,Terraria,2020-05-16,5,position,True
+"fixed an issue where yoyos behaved increasingly erratically at high melee speeds, ultimately culminating with them breaking entirely and being unusable",Terraria,2020-05-16,5,position,True
+fixed a layering issue where stardust dragon’s head was laying in the wrong order with the rest of its segments,Terraria,2020-05-16,5,position,True
+fixed an issue where the tiki mask pet would shake violently when submerged in water,Terraria,2020-05-16,5,position,True
+fixed a multiplayer issue where critters standing on platforms at night would constantly fall down and then teleport back up to the top of the platform,Terraria,2020-05-16,5,position,True
+fixed a multiplayer issue where portal gun portals could overlap each other and lead to inconsistent behavior,Terraria,2020-05-16,5,position,True
+"we’ve altered the height of the spawn points on big crystal temple just slightly to fix an issue where, for a few frames, a character would have their head stuck in the ceiling collision while spawning. the spawn points are now also the same height above the ground so all players on the map will land and start moving on the same frame",Brawlhalla,2020-05-20,1,position,True
+fixed an issue where playing the climb game mode with more than 4 players and with teams on could result in multiple players’ using the same spawn point on their first spawn,Brawlhalla,2020-03-16,3,position,True
+hattori down spear: fixed a case where the target could be dropped before the final hit,Brawlhalla,2020-03-16,3,position,True
+katar recovery: fixed a case where the target could be dropped before the final hit (credit: vtrem),Brawlhalla,2020-02-26,4,position,True
+gauntlets neutral light: fixed a case where the target could be dropped before the final hit (credit: addymestic),Brawlhalla,2020-02-26,4,position,True
+gnash down hammer: fixed a case where the target could be dropped before the final hit (credit: scottpeace),Brawlhalla,2020-02-26,4,position,True
+gauntlets side light: fixed a case where the target could be dropped before the final hit (credit: remmy),Brawlhalla,2020-02-05,5,position,True
+volkov neutral scythe: fixed a case where the target could be dropped before the final hit (credit: ethan),Brawlhalla,2020-02-05,5,position,True
+petra neutral orb: fixed a case where the target could be dropped before the final hit when struck simultaneously by the final two setup hits. (credit: sandstorm),Brawlhalla,2020-01-15,6,position,True
+gauntlets neutral light: fixed a case where the target could be dropped before the final hit,Brawlhalla,2020-01-15,6,position,True
+rocket lance neutral light: fixed a case where the target could be dropped before the final hit,Brawlhalla,2020-01-15,6,position,True
+volkov side scythe: fixed a case where the target could be dropped before the final hit when connecting with the end of the hit window,Brawlhalla,2020-01-15,6,position,True
+volkov down scythe: fixed a case where the target could be dropped before the final hit,Brawlhalla,2020-01-15,6,position,True
+katar recovery: fixed a case where the target could be dropped before the final hit. (credit: kroltrox),Brawlhalla,2019-11-04,10,position,True
+petra neutral orb: fixed a case where the target could be dropped before the final hit when gravity canceled,Brawlhalla,2019-10-10,11,position,True
+vector side lance: fixed a case where the target could be dropped before the final hit,Brawlhalla,2019-10-10,11,position,True
+sword down light: fixed a case where the target could be dropped before the final hit,Brawlhalla,2019-09-20,12,position,True
+rayman down axe: fixed a case where the target could be dropped before the final hit during an early aerial collision,Brawlhalla,2019-09-20,12,position,True
+scythe ground pound: fixed a case where the target could be dropped before the final hit when held,Brawlhalla,2019-09-20,12,position,True
+petra neutral orb: fixed a case where the target could be dropped before the final hit,Brawlhalla,2019-09-20,12,position,True
+isaiah down blasters: fixed a case where force on the missile flight could be much greater than intended,Brawlhalla,2019-07-17,15,position,True
+fixed an offset issue with the menu fade-in,Terraria,2020-06-04,0,ui,True
+fixed the bestiary background for giant flying fox,Terraria,2020-06-04,0,ui,True
+fixed an issue where the fps counter would move with the ui scale setting,Terraria,2020-06-04,0,ui,True
+fixed some buff icons having whitespace on them instead of transparency,Terraria,2020-06-04,0,ui,True
+fixed team nameplates being in the wrong position,Terraria,2020-05-23,1,ui,True
+fixed player map borders not adjusting the border color properly,Terraria,2020-05-23,1,ui,True
+fixed an issue where the world menu seed button was still hidden,Terraria,2020-05-20,2,ui,True
+fixed an issue where the summon lock-on icon would at an inverted position in reverse gravity,Terraria,2020-05-20,2,ui,True
+fixed angler quest fishing icon disappearing when a player dies,Terraria,2020-05-20,2,ui,True
+fixed a ui overlap issue where the name of a dresser and the shirt icon for using it would cover each other,Terraria,2020-05-16,5,ui,True
+"fixed an issue where ruler ui would scale with game zoom, not ui scale",Terraria,2020-05-16,5,ui,True
+fixed an issue with the twins where their map icons were mixed up,Terraria,2020-05-16,5,ui,True
+fixing an issue where info accessory icons disappeared when renaming chests,Terraria,2020-05-16,5,ui,True
+fixed some issues where left sidebar builder buttons would have unusual spacing,Terraria,2020-05-16,5,ui,True
+fixed an issue where there was a slight overlap between the pvp button and dye slots,Terraria,2020-05-16,5,ui,True
+fixed an issue where opening chests would make info accessory icons move,Terraria,2020-05-16,5,ui,True
+"fixed an issue where, when moving npcs and holding a tool, it would show both the npc’s head and the tool cursor",Terraria,2020-05-16,5,ui,True
+fixed an issue where mousing over the banner buff while near extremely high numbers of banners would cut off the text in an ugly way,Terraria,2020-05-16,5,ui,True
+fixed some ui scale/resolution issues that caused the minimap and other ui elements to overlap and allowed you to hit two buttons at once,Terraria,2020-05-16,5,ui,True
+fixed an issue where the item mouseover text for soul items and yorai’s scowl/spell would be very high above the item,Terraria,2020-05-16,5,ui,True
+fixed an issue where in-game text over chatting player’s heads did not scale properly with ui scale,Terraria,2020-05-16,5,ui,True
+fixed an issue where the lock on icon would become stuck when switching back to keyboard and mouse when using a gamepad,Terraria,2020-05-16,5,ui,True
+fixed a visual bug causing certain weapon icons in the picker menu during character select to have black borders and other artifacts,Brawlhalla,2019-09-20,12,ui,True
+fixed a bug causing the system settings icon for ‘collapse crossovers’ to not correctly display,Brawlhalla,2019-07-17,15,ui,True
+fixed a bug where community colors would sometimes fail to appear as a valid team color in matchmaking lobbies in situations where both players owned them,Brawlhalla,2019-06-26,16,ui,True
+fixed issue on pc only causing certain window frames in the store to be visually cut off by 1 pixel on both the x and y axis,Brawlhalla,2019-06-26,16,ui,True
+fixed some pixel spots on t-side bridge and behind bombsite a,Counter-Strike: Global Offensive,2019-08-08,49,bounds,False
+fixed an issue where items awarded by the gifts of the red queen and gifts of the sacrificed strongboxes could get stuck in inaccessible locations,Path of Exile,2020-03-10,34,bounds,False
+"fixed a bug where blight portals could spawn behind the vault door in vault map, preventing the monsters from pathing to the ichor pump",Path of Exile,2020-01-16,42,bounds,False
+fixed – players can clip inside the excavator in ext construction site of oregon,Tom Clancy's Rainbow Six Siege,2020-04-20,2,bounds,False
+fixed – defuser can be dropped oob behind the truck on ext fuel pumps of outback,Tom Clancy's Rainbow Six Siege,2020-03-09,4,bounds,False
+fixed – echo’s yokai will go out of bounds and can get stuck behind the cabinet in 2f consul office of consulate,Tom Clancy's Rainbow Six Siege,2019-12-03,8,bounds,False
+fixed – situations players can access and get stuck in the basement on the 1st situation on hereford base,Tom Clancy's Rainbow Six Siege,2019-11-11,9,bounds,False
+fixed – operators can clip through the b tower stairs,Tom Clancy's Rainbow Six Siege,2019-07-09,15,bounds,False
+fixed a case where space whale could blink behind static meshes,ARK: Survival Evolved,2020-03-13,49,bounds,False
+"fixed an issue that allowed the executioner to stand in front of a cage of atonement, preventing any possible rescue",Dead by Daylight,2020-07-02,0,bounds,False
+gas heaven: fixed an issue that allowed survivors to go through the ground near the gas pumps,Dead by Daylight,2020-03-09,7,bounds,False
+fixed apc crates falling through the ground,Rust,2019-09-27,12,bounds,False
+fixed floating platforms appearing way in the distance in the mastery rank 29 test,Warframe,2020-05-01,19,bounds,False
+fixed being able to get behind the first data-conduit in sanctuary onslaught,Warframe,2020-02-04,42,bounds,False
+fixed a progression stop in saya’s vigil where the the ostron coffer was behind the plains of eidolon barrier,Warframe,2019-11-01,65,bounds,False
+fixed hard to reach loot spawn that was stuck in mesh collision in the corpus ice planet tileset. as seen here: https://old.reddit.com/r/warframe/comments/d02t3e/level_holes_in_void_and_derelict_extraction_tiles/ez5w4rx/?context=3,Warframe,2019-09-05,76,bounds,False
+fixed being able to clip through a certain wall in the corpus outpost tileset. you know the one…,Warframe,2019-08-29,80,bounds,False
+fixed ability to clip into the wall in the corpus outpost tileset,Warframe,2019-07-06,96,bounds,False
+fixed an issue where kaldr could fall through the floor of maps. bad dog,SMITE,2019-11-12,11,bounds,False
+fixed clipping on dumpster at a site,Counter-Strike: Global Offensive,2020-04-23,9,collision,False
+several clipping fixes,Counter-Strike: Global Offensive,2020-04-16,10,collision,False
+fixed all reports regarding clipping and unintended boost spots,Counter-Strike: Global Offensive,2020-04-10,11,collision,False
+fixed clipping issue near crazy river,Counter-Strike: Global Offensive,2020-04-10,11,collision,False
+fixed some clipping issues,Counter-Strike: Global Offensive,2020-04-10,11,collision,False
+fixed long a wingman clip not working,Counter-Strike: Global Offensive,2020-02-25,19,collision,False
+clipping fixes,Counter-Strike: Global Offensive,2019-11-26,31,collision,False
+fixed mesh clipping issue at the ice cream stand,Counter-Strike: Global Offensive,2019-07-16,54,collision,False
+fixed an issue where sometimes weapons would clip through a player’s back while they were a passenger in a vehicle,PLAYERUNKNOWN'S BATTLEGROUNDS,2020-06-08,0,collision,False
+fixed the clipping issue with jockey boots,PLAYERUNKNOWN'S BATTLEGROUNDS,2020-05-12,2,collision,False
+fixed a clipping issue when equipping pgi title hand strap and ogre’s jacket at the same time,PLAYERUNKNOWN'S BATTLEGROUNDS,2020-05-12,2,collision,False
+fixed an issue where players could clip through walls/ceilings of buildings by using vaulting and ledge-grab,PLAYERUNKNOWN'S BATTLEGROUNDS,2020-04-09,8,collision,False
+fixed an issue where players behind walls could be damaged by vehicles in specific situations,PLAYERUNKNOWN'S BATTLEGROUNDS,2019-07-17,24,collision,False
+fixed visual issue with high waisted shorts overlapping some shirt skins,PLAYERUNKNOWN'S BATTLEGROUNDS,2019-07-03,25,collision,False
+fixed an issue where character’s limbs overlapped when reloading the r45 and akm in specific circumstances,PLAYERUNKNOWN'S BATTLEGROUNDS,2019-06-19,26,collision,False
+fixed an issue where weapon charms attached to a tommy gun would overlap an attached extended mag,PLAYERUNKNOWN'S BATTLEGROUNDS,2019-06-19,26,collision,False
+fixed numerous cosmetic issues with effects clipping badly,Path of Exile,2020-03-10,34,collision,False
+fixed the crucible hood clipping when worn on ranger,Path of Exile,2019-12-20,50,collision,False
+fixed clipping issues with the havenwood armour set,Path of Exile,2019-10-01,70,collision,False
+fixed issues that resulted in clipping between vehicles and the podium in the casino,Grand Theft Auto V,2019-12-12,19,collision,False
+fixed issues that resulted in clipping between ambient population and casino tables,Grand Theft Auto V,2019-12-12,19,collision,False
+fixed an issue that resulted in the spectator cam clipping in the arena war – tag team,Grand Theft Auto V,2019-12-12,19,collision,False
+fixed issues that resulted in clipping when entering the arena workshop in a vehicle,Grand Theft Auto V,2019-12-12,19,collision,False
+fixed an issue that resulted in players clipping through the map during the round intro camera in arena war – games masters,Grand Theft Auto V,2019-07-23,38,collision,False
+fixed an issue that resulted in players clipping into the ground when spawning into arena war – game masters,Grand Theft Auto V,2019-07-23,38,collision,False
+fixed – various clipping and dynamic clipping issues on maps,Tom Clancy's Rainbow Six Siege,2020-06-29,0,collision,False
+fixed – echo's yokai can sometimes clip through thin ceilings on maps and see onto the rooftops in support mode,Tom Clancy's Rainbow Six Siege,2020-06-14,1,collision,False
+fixed – various clipping/dynamic clipping issues on maps,Tom Clancy's Rainbow Six Siege,2020-06-14,1,collision,False
+fixed – operators' gadgets can get stuck in the flags on consulate,Tom Clancy's Rainbow Six Siege,2020-06-14,1,collision,False
+fixed – weapons clip through defenders hands at spawn if a grip is equipped,Tom Clancy's Rainbow Six Siege,2020-06-14,1,collision,False
+fixed – monty’s shield hitbox is larger than the shield and can prevent players from hitting enemies when they hide behind monty,Tom Clancy's Rainbow Six Siege,2020-03-24,3,collision,False
+fixed – various clipping/dynamic clipping issues with map assets,Tom Clancy's Rainbow Six Siege,2020-03-24,3,collision,False
+fixed – various clipping and dynamic clipping issues,Tom Clancy's Rainbow Six Siege,2020-03-24,3,collision,False
+"fixed – various gun, operator model clipping issues while performing various actions",Tom Clancy's Rainbow Six Siege,2020-03-09,4,collision,False
+fixed – the magazines of the arx200 clips through the weapon's mag-well when reloading in first person pov,Tom Clancy's Rainbow Six Siege,2020-03-09,4,collision,False
+fixed – various dynamic clipping/clipping issues on maps,Tom Clancy's Rainbow Six Siege,2020-03-09,4,collision,False
+fixed – castle’s nail gun remains present and clips while deploying his armor panels,Tom Clancy's Rainbow Six Siege,2020-01-27,5,collision,False
+fixed – operator hitboxes can clip through reinforced walls and be shot,Tom Clancy's Rainbow Six Siege,2020-01-12,6,collision,False
+fixed – caveira's hand clips through her phone when resetting it during a dokkaebi call,Tom Clancy's Rainbow Six Siege,2020-01-12,6,collision,False
+fixed – minor animation clipping issues,Tom Clancy's Rainbow Six Siege,2020-01-12,6,collision,False
+fixed – dynamic clipping issues across maps,Tom Clancy's Rainbow Six Siege,2019-12-11,7,collision,False
+fixed – drone clipping/collision issues on maps,Tom Clancy's Rainbow Six Siege,2019-12-11,7,collision,False
+fixed – kali’s lv-ei hammerdrill clips through underbarrel launcher when reloading,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – nokk’s left hand snaps and clips through her gun when deactivating the hel presence reduction,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – wamai’s fingers clip inside the gadget from 1st person pov,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – various dynamic clipping and clipping issues,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – operator hitboxes clipping when forcing dynamic clipping through metal desks on various maps,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – dynamic clipping issue with a wall in b vault of bank,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – yokai clipping through stone door frame on bank,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – particles from destroyable objects clip through the floor of clubhouse,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – shields lip through the wall of ext roof on favela,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – operator hitboxes and models dynamic clipping issues with metal desks of fortress,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – operators clip through crates on hereford,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – sticky gadgets clip through banners of 1f throne room of theme park,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – dynamic clipping issue on a wall of 1f wes balcony of tower,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – operators phones clipping with the ground when prone and in observation mode,Tom Clancy's Rainbow Six Siege,2019-12-03,8,collision,False
+fixed – blackbeard's shield clips through his body when equipping it in lean stance,Tom Clancy's Rainbow Six Siege,2019-11-11,9,collision,False
+fixed – clash cce shield clips through clash body if a player spams between weapon and shield,Tom Clancy's Rainbow Six Siege,2019-11-11,9,collision,False
+fixed – various dynamic clipping issues across all maps,Tom Clancy's Rainbow Six Siege,2019-11-11,9,collision,False
+fixed – blackbeard’s shield clips through his body when equipping while leaning,Tom Clancy's Rainbow Six Siege,2019-10-21,10,collision,False
+fixed – goyo’s volcan shield clips with operators when forcing collision with the shield while prone between the shield and other props/walls,Tom Clancy's Rainbow Six Siege,2019-10-07,11,collision,False
+fixed - operator's shield clips through the wall at 2f offices on border,Tom Clancy's Rainbow Six Siege,2019-09-19,12,collision,False
+fixed – players can clip through the ceiling domes in fortress,Tom Clancy's Rainbow Six Siege,2019-09-19,12,collision,False
+fixed – mira’s black mirror can clip through an unbreakable surface if deployed at the west wall of 2f staff section on plane,Tom Clancy's Rainbow Six Siege,2019-09-19,12,collision,False
+fixed – clash cce shield can clip through clash’s body if spamming weapon/shield swapping,Tom Clancy's Rainbow Six Siege,2019-09-10,13,collision,False
+fixed – various clipping issues on maps,Tom Clancy's Rainbow Six Siege,2019-09-10,13,collision,False
+fixed – drones can clip into the walls from ext terrace on bank,Tom Clancy's Rainbow Six Siege,2019-09-10,13,collision,False
+fixed – drone clipping into ruined wall at ext ruins of coastline,Tom Clancy's Rainbow Six Siege,2019-09-10,13,collision,False
+fixed – various model clipping/animation issues,Tom Clancy's Rainbow Six Siege,2019-09-10,13,collision,False
+fixed – operator hands can clip inside while deploying the deployable shield,Tom Clancy's Rainbow Six Siege,2019-09-10,13,collision,False
+fixed – operators clip through the south building's wall when rappeling down ext low roof while holding the hostage,Tom Clancy's Rainbow Six Siege,2019-07-09,15,collision,False
+the executioner: fixed an issue that caused the weapon to clip through windows when vaulting,Dead by Daylight,2020-07-02,0,collision,False
+the clown: fixed an issue that caused the clown's tailcoat cosmetics to clip into his right calf,Dead by Daylight,2020-06-16,1,collision,False
+yui kimura's sakura happi: fixed clipping issues with the sleeves,Dead by Daylight,2020-06-16,1,collision,False
+zarina kassir's draped cardigan: fixed clipping issues with the sleeves and neck,Dead by Daylight,2020-06-16,1,collision,False
+nea karlson's summit jacket: fixed clipping issues on the neck,Dead by Daylight,2020-06-16,1,collision,False
+fixed an issue that caused the trapper's neptune failure body customization to clip through the camera while the trap collecting animation is playing,Dead by Daylight,2020-05-05,3,collision,False
+the underground complex: fixed a clipping issue on the survivors' right arm when entering and leaving a locker,Dead by Daylight,2020-04-28,4,collision,False
+treatment theatre: fixed an issue that caused survivors to clip through the iron gate near the staircase of the second floor,Dead by Daylight,2020-04-28,4,collision,False
+the deathslinger: fixed a clipping issue when aiming down sights with the default head customization,Dead by Daylight,2020-04-28,4,collision,False
+fixed various clipping issues,Dead by Daylight,2020-04-28,4,collision,False
+fixed an issue that caused various huntress masks to clip through her neck,Dead by Daylight,2020-03-09,7,collision,False
+fixed an issue that caused the hanging piece of cloth on the doctor's straight jacket torso to be clipping through his body,Dead by Daylight,2020-03-09,7,collision,False
+fixed a clipping issue when viewing all of nea's shirt models,Dead by Daylight,2020-03-09,7,collision,False
+fixed an issue that caused the wraith's glowing vigil head customization to clip through the evening wear body customization,Dead by Daylight,2020-03-09,7,collision,False
+fixed an issue that caused the railing just in front of the basement in the farm house to partially lack collision in the thompson house map,Dead by Daylight,2020-01-21,10,collision,False
+fixed an issue that caused some of the doctor's head cosmetics to clip through the camera when performing the shock therapy or static blast actions while looking up,Dead by Daylight,2020-01-21,10,collision,False
+fixed an issue that caused the oni's blood orbs to remain partially in a locker when an injured survivor left the locker,Dead by Daylight,2019-12-11,11,collision,False
+fixed an issue that caused some female survivors to have items clip during their idle animation,Dead by Daylight,2019-12-11,11,collision,False
+fixed an issue that could cause survivors to fall through the ground to the floor below when dropped from the killers shoulder,Dead by Daylight,2019-12-05,12,collision,False
+fixed an issue that caused survivors to clip through the locker when entering the right one in the mine of the suffocation pit map,Dead by Daylight,2019-12-03,13,collision,False
+fixed an issue that allowed players to walk through the wall underneath the slope in the lodge building in the blood lodge map,Dead by Daylight,2019-12-03,13,collision,False
+fixed an issue that caused the tarp on the maze walls to clip through the walls in the autohaven wreckers maps,Dead by Daylight,2019-12-03,13,collision,False
+fixed an issue that caused the red shipping containers in the badham preschool maps to clip through the grass,Dead by Daylight,2019-12-03,13,collision,False
+fixed an issue that caused a crow to clip through part of the window of one of the houses in the badham preschool maps,Dead by Daylight,2019-12-03,13,collision,False
+fixed an issue that caused an invisible collision in front of an exit gate switch in the lampkin lane map,Dead by Daylight,2019-12-03,13,collision,False
+misc cosmetic clipping fixes and improvements,Dead by Daylight,2019-12-03,13,collision,False
+fixed an issue that allowed players to walk through the wall underneath the slope in the lodge building in the blood lodge map,Dead by Daylight,2019-12-03,13,collision,False
+fixed an issue that caused bear traps to clip inside some rocks at the base of the shrine in the sanctum of wrath map,Dead by Daylight,2019-12-03,13,collision,False
+fixed an issue that caused items to clip through the vines on one of the lab tiles near the rift room in the underground complex map,Dead by Daylight,2019-10-29,15,collision,False
+fixed an issue that caused charms to clip through the killers camera when survivors on their shoulder wiggled,Dead by Daylight,2019-10-29,15,collision,False
+fixed multiple issues that caused cosmetics to clip through the killers camera while carrying survivors,Dead by Daylight,2019-10-29,15,collision,False
+fixed an issue that caused male survivors hands to clip through their head when snapping out of it,Dead by Daylight,2019-10-29,15,collision,False
+fixed an issue that caused cosmetics with apex to clip through the killers camera when carrying survivors,Dead by Daylight,2019-10-29,15,collision,False
+fixed an issue that caused the shape's hand to clip through survivors heads during his mori,Dead by Daylight,2019-10-29,15,collision,False
+fixed an issue that allowed survivors to clip through a column on the lower floor of the game map,Dead by Daylight,2019-07-23,21,collision,False
+fixed an issue that caused hiding survivors to clip inside of lockers in the control room of the game map,Dead by Daylight,2019-07-23,21,collision,False
+fixed an issue that caused players to clip inside certain big tree trunks in the backwater swamp maps,Dead by Daylight,2019-07-23,21,collision,False
+fixed an issue that allowed survivors to clip through a column in the game map,Dead by Daylight,2019-07-23,21,collision,False
+fixed rotor and hub clipping from several wheel types,Rocket League,2019-12-04,6,collision,False
+fixed jerry can clipping on rowboat,Rust,2020-07-02,0,collision,False
+fixed the shi chest plate armor attachment clipping through the wukong,Warframe,2020-06-17,2,collision,False
+fixed kuva siphons clipping into geometry in the corpus ship tileset,Warframe,2020-06-11,6,collision,False
+"fixed enemies/objects becoming stuck inside a catwalk in the grineer shipyard tileset, which could cause a progression stop",Warframe,2020-06-11,7,collision,False
+fixed the tennocon 2020 syandana clipping with mirage and ash shroud skin lower body,Warframe,2020-06-11,7,collision,False
+fixed numerous kubrow armors clipping into large boned kubrows,Warframe,2020-06-11,7,collision,False
+fixed the thiazi syandana clipping into numerous warframes,Warframe,2020-06-11,7,collision,False
+fixed the kunshu syandana clipping through wisp’s delusion skin scarf,Warframe,2020-06-11,7,collision,False
+fixed the railjack sungem and caballero skins having the ordnance and nose turret weapons clipping with parts of the railjack/skin,Warframe,2020-05-01,19,collision,False
+"fixed an energy fx clipping through into an unintended area in augustus, mars",Warframe,2020-05-01,19,collision,False
+fixes towards melee weapons equipped with the kopesh longsword skin clipping into warframe,Warframe,2020-05-01,19,collision,False
+fixed armor offsets for saryn to prevent clipping into tennogen skins. this also fixes the clipping issues with the pakal chest plate and kuva leg plates,Warframe,2020-05-01,19,collision,False
+"fixed galvanik shoulder plates, quaro, and narvarr prime armor clipping through equinox’s shoulders on both of her forms",Warframe,2020-05-01,19,collision,False
+fixes towards clipping issues from upper leg armor pieces on excalibur,Warframe,2020-05-01,19,collision,False
+made fixes towards clipping issues with bow quivers and khora’s spikes,Warframe,2020-05-01,19,collision,False
+fixed ability to clip through the helminth infirmary chair after having your helminth cyst removed,Warframe,2020-05-01,19,collision,False
+fixes to numerous clipping issues with the solstice centuria syandana,Warframe,2020-05-01,19,collision,False
+fixed projectile armaments like the apoc or cryophon ignoring the gigantic rocks in front of enemies and damaging them anyways,Warframe,2020-03-05,39,collision,False
+"fixed the cycuta prime sigil, igaro, yamako prime, zaikhya, cycuta prime, and opulas robe syandanas clipping through the titania empress skin",Warframe,2020-03-05,39,collision,False
+fixed frost’s hisame skin clipping with the targis prime greaves and syrinx leg plates,Warframe,2020-03-05,39,collision,False
+"fixed equipping regalia on one side of your kubrow applying to both sides, resulting in a regalia overlap. as reported here: https://forums.warframe.com/topic/1166139-double-emblememblem-copy/",Warframe,2020-02-11,41,collision,False
+fixed blade and whip weapons clipping into wisp when she runs,Warframe,2020-02-04,42,collision,False
+fixed a rock clipping into a vent on the corpus outpost,Warframe,2020-02-04,42,collision,False
+fixes towards ivara prime’s helmet cloth clipping through her forehead,Warframe,2020-01-23,43,collision,False
+fixed overlapping environmental issues in grineer galleons,Warframe,2020-01-09,46,collision,False
+fixed the heartwood armor set clipping with rhino,Warframe,2020-01-09,46,collision,False
+fixes towards syandana’s clipping through excalibur zato skins body,Warframe,2019-12-17,50,collision,False
+fixed the dry dock platform used to enter the railjack clipping into it if the caballero railjack skin is equipped,Warframe,2019-12-17,51,collision,False
+fixes towards excalibur zato’s front cloth clipping which could sometimes result in weird triangle cloth textures,Warframe,2019-12-17,51,collision,False
+fixes towards clipping issues with excalibur zato’s left shoulder fur cloth,Warframe,2019-12-17,51,collision,False
+more fixes towards syandanas clipping into titania’s empress skin,Warframe,2019-12-17,51,collision,False
+fixed left hand clipping on excalibur zato idle animation,Warframe,2019-12-13,53,collision,False
+fixes towards the cumulus syandana clipping through numerous warframes,Warframe,2019-12-13,55,collision,False
+fixed naru syandana violently clipping through warframes,Warframe,2019-11-22,59,collision,False
+more fixes towards infested corpus ship doors clipping into other rooms,Warframe,2019-11-14,61,collision,False
+fixed terrain clipping into the orb vallis spaceport building. as reported here: https://old.reddit.com/r/warframe/comments/dw3ojs/found_a_weird_panel_sticking_out_at_the_top/,Warframe,2019-11-14,61,collision,False
+fixed submersible water clipping through levels where there’s no swimming allowed,Warframe,2019-11-06,63,collision,False
+fixed excessive syandana clipping on grendel,Warframe,2019-11-05,64,collision,False
+fixed the diva chest armor clipping into hydroid/hydroid prime,Warframe,2019-10-31,68,collision,False
+fixed the cryona syandana clipping with some warframe stances,Warframe,2019-10-31,68,collision,False
+fixed the diva chest armor clipping through chroma/chroma prime,Warframe,2019-10-31,68,collision,False
+fixes towards reducing cloth clipping with the wisp damas helmet,Warframe,2019-10-09,70,collision,False
+fixed door clipping through walls in the infested corpus ship tileset,Warframe,2019-10-01,71,collision,False
+fixed a number of different operator accessories excessively clipping with the norg mask and mother's mask when ‘hood opened” is selected,Warframe,2019-09-09,75,collision,False
+fixed the etheria armor set clipping with many warframes/skins,Warframe,2019-09-09,75,collision,False
+fixed numerous syandanas clipping through wisp’s cape,Warframe,2019-08-29,80,collision,False
+fixed previewing kubrow armor in the market with a kavat active resulting in the default preview kubrow’s fur clipping through the armor,Warframe,2019-08-29,80,collision,False
+fixed amphatz kubrow armor clipping into bulkier kubrows,Warframe,2019-08-29,80,collision,False
+fixed braid on the back of the valkyr leonessa helmet clipping through her head,Warframe,2019-08-29,80,collision,False
+fixed the subhuti syandana clipping through some warframes’ legs,Warframe,2019-08-29,80,collision,False
+fixed the narvarr prime shoulder armor clipping through mirage prime’s shoulder plates,Warframe,2019-08-29,80,collision,False
+fixed the narvarr prime shoulder armor clipping through excalibur umbra,Warframe,2019-08-29,80,collision,False
+"fixed several areas (foundry, relic refinement console, arsenal, and the infested chair) around the orbiter not having any collision for the roller floofs from dog days tactical alert, causing them to clip through",Warframe,2019-08-29,80,collision,False
+fixed the jat kusar default holster position clipping inside trinity strega skin,Warframe,2019-08-29,80,collision,False
+fixed the atavist prime right shoulder plate clipping on the ash koga skin,Warframe,2019-08-29,80,collision,False
+fixed the sarva harness syandana clipping on saryn,Warframe,2019-08-29,80,collision,False
+fixed the quiver of the daikyu clipping inside nezha,Warframe,2019-08-29,80,collision,False
+partial fixes toward leg armor clipping with frost,Warframe,2019-08-29,80,collision,False
+fixed operator legs clipping through the smelter apparel,Warframe,2019-08-29,80,collision,False
+fixed the subhuti syandana clipping through equinox’s day form,Warframe,2019-08-02,87,collision,False
+fixed the narvarr prime leg armor clipping through nyx’s pasithea skin skirt,Warframe,2019-07-31,88,collision,False
+fixed the cryona syandana clipping through khora,Warframe,2019-07-31,88,collision,False
+fixed clipping doors in the lua sabotage tileset,Warframe,2019-07-26,89,collision,False
+fixes toward the amphatz kubrow armor clipping on more bulky kubrows,Warframe,2019-07-24,91,collision,False
+fixes toward the sloughi kubrow armor clipping on bulky kubrows,Warframe,2019-07-24,91,collision,False
+fixed a crate clipping into the wall on the lua spy tileset,Warframe,2019-07-24,91,collision,False
+fixed a few instances of selection banners clipping into units,Total War: WARHAMMER II,2020-05-19,1,collision,False
+"chariot articulation has been adjusted and fixed across all chariots, improving their reliability when turning and reducing the amount of visual issues where a chariot could clip into itself",Total War: WARHAMMER II,2019-12-09,3,collision,False
+fixed an issue where a siege crew for the screaming skull catapult would clip through the artillery,Total War: WARHAMMER II,2019-09-06,5,collision,False
+fixed an issue where some units could clip through gates in tomb king siege maps,Total War: WARHAMMER II,2019-09-06,5,collision,False
+fixed the water clipping through the ground on the ironfrost isles battle map,Total War: WARHAMMER II,2019-09-06,5,collision,False
+border crossing - fixed an issue where a blown door would clip with the stairs in the big warehouse,PAYDAY 2,2020-02-27,6,collision,False
+fixed a clipping issue with using the joceline shotgun and the raincoat outfit,PAYDAY 2,2020-02-27,6,collision,False
+fixed an issue where characters could clip into their nameplates after transforming,The Elder Scrolls Online,2020-06-29,0,collision,False
+fixed an issue where the face of female characters would clip into the master field cartographer helmet while using the race change menu,The Elder Scrolls Online,2020-05-26,3,collision,False
+fixed an issue where the glyptodon would clip through its shell if it took a step after turning in place,The Elder Scrolls Online,2020-02-20,9,collision,False
+fixed an issue when previewing dagger outfit styles would cause the dagger to clip into your character,The Elder Scrolls Online,2019-10-18,19,collision,False
+"fixed myriad clipping chests, resource nodes, and other miscellaneous spawners",The Elder Scrolls Online,2019-08-09,26,collision,False
+"fixed an issue where haxara was clipping into the ground when kneeling, and her quest pin was off-center on the map",The Elder Scrolls Online,2019-08-09,26,collision,False
+fixed an issue where kaldr could fall through the floor if he was killed while under certain types of cc,SMITE,2019-12-11,10,collision,False
+fixed checked move to only ignore initially overlapping colliders,Unturned,2020-05-15,2,collision,False
+fixed fishing rod bobber not using continuous collision detection. with the right angle it could be launched through the ground to fish anywhere on the map,Unturned,2020-05-15,2,collision,False
+fixed stance transition and obstruction tests to include player clipping. this was abuseable in some places to escape the map border,Unturned,2020-05-15,2,collision,False
+fixed overlapping barricade placed on vehicle,Unturned,2020-01-17,6,collision,False
+fixed the issue where some buildings in altinova were clipping into each other,Black Desert Online,2020-01-08,23,collision,False
+fixed the graphical issue with npcs overlapping with certain structures in parts of valencia,Black Desert Online,2019-12-11,26,collision,False
+fixed the issue where you would sink into a certain rooftop in altinova,Black Desert Online,2019-11-13,30,collision,False
+fixed the issue where the flag pierced through the wall in certain region of altinova arena,Black Desert Online,2019-10-23,33,collision,False
+[mystic] fixed the graphical issue of the marine romance clothes where the underwear clipped out when adjusting chest size,Black Desert Online,2019-09-04,39,collision,False
+[archer] fixed the graphical issue of the gorca swimsuit clipping through the kibelius armor,Black Desert Online,2019-09-04,39,collision,False
+[striker] fixed the issue where the striker glorious shudad outfit and the blackstar gauntlet’s appearances overlapped when equipping them together,Black Desert Online,2019-08-07,44,collision,False
+[striker] fixed the issue where the glorious shudad outfit and the blackstar gauntlet’s appearances overlapped,Black Desert Online,2019-07-31,45,collision,False
+fixed the issue where you could hit enemies behind pillars in the altar of blood,Black Desert Online,2019-07-17,47,collision,False
+fixed the issue where the gloves and the outfit overlapped when equipping the blackstar gauntlet after the shudad outfit,Black Desert Online,2019-07-17,47,collision,False
+fixed the syazhar helmet to not overlap with the character's hair,Black Desert Online,2019-07-10,48,collision,False
+fixed the prop draw distance at canal in front of a,Counter-Strike: Global Offensive,2020-04-16,10,graphical,False
+fixed a bug which caused particles created by the orion body armour microtransaction to linger,Path of Exile,2020-06-16,10,graphical,False
+fixed a bug which caused brands to visibly linger indefinitely,Path of Exile,2020-06-16,10,graphical,False
+fixed a bug where molten shell's effect would linger indefinitely if the skill gem were replaced by a vaal molten shell gem during the original gem's duration,Path of Exile,2020-06-16,10,graphical,False
+"fixed a bug where characters with phasing would render behind track tiles in areas with tracks, such as the pier map",Path of Exile,2020-03-10,34,graphical,False
+fixed a bug where the eye of malice on the duelist and templar was more like the floating blob of malice,Path of Exile,2020-03-10,34,graphical,False
+fixed a bug which caused shield cosmetic microtransactions to linger if you used shield charge,Path of Exile,2020-03-10,34,graphical,False
+fixed a bug where shadows in the celestial nebula hideout would abruptly get cut off,Path of Exile,2020-03-10,34,graphical,False
+"fixed a bug with some arrow skills which, when fired upwards, would leave the arrow model behind",Path of Exile,2020-03-10,34,graphical,False
+fixed a bug where the visual effects from the cycling buffs on arborix and augyre would linger,Path of Exile,2019-12-10,63,graphical,False
+fixed a bug where the heavy strike visual effect would linger if the skill was cancelled by movement,Path of Exile,2019-12-10,63,graphical,False
+fixed a bug where ancestral call would leave weapon images behind when used with flicker strike,Path of Exile,2019-09-03,92,graphical,False
+fixed – hologram vfx remains even if her hologram is destroyed right upon deployment,Tom Clancy's Rainbow Six Siege,2020-03-24,3,graphical,False
+fixed – wall splinters remain when destroying some of the walls on yacht,Tom Clancy's Rainbow Six Siege,2020-03-24,3,graphical,False
+"fixed – after being affected by thatcher’s emp, yokai’s blue lights remain dark even when being operated",Tom Clancy's Rainbow Six Siege,2020-01-27,5,graphical,False
+fixed – red overlay in front of barricaded door in 1f cargo front entrance of plane during prep phase,Tom Clancy's Rainbow Six Siege,2019-12-11,7,graphical,False
+fixed – operators look like they are falling when on top of the sinks in 1f toilet arcade of theme park,Tom Clancy's Rainbow Six Siege,2019-12-03,8,graphical,False
+fixed – alibi’s prisma animation outline remains after players collide with it,Tom Clancy's Rainbow Six Siege,2019-10-07,11,graphical,False
+fixed – frag grenades remains in the player's hands if you attempt to ads and use the gadget before the ads animation completes,Tom Clancy's Rainbow Six Siege,2019-09-10,13,graphical,False
+fixed a visual bug with the space whale saddle that caused skins to remain on when the saddle is removed,ARK: Survival Evolved,2020-03-13,49,graphical,False
+fixed instances where stone pick and crossbow remained in lower resolution when starting the game in ''extreme low memory mode'',ARK: Survival Evolved,2019-09-18,102,graphical,False
+lampkin lane: fixed a one sided texture wall and floating grass above the stairs of the basement,Dead by Daylight,2020-05-05,3,graphical,False
+the demogorgon: fixed an issue that caused a particle emitter to remain present when a survivor destroys a portal,Dead by Daylight,2020-04-28,4,graphical,False
+fixed an issue that caused the heads of the legion and the deathslinger to snap back when finding a survivor in a locker,Dead by Daylight,2020-04-28,4,graphical,False
+fixed multiple clipping and lighting issues with david king's hard headlight torso customization,Dead by Daylight,2020-03-09,7,graphical,False
+dead dawg saloon: fixed an issue that caused the survivors to remain in falling animation upon jumping on the cash register,Dead by Daylight,2020-03-09,7,graphical,False
+the deathslinger: fixed the animation when damaging a generator,Dead by Daylight,2020-03-09,7,graphical,False
+partially fixed an issue that caused the doctor's iridescent queen add-on vfx to be displaced in front of the survivor if they were moving. the vfx is still displaced when turning,Dead by Daylight,2020-01-28,9,graphical,False
+fixed an issue that visually caused killers to get stuck in their fall animation from other players perspectives after falling from a height,Dead by Daylight,2019-12-03,13,graphical,False
+fixed an issue that caused survivor shadow models to appear in front of bubble indicators,Dead by Daylight,2019-11-06,14,graphical,False
+fixed an issue that caused the legion's frenzy vfx to remain after getting stunned in feral frenzy,Dead by Daylight,2019-07-23,21,graphical,False
+fixed lingering red spark fx after picking up a health orb from protea’s dispensary until all players have picked it up,Warframe,2020-06-11,6,graphical,False
+fixed a script error as well as a case where some of the effects of the forward artillery gun in railjack lingered forever if you started and stopped charging it very rapidly,Warframe,2020-03-05,39,graphical,False
+fixed small fx offset issues with the kuva bramma when reloading,Warframe,2020-03-05,39,graphical,False
+"fixed walk trail (burning step, frozen step, fae path, etc.) ephemeras spawning half of the fx when equipped on a warframe with wisp’s floating animations",Warframe,2020-03-05,39,graphical,False
+fixed ivara’s artemis bow arrows not reflecting chosen colors when stuck into objects/enemies,Warframe,2020-02-04,42,graphical,False
+"fixed the vengeful charge ephemera providing constant light source for mirage's eclipse, resulting in a cosmetic granting the light buff to remain 99% of the time",Warframe,2020-01-23,43,graphical,False
+fixed distortions being offset with dynamic resolution enabled,Warframe,2020-01-23,43,graphical,False
+fixed some color and alpha settings on off-screen markers in archwing for better visibility,Warframe,2020-01-09,46,graphical,False
+fixed imugi prime shoulder pieces always glowing blue when mirage is using eclipse,Warframe,2020-01-09,46,graphical,False
+fixed the railjack wing turrets fx lingering across the game until you restarted,Warframe,2019-12-13,54,graphical,False
+fixes towards elemental fx being misaligned when using a zaw skin - some alignment issues still remain,Warframe,2019-12-13,55,graphical,False
+"fixed zealot heralds torid fx perpetually lingering, thus affecting performance",Warframe,2019-08-30,78,graphical,False
+"fixed akarius fx particles perpetually lingering, thus also affecting performance",Warframe,2019-08-30,78,graphical,False
+updated and fixed animations related to the quatz clip when reloading and firing,Warframe,2019-08-29,80,graphical,False
+fixed lingering explosion fx on failed coildrive ambush bounty in the orb vallis,Warframe,2019-08-29,80,graphical,False
+fixed offscreen flickering for khora’s spikes syandana,Warframe,2019-08-29,80,graphical,False
+"fixed browsing warframe helmets, if the active one is a prime helmet, the preview for the selected ones will overlap the prime, instead of switching to a different one",Warframe,2019-08-29,80,graphical,False
+fixed an instance where under empire vfx would remain on a settlement that has been captured by skaven,Total War: WARHAMMER II,2019-09-06,5,graphical,False
+fixed upper body sometimes remaining stiff after using ability,SMITE,2019-07-23,15,graphical,False
+fixed the issue where a certain part of the ataraxia clothes would be cut off when simultaneously equipped with ataraxia clothes and purnado shoes,Black Desert Online,2020-02-05,20,graphical,False
+[tamer] fixed the issue where the tail part of the vixen outfit would appear cut off when equipped together with the lahr arcien shoes (r),Black Desert Online,2019-08-28,41,graphical,False
+[lahn] fixed the issue where the backside of the skirt for the sanguine petal outfit would appear cut off when equipping it together with urugon's shoes,Black Desert Online,2019-08-28,41,graphical,False
+fixed the graphics issue of the [shai] serendian soldier armor behind the knee,Black Desert Online,2019-08-14,43,graphical,False
+"mig-21smt, mig-21mf — a bug where the mirror texture of the rear-view mirror would remain in the air despite the cockpit being opened has been fixed",War Thunder,2019-12-18,66,graphical,False
+fixed an issue where hunter's would remain off radar for too long when coming out of invisibility while crouched,Destiny 2,2020-03-10,8,info,False
+fixed an issue that caused fotl items to be stuck in the postmaster as invisible items for some players,Destiny 2,2020-01-28,9,info,False
+fixed a rare issue where the “??????” quest item from mission ''a mysterious disturbance'' could get stuck in inventory; it has been removed from affected players,Destiny 2,2019-12-10,12,info,False
+fixed an issue which could cause multiple map waypoints from the same player to remain visible,PLAYERUNKNOWN'S BATTLEGROUNDS,2020-04-22,4,info,False
+fixed an issue which could cause multiple map waypoints from the same player to remain visible,PLAYERUNKNOWN'S BATTLEGROUNDS,2020-04-14,7,info,False
+"fixed a bug where delirium volatiles remained visible, though inactive, if they were killed by the delirium mist receding",Path of Exile,2020-04-01,23,info,False
+fixed a bug causing the location of animated weapons' health bar to sometimes be incorrect,Path of Exile,2020-03-26,25,info,False
+fixed a bug where part of the arcane tome totem skin remained visible after the totem submerged,Path of Exile,2019-10-23,68,info,False
+fixed a bug where the timer in blighted maps remained visible after the ichor pump had been destroyed,Path of Exile,2019-09-09,85,info,False
+fixed an issue that caused players to incorrectly have a vehicle health bar above their car,Grand Theft Auto V,2019-07-23,38,info,False
+fixed – ela elite’s model outline can be seen behind the paint during the elite victory animation at the end of a match,Tom Clancy's Rainbow Six Siege,2020-01-12,6,info,False
+fixed – timer for tk offenses are out of sync between the hud and floating banner,Tom Clancy's Rainbow Six Siege,2019-12-11,7,info,False
+fixed – capitao’s firebolt dart remains visible for the duration of the aoe on local custom games,Tom Clancy's Rainbow Six Siege,2019-12-03,8,info,False
+fixed – pixel los behind on clubhouse in b church,Tom Clancy's Rainbow Six Siege,2019-10-07,11,info,False
+"fixed – in standard deployment mode, the attach prompt can remain in the hud after deploying a deployable shield/volcan and swapping to weapons",Tom Clancy's Rainbow Six Siege,2019-10-07,11,info,False
+"fixed – after reconnecting to a ranked match, the “ongoing ranked match” ribbon remains and prevents player from starting any other multiplayer modes that are not ranked",Tom Clancy's Rainbow Six Siege,2019-09-10,13,info,False
+"fixed the cliff-side one way door not closing properly, leaving behind invisible collision",Team Fortress 2,2019-10-16,12,info,False
+the deathsligner: fixed the german description for the deathslinger achievements,Dead by Daylight,2020-06-16,1,info,False
+the underground complex: fixed an issue that caused the some doorways to lack collision and allowing players to see through the walls,Dead by Daylight,2020-06-16,1,info,False
+fixed an issue that caused the extra points awarded for healing a survivor with no one left behind to not properly show in the score event,Dead by Daylight,2020-03-09,7,info,False
+fixed an issue that caused the pig's weapon wielding arm to be mostly offscreen during her ambush dash,Dead by Daylight,2019-12-03,13,info,False
+"fixed an issue that caused survivors models to be visible in front of a bubble indicator (hooked, madness, etc)",Dead by Daylight,2019-07-30,20,info,False
+fixed an issue that caused location indicators from screams not to give an off-screen indicator,Dead by Daylight,2019-07-30,20,info,False
+fixed an issue that caused the ghost face not to have an off-screen notification when spotted in the 180 degrees in front of him,Dead by Daylight,2019-07-23,21,info,False
+fixed text overflow on team dock when players have long names,Rust,2019-08-01,14,info,False
+fixed an issue where the incorrect ''turns remaining'' numerical value was displayed in prompts for completed emergencies while another emergency competition was active,Sid Meier's Civilization VI,2020-05-20,0,info,False
+fixed the icons for the braton nocturne skin and kintsugi skin missing its clip in the in-game market and arsenal,Warframe,2020-05-01,19,info,False
+"fixed rooms in the dojo showing as “insufficient space” despite not overlapping with the observatory, even with larger amounts of space given",Warframe,2020-03-05,39,info,False
+potential fix towards resource crate names lingering after being destroyed,Warframe,2020-01-23,43,info,False
+"fixed the ability screen showing ''distance per energy'' and unintentionally applying both efficiency and duration under the hood, resulting in energy drain not matching the ui when you had duration mods. changed energy per meter stat into energy per second: unmodded energy drain remains the same, and while speed mods previously increased energy drain (more distance covered), they now no longer do. thus, energy drain will be either the same or better than before, never worse",Warframe,2019-10-01,71,info,False
+fixed enemy health bar remaining yellow on armored enemies that have their armor reduced to 0 for clients,Warframe,2019-10-01,71,info,False
+fixed an issue where long achievement category names would get cut off,The Elder Scrolls Online,2020-02-20,9,info,False
+fixed an issue where the campaign ruleset name in the campaign browser was cut off in non-1920x1080 resolutions,The Elder Scrolls Online,2020-02-20,9,info,False
+fixed a cooking fire in a tavern in rivenspire that let you see the world behind the world. pay no attention to that man behind the curtain,The Elder Scrolls Online,2019-10-18,19,info,False
+fixed an issue where expired guild applications could linger in the applications list,The Elder Scrolls Online,2019-08-09,26,info,False
+fixed the issue where the enhanced manshaum totem at the cave in manshaum forest would remain as a question mark (?) on the minimap even after gaining the relevant knowledge,Black Desert Online,2020-05-13,7,info,False
+fixed the issue where the remaining time was not correctly displayed when going over to the next stage during the lakiaro minigame,Black Desert Online,2020-04-01,12,info,False
+fixed the issue where you could not see the custom hp bar when selecting the custom hp bar option in edit ui and using combat focus mode,Black Desert Online,2020-01-08,23,info,False
+fixed the issue where the effects of certain weapons remained visible even after your character became invisible via certain skills,Black Desert Online,2019-12-11,26,info,False
+"fixed the issue where the gear you equipped on your horse sometimes remained invisible, even if you toggled on its appearance in the mount information window",Black Desert Online,2019-11-13,30,info,False
+fixed the issue where the fish icon remained above the character's head even after having caught a fish by doing auto-fishing with crio's fishing chair equipped,Black Desert Online,2019-10-16,34,info,False
+[shai] fixed the issue where ''[shai] beautiful melody: joy'' remained in the quest list as incomplete even after completing it,Black Desert Online,2019-09-04,39,info,False
+"[kunoichi, ninja, dark knight, witch, wizard] fixed the issue where the fishing float was displayed when equipped with only the float during standby mode",Black Desert Online,2019-09-04,39,info,False
+"[warrior, valkyrie, archer, shai, striker, mystic, lahn] fixed the issue where the fishing float was displayed during weapon changing and swimming when equipped with the fishing float",Black Desert Online,2019-09-04,39,info,False
+fixed the issue where the hp bars of the below monsters of sycraia were not displayed when you didn't have their knowledge,Black Desert Online,2019-08-14,43,info,False
+fixed the issue where the dialog of 'the truth behind the treasure' was repeated when accepting the quest,Black Desert Online,2019-07-03,49,info,False
+a bug where a ship’s ‘weapons overheating’ marker remained red after cooling has been fixed,War Thunder,2020-02-06,47,info,False
+sturer emil - a bug has been fixed leaving some ammo rack modules to remain visible even after complete shell depletion,War Thunder,2019-11-18,79,info,False
+"fixed a bug where sextants that guaranteed the presence of a certain shrine would spawn a random shrine and then replace it by the guaranteed shrine, but the effects of the initial shrine would remain",Path of Exile,2020-03-10,34,persistence,False
+fixed – iana’s operator model remains in the map even if the player leaves the game while controlling the hologram,Tom Clancy's Rainbow Six Siege,2020-03-24,3,persistence,False
+fixed – kali’s lv-ei destruction decal remains even after the gadget is deployed and destroyed,Tom Clancy's Rainbow Six Siege,2019-12-11,7,persistence,False
+fixed an issue where rock slides would linger after ending,ARK: Survival Evolved,2020-02-27,60,persistence,False
+the nightmare: fixed an issue that caused pallet remains to not be cleared when the nightmare puts down a dream pallet,Dead by Daylight,2020-05-12,2,persistence,False
+fixed an issue that caused bloodwebs between levels 40-43 and 50 to not generate the maximum amount of perks if all remaining perks were very rare,Dead by Daylight,2019-09-17,18,persistence,False
+fixed an issue that caused some fences to be missing in front or in the back of various houses in the lampkin lane map,Dead by Daylight,2019-07-30,20,persistence,False
+fixed an issue that caused the hag's phantasms to stay permanently when the hag is behind the users camera and facing a phantasm,Dead by Daylight,2019-07-23,21,persistence,False
+fixed an issue that caused the hag's phantasms to stay permanently when the hag is behind the users camera and facing a phantasm,Dead by Daylight,2019-07-23,21,persistence,False
+fixing the naturalist model staying behind after the unit is destroyed by creating a park,Sid Meier's Civilization VI,2019-06-18,2,persistence,False
+fixed zaws remaining in your warframe’s hands when switching arsenal views to your primary/secondary,Warframe,2020-05-01,19,persistence,False
+fixed oplinks placed by a squadmate who has disconnected lingering perpetually,Warframe,2020-03-31,30,persistence,False
+fixed the sanctuary sentinel mod and companion shelter mod leaving an invulnerable shield lingering forever for the host if used in a no-shield nightmare mission,Warframe,2020-02-04,42,persistence,False
+potential fix towards stalker not remaining in the mission if a host migration occurred while he was out for blood,Warframe,2019-11-25,57,persistence,False
+fixed the fulmins detached barrel lingering for clients after switching weapons,Warframe,2019-10-31,68,persistence,False
+fixed quatz clip disappearing if you interrupted reload at just the right time,Warframe,2019-08-29,80,persistence,False
+[witch/wizard] fixed the issue where the character's main weapon sometimes remained in his or her hands when switching to awakening weapon while on main weapon mode,Black Desert Online,2020-03-25,13,persistence,False
+fixed the issue where your character would disappear when being hit by an attack with floating effect from another player,Black Desert Online,2019-12-24,24,persistence,False
+speculative fix to ragdolls floating on the a bombsite,Counter-Strike: Global Offensive,2020-04-23,9,position,False
+"fixed some floating objects in goroka, vikendi",PLAYERUNKNOWN'S BATTLEGROUNDS,2020-05-12,2,position,False
+fixed an issue where a disconnected player could float when displaced by a prone character,PLAYERUNKNOWN'S BATTLEGROUNDS,2019-12-11,15,position,False
+fixed an issue where smoke grenades could float above the ground in specific situations,PLAYERUNKNOWN'S BATTLEGROUNDS,2019-07-17,24,position,False
+fixed a bug where brands hovered above kitava's head (and typically offscreen),Path of Exile,2020-06-16,10,position,False
+fixed a bug introduced in 3.10.0 where portals created through the use of portal scrolls were inconsistently placed behind your character,Path of Exile,2020-04-20,20,position,False
+fixed a bug that could cause ballista totems to magically float. flying isn't planned until path of exile 6,Path of Exile,2020-03-10,34,position,False
+fixed an issue that resulted in vehicles appearing to be floating in the arena war – games masters,Grand Theft Auto V,2019-12-12,19,position,False
+fixed an issue that resulted in players being in the wrong position on the podium after completing the arena war – wreck it,Grand Theft Auto V,2019-12-12,19,position,False
+fixed an issue that resulted in money props floating after performing the make it rain player action,Grand Theft Auto V,2019-07-23,38,position,False
+fixed – gadgets remain floating after being placed on barrels that are later destroyed in b wine cellar of chalet,Tom Clancy's Rainbow Six Siege,2020-06-29,0,position,False
+fixed – attackers rappelling into the window of 2f back stairs of house remain in the air for a brief moment due to a missing floor asset,Tom Clancy's Rainbow Six Siege,2020-06-14,1,position,False
+fixed - sight alignment offset when nøkk goes from prone to standing if hel is activated,Tom Clancy's Rainbow Six Siege,2020-03-24,3,position,False
+fixed – kali’s lv-el can remain in the air after the barricade/wall is destroyed,Tom Clancy's Rainbow Six Siege,2020-03-09,4,position,False
+fixed – floating gadgets after deployment on some map objects,Tom Clancy's Rainbow Six Siege,2020-03-09,4,position,False
+fixed – various map assets have floating issues after the surface that they are on is destroyed,Tom Clancy's Rainbow Six Siege,2020-03-09,4,position,False
+fixed – bandit’s shockwire gadget appears offset when he holds it in his hands,Tom Clancy's Rainbow Six Siege,2020-01-27,5,position,False
+fixed – operators can appear to be floating over a shield from 3rd person pov if they vault over a shield twice,Tom Clancy's Rainbow Six Siege,2020-01-27,5,position,False
+fixed – volcán’s explosive canister and shell will sometimes remain floating after an ash breaching round or mira mirror is deployed close to it,Tom Clancy's Rainbow Six Siege,2020-01-12,6,position,False
+fixed – deployable gadgets float after the monitor they're placed on is destroyed in border,Tom Clancy's Rainbow Six Siege,2020-01-12,6,position,False
+fixed – sticky gadgets remain floating after destroying a vase in 3f cocktail lounge in kafe,Tom Clancy's Rainbow Six Siege,2020-01-12,6,position,False
+fixed – dbno players appear to float when moving down staircases from 3rd person pov,Tom Clancy's Rainbow Six Siege,2019-12-03,8,position,False
+fixed – weapons float in 1st person pov while transitioning from ads to counter defusing animation,Tom Clancy's Rainbow Six Siege,2019-12-03,8,position,False
+fixed – drones float for a few seconds after jumping on a wall or a doorway,Tom Clancy's Rainbow Six Siege,2019-10-07,11,position,False
+"fixed – painting hooks remain floating after wall destruction, retain collision physics",Tom Clancy's Rainbow Six Siege,2019-09-10,13,position,False
+fixed – floating debris after destroying the wall in 2f fireplace hall,Tom Clancy's Rainbow Six Siege,2019-07-09,15,position,False
+fixed holes/floating foliage,ARK: Survival Evolved,2020-04-27,30,position,False
+fixed an issue that would sometimes show the survivors floating above the hook,Dead by Daylight,2020-07-02,0,position,False
+"badham preschool: fixed an issue that caused various assets to appear offset, leaving a gap behind them",Dead by Daylight,2020-06-16,1,position,False
+haddonfield: fixed an issue that displayed floating thrashbags in one of the houses's garage,Dead by Daylight,2020-06-16,1,position,False
+fixed an issue that caused survivors to briefly appear offset from the hook and then snap back to it,Dead by Daylight,2020-06-16,1,position,False
+the oni: fixed an issue that caused the oni's kanobo to float briefly when he transitions to demon mode,Dead by Daylight,2020-05-05,3,position,False
+fixed an animation issue that caused the killer to be offset when performing a mori on a survivor that is quickly spinning,Dead by Daylight,2020-05-05,3,position,False
+fixed an issue that caused female survivors to appear offset when being grabbed while vaulting away from the spirit,Dead by Daylight,2020-04-28,4,position,False
+treatment theatre: fixed an issue that displayed a floating book next to a desk,Dead by Daylight,2020-03-09,7,position,False
+fixed a rock asset that could be seen floating on multiple tiles,Dead by Daylight,2020-03-09,7,position,False
+fixed an issue that caused bear traps to sink into the ground on multiple areas around the silo building in the torment creek map,Dead by Daylight,2020-01-21,10,position,False
+fixed an issue that caused the chandelier in the chapel to be floating unattached to anything in the father campbell's chapel map,Dead by Daylight,2020-01-21,10,position,False
+fixed an issue that caused players to be floating above the ground on most tiles in the mount ormond resort map,Dead by Daylight,2020-01-21,10,position,False
+fixed an issue that caused multiple killer belongings to be offset or floating when spawned on the watch tower in the mount ormond resort map,Dead by Daylight,2020-01-21,10,position,False
+fixed an issue that caused male survivors hands to be floating above the pool of devotion when cleansing their sickness,Dead by Daylight,2020-01-21,10,position,False
+fixed an issue that caused a floating crow on a maze wall in the shelter woods map,Dead by Daylight,2019-12-03,13,position,False
+fixed an issue that caused survivor models not to rotate and become stuck in one direction when being unhooked,Dead by Daylight,2019-12-03,13,position,False
+fixed an issue that caused fire torches to float on the maze walls in the yamaoka estate maps,Dead by Daylight,2019-12-03,13,position,False
+fixed an issue that caused players to float at the top of staircases in the temple building of the temple of purgation map,Dead by Daylight,2019-10-29,15,position,False
+fixed an issue that caused a floating crow in a hallway in the treatment theatre map,Dead by Daylight,2019-10-29,15,position,False
+fixed an issue that caused survivors to become offset from the killer's shoulder when they hit a surface,Dead by Daylight,2019-09-17,18,position,False
+fixed an issue that caused a hook in front of the warehouse to float in the coal tower map,Dead by Daylight,2019-07-23,21,position,False
+fixed an issue that caused a ski stick to be floating on top of the bar counter in the chalet of the mount ormond resort map,Dead by Daylight,2019-07-23,21,position,False
+fixed 3rd person weapon attachment offsets,Rust,2020-06-04,1,position,False
+fixed spas12 viewmodel - shell floating into shot during reload,Rust,2020-06-04,1,position,False
+fixed minicopters floating in the air if the ground they were resting on was destroyed,Rust,2019-11-07,10,position,False
+fixed horses floating in the air if the ground they were resting on was destroyed,Rust,2019-11-07,10,position,False
+fixed an issue in the grineer's genetic code where dying while frozen resulted in their face floating a meter away from their head,Warframe,2020-06-24,1,position,False
+"fixed the dessicata syandana appearing to float away from nova, saryn, and titania",Warframe,2020-06-12,3,position,False
+fixed some fish bait not properly floating in the water,Warframe,2020-06-12,5,position,False
+fixed base of the railjack wing turret appearing to float in front of the client player when mounting said wing turret,Warframe,2020-05-05,16,position,False
+fixed cestra’s clip ejecting in the wrong directions when reloading. also tweaked the reload animation timing so that you can see the arm rotating instead of looking like it pops,Warframe,2020-05-01,19,position,False
+fixed some floating geometry that was outside of bounds in the gas city tileset,Warframe,2020-05-01,19,position,False
+fixed the executioner harkonar noggle face being offset,Warframe,2020-05-01,19,position,False
+fixed erroneous floating floor texture appearing in the earth cervantes tileset,Warframe,2020-03-05,38,position,False
+fixed void hole appearing offset if activated by a client who is piloting the railjack,Warframe,2020-03-05,39,position,False
+"fixed attachment offsets on the vapos aquila in the gas city tileset. corpus fleet technicians finally found the ship schematics and are now properly attaching laser weapons pods, vs previous woeful assembly",Warframe,2020-03-05,39,position,False
+fixed the left hulta leg guard being offset when equipped on hydroid prime. as reported here: https://forums.warframe.com/topic/1165714-hydroid-severe-offset/,Warframe,2020-02-11,41,position,False
+"fixed an issue where the defense target's head would float above the cryopod in defense missions, exposing it to the many dangers of the environment and also the dangers of not having your head connected to your body",Warframe,2020-02-04,42,position,False
+fixed jackal and razorback not correctly turning to face players sometimes when you get behind them,Warframe,2020-01-10,45,position,False
+fixed offsets for equinox night form leg armor so it sits better on the leg,Warframe,2020-01-09,46,position,False
+fixed the quellor’s clip rendering behind the gun if reloading while aiming,Warframe,2020-01-09,46,position,False
+fixed miniature boiler pods that could get stuck lingering in mid-air,Warframe,2020-01-09,46,position,False
+fixed the ivara kuvael huntress helmet floating away from ivara prime’s body,Warframe,2019-12-18,49,position,False
+fixed vitus pickups sometimes falling through the floor,Warframe,2019-10-31,68,position,False
+fixed a floating npc in the hydroid relay,Warframe,2019-10-31,68,position,False
+fixed players being left floating if they were standing on an excavator or a capture case when it is destroyed,Warframe,2019-10-18,69,position,False
+fixed ziplines kicking you off if you bump into geometry instead of just stopping you short of overlapping. also fixed colliding with other players/enemies on ziplines when you should be able to pass through,Warframe,2019-10-09,70,position,False
+fixed ivara's sleep arrow sometimes causing birds to fall through the ground,Warframe,2019-09-05,76,position,False
+fixed an issue where some projectiles wouldn't come to a complete stop and would slowly float away (noticed on some bouncing penta grenades),Warframe,2019-09-03,77,position,False
+fixed larkspur beams lagging behind when flying in archwing,Warframe,2019-08-29,80,position,False
+fixed shotgun shells floating if corinth’s reload was interrupted,Warframe,2019-08-29,80,position,False
+"fixed issues with ayla, misa prime and pyra syandana offsets on banshee prime",Warframe,2019-08-29,80,position,False
+fixed emblems being improperly offset on the rhino blade of the lotus skin,Warframe,2019-08-29,80,position,False
+fixed warframes floating with flat feet with the wisp agile animation equipped as per: https://forums.warframe.com/topic/1112277-minor-issue-with-wisps-agile-animation-set,Warframe,2019-08-29,80,position,False
+"fixed floating, detached fans on the jupiter tileset",Warframe,2019-08-29,80,position,False
+fixed the citadella prime syandana spinning ring being slightly offset. as reported here: https://forums.warframe.com/topic/1122937-citadella-prime-syandana-bug/,Warframe,2019-08-29,80,position,False
+fixed placing domestik drone decorations in the air causing them to fall through the floor,Warframe,2019-07-24,91,position,False
+fixed the quatz’ reload ejected clip flipping orientation when released,Warframe,2019-07-24,91,position,False
+further fixes to floating armor on wukong / wukong prime,Warframe,2019-07-12,94,position,False
+fixed offset left shoulder emblem on wukong prime,Warframe,2019-07-08,95,position,False
+fixed random floating objects outside the corpus gas city tileset,Warframe,2019-07-06,96,position,False
+fixed performing a ground slam on a cryopod while wukong's primal staff is equipped resulting in the warframe’s animation to get stuck in the air,Warframe,2019-06-27,97,position,False
+fixed instances of floating trees in several coastal maps around lustria,Total War: WARHAMMER II,2019-09-06,5,position,False
+fixed instances of floating trees in port reaver siege map,Total War: WARHAMMER II,2019-09-06,5,position,False
+fixed instances of floating foliage on the storm daemon battle map,Total War: WARHAMMER II,2019-09-06,5,position,False
+fixed an issue with a floating lamppost in the outside area near palm trees,PAYDAY 2,2020-07-01,0,position,False
+fixed an issue with floating objects in the outside area near mexican grill,PAYDAY 2,2020-07-01,0,position,False
+fixed an issue on scarface mansion where some debris could be seen floating above the ground,PAYDAY 2,2020-04-28,3,position,False
+fixed a floating flag behind the bar in border crossing,PAYDAY 2,2019-12-16,8,position,False
+fixed so that the signature magnifier gadget does not float when using it together with the see more sight on certain weapons,PAYDAY 2,2019-12-16,8,position,False
+fixed an issue with the compact laser module floating when attached to the akimbo cobra submachine guns,PAYDAY 2,2019-12-16,8,position,False
+fixed the “breda’s bottomless mug” memento so that characters always drink from the mug instead of sometimes pouring the mead out in front of them,The Elder Scrolls Online,2020-05-26,3,position,False
+fixed an issue where the gas visuals for a “gas blossom” furnishing could appear offset from the body of the plant when it was sideways or upside-down,The Elder Scrolls Online,2020-05-26,3,position,False
+fixed a large number of monsters that were floating or clipping into fixtures and terrain,The Elder Scrolls Online,2020-05-26,3,position,False
+fixed a number of floating and hovering npcs,The Elder Scrolls Online,2020-02-20,9,position,False
+"fixed an issue where rapidly placing a furnishing could cause it to appear far above you, instead of in front of you",The Elder Scrolls Online,2019-10-18,19,position,False
+fixed the pyromancer cauldron disappearing in collapsed view and also causing vfx to float,SMITE,2019-07-23,15,position,False
+fixed updating viewmodel offset when sight attachment changes while aiming in multiplayer,Unturned,2020-05-15,2,position,False
+"fixed zombies floating until first tick, now they always tick once after spawning",Unturned,2019-12-07,7,position,False
+fixed the issue where characters appeared to be floating in the air while riding an elevator,Black Desert Online,2020-06-24,1,position,False
+fixed the graphical issue with floating rocks at certain locations,Black Desert Online,2020-06-10,3,position,False
+fixed the issue where the grass in certain areas of khalk canyon appeared as if it were floating in the air,Black Desert Online,2020-05-13,7,position,False
+fixed the issue where certain structures at certain parts of rhua tree stub appeared to be floating in the air,Black Desert Online,2020-05-13,7,position,False
+fixed the issue where some rocks were floating in parts of balenos mountains and lema island,Black Desert Online,2020-04-15,10,position,False
+fixed the graphical issue where grass appeared to be floating at certain regions of south kaia mountain and the balenos mountains,Black Desert Online,2020-03-11,15,position,False
+fixed the issue where the npc who's at the border zone near kamasylvia was floating in the air,Black Desert Online,2020-02-19,18,position,False
+fixed the graphical issue where rocks appeared floating in some regions of balenos mountains,Black Desert Online,2020-02-12,19,position,False
+fixed the issue where grass near serendia shrine and iliya island appeared floating,Black Desert Online,2020-02-12,19,position,False
+fixed the issue where some trees were floating in parts of garmoth's lair,Black Desert Online,2020-02-05,20,position,False
+fixed the location of the monsters that were stuck in certain areas of the following regions,Black Desert Online,2020-01-22,21,position,False
+fixed the graphical issue where grass appeared to be floating in some regions in the desert naga temple,Black Desert Online,2020-01-15,22,position,False
+fixed the graphical issue where grass appeared to be floating at some regions in the imp cave,Black Desert Online,2020-01-08,23,position,False
+fixed the graphical issue where certain npc of altinova appeared floating,Black Desert Online,2019-12-24,24,position,False
+fixed the issue where the ground appeared to be floating in certain areas of desert naga temple,Black Desert Online,2019-12-17,25,position,False
+fixed the graphical issue where certain structures appeared floating at marak farm,Black Desert Online,2019-12-11,26,position,False
+fixed the issue where an oar was floating around in the ross sea,Black Desert Online,2019-12-04,27,position,False
+fixed the issue where it would appear as if grass would be floating around in certain areas of desert naga temple,Black Desert Online,2019-11-20,29,position,False
+fixed the issue where the structures in certain places of the weita island were floating in the air,Black Desert Online,2019-10-30,32,position,False
+fixed the issue where the grass in certain areas of mediah northern highlands was floating in the air,Black Desert Online,2019-10-16,34,position,False
+fixed the issue where the grass around calpheon castle appeared to float in the air,Black Desert Online,2019-10-16,34,position,False
+fixed the issue where the npc near the shady tree forest was floating in the air,Black Desert Online,2019-10-08,35,position,False
+fixed the issue where grass appeared to be floating in thin air at certain locations in loopy tree forest,Black Desert Online,2019-10-02,36,position,False
+fixed the issue where grass appeared to be floating in thin air at certain locations in calpheon castle site,Black Desert Online,2019-10-02,36,position,False
+fixed the issue where some grass in the loopy tree forest was floating in the air,Black Desert Online,2019-09-10,38,position,False
+fixed the issue where grass in certain areas of calpheon castle was floating in the air,Black Desert Online,2019-09-10,38,position,False
+"fixed the issue where the grass in certain areas around the saunil battlefield, treant forest and along the way from the longleaf tree sentry post to the foggy forest was floating in the air",Black Desert Online,2019-09-04,39,position,False
+"fixed the issue where the grass in certain areas of the treant forest, loopy tree forest, and calpheon castle was floating in the air",Black Desert Online,2019-08-14,43,position,False
+fixed the issue where povios was floating in midair during the ''precious footsteps'' quest,Black Desert Online,2019-08-14,43,position,False
+fixed the issue where a rock in certain region of the sausan garrison was abnormally floating in the air,Black Desert Online,2019-08-07,44,position,False
+fixed the issue where the grass in certain place of the loopy tree forest was floating in the air,Black Desert Online,2019-08-07,44,position,False
+fixed the issue where a rock in a certain place around the saunil battlefield was floating in the air,Black Desert Online,2019-08-07,44,position,False
+fixed the issue where the grass near the calpheon castle was floating in the air,Black Desert Online,2019-07-31,45,position,False
+fixed the issue where the grass near the treant forest was floating in the air,Black Desert Online,2019-07-31,45,position,False
+fixed the issue where the grass near the ibellab oasis was floating in the air,Black Desert Online,2019-07-31,45,position,False
+fixed the issue where the grass in some places around the loopy tree forest was floating intermittently,Black Desert Online,2019-07-31,45,position,False
+fixed the issue where grass was floating in some places around trent,Black Desert Online,2019-07-17,47,position,False
+“[conquest] karelia” — unnecessary respawn zones have been removed from the mission briefing. the position of the respawn point which was located in front of the tree has been fixed,War Thunder,2020-05-26,19,position,False
+мо-4 — wrong position of the commander’s arms have been corrected. the axis of the vertical aiming of the 12.7mm dshk machine gun in the x-ray has been corrected,War Thunder,2020-05-26,19,position,False
+"f4f-4, f4f-3, martlet  — a bug causing the landing gear on the aircraft model to be in the wrong position has been fixed",War Thunder,2019-12-18,66,position,False
+"me 163, ki-200 — a bug causing incorrect aircraft behaviour in the hangar, where its position could be erratic (floating, etc), has been fixed",War Thunder,2019-11-20,77,position,False
+object 685 - a bug has been fixed with insufficient floating ability,War Thunder,2019-11-18,79,position,False
+type k-7 / class no.4 — wrong positioning of the stern machine gunner has been fixed,War Thunder,2019-09-11,102,position,False
+type 11 — wrong position of the front right torpedo in the launcher has been fixed,War Thunder,2019-09-11,102,position,False
+fixed an issue that caused older quests to sort in front of newer quests when players logged in,Destiny 2,2020-06-09,2,ui,False
+fixed an issue where the rank 50 toast would display overlapping numbers,Destiny 2,2020-03-10,8,ui,False
+fixed an issuing causing the health bar to display incorrectly when using healing items,PLAYERUNKNOWN'S BATTLEGROUNDS,2020-05-12,2,ui,False
+fixed an issue where the weapon crosshair was exposed overlapped when moving to the next round in war mode while holding a weapon,PLAYERUNKNOWN'S BATTLEGROUNDS,2020-01-14,14,ui,False
+fixed an issue where the throwable ui overlapped when switching between specific throwable items,PLAYERUNKNOWN'S BATTLEGROUNDS,2019-06-19,26,ui,False
+fixed a bug where the ''start blight encounter'' button lingered for a short duration after being clicked,Path of Exile,2019-09-18,78,ui,False
+fixed a bug where the sunstone portal would overlap with the map device if you were using the smaller map device model,Path of Exile,2019-08-28,94,ui,False
+fixed issues that resulted in overlapping ui between the interaction menu and the casino elevator menu,Grand Theft Auto V,2019-12-12,19,ui,False
+the nightmare: fixed an issue that caused the top part of the power description tooltip to be slightly cut off in windowed mode,Dead by Daylight,2020-06-16,1,ui,False
+fixed an issue that caused tooltips for items in the free track to overlap on the tier progress,Dead by Daylight,2020-01-21,10,ui,False
+fixed an issue that caused tooltips from cosmetics in the free track to overlap the rift tier progress in the rift,Dead by Daylight,2019-12-03,13,ui,False
+fixed an issue that caused the fade out between killer and survivor select in the store to be offset,Dead by Daylight,2019-10-29,15,ui,False
+fixed an issue that caused the back button text color to remain highlighted after having hovering over the button,Dead by Daylight,2019-10-29,15,ui,False
+fixed an issue that caused the nightmare's action prompts to overlap by adding support for displaying prompts on multiples rows in the hud to prevent current and future overlaps,Dead by Daylight,2019-07-30,20,ui,False
+fixed titles getting cut off in pie menu,Rust,2019-08-30,13,ui,False
+fixed an issue where the tech/civics tree scrollbar was being clipped by the background,Sid Meier's Civilization VI,2020-05-20,0,ui,False
+fixed an issue where the scored competition prompt would overlap the chat panel when viewing the world tracker during a multiplayer game,Sid Meier's Civilization VI,2020-05-20,0,ui,False
+fix usable scroll area and logo clipping for various resolutions,Sid Meier's Civilization VI,2019-09-12,1,ui,False
+fixed opening any kind of chat link while on the railjack configure screen causing ui overlaps,Warframe,2020-06-24,1,ui,False
+fixed ui backer on mastery rank test complete screens being offset for non 16:9 aspect ratios,Warframe,2020-06-12,4,ui,False
+fixed long clan names being partly hidden behind the menu options in the clan management screen,Warframe,2020-06-11,7,ui,False
+fixed the pause menu overlapping with the dojo architect screen,Warframe,2020-05-15,11,ui,False
+fixed floating text in ash’s leverian,Warframe,2020-05-12,13,ui,False
+fixed teammate buttons in the railjack tactical menu overlapping the location text,Warframe,2020-05-01,19,ui,False
+fixed ally kuva lich name/health bar overriding enemy kuva lich ui,Warframe,2020-05-01,19,ui,False
+fixed clicking on chat-linked zaws overlapping ui screens that are already open with the zaw inventory select screen,Warframe,2020-05-01,19,ui,False
+fixed the mod drop chance booster text getting cut off in the booster ui section,Warframe,2020-05-01,19,ui,False
+fixed mod station mods list appearing cut off if the nightwave screen is opened while counting down to enter a relay or town and the loading starts with the nightwave screen remaining open,Warframe,2020-05-01,19,ui,False
+fixed cases of overlapping ui when opening the pause menu while viewing other screens,Warframe,2020-05-01,19,ui,False
+fixed ui overlapping when viewing arcanes and then opening a chat link,Warframe,2020-04-14,24,ui,False
+fixed slightly overlapping ui trackers when playing a disruption mission,Warframe,2020-04-09,25,ui,False
+fixed the tenno affinity icon in the squad/player list on the hud overlapping with the message of bleeding out and reviving,Warframe,2020-04-08,26,ui,False
+"fixed certain ui elements (boss health bar, markers, enemy statuses) sometimes tinting red for the rest of the mission",Warframe,2020-03-31,29,ui,False
+fixed squad labels displayed above the ground/murex missions in the flotilla overlapping each other,Warframe,2020-03-24,35,ui,False
+fixed railjack name text lingering behind when joining another player’s squad and loading into their dry dock,Warframe,2020-03-24,36,ui,False
+this fixes arcane tooltips expanding off screen when viewed in vendor offerings,Warframe,2020-03-24,36,ui,False
+fixed volatile runner enemy name lingering in the hud,Warframe,2020-03-24,36,ui,False
+fixed enemy names appearing offset at low resolutions if the hud scale is greater than 100,Warframe,2020-03-24,36,ui,False
+fixed longer research names going off screen in clan research labs,Warframe,2020-03-24,36,ui,False
+fixed mission objective ui appearing and overlapping the options menu when you pause the game while using a turret in the railjack or stolen crewship,Warframe,2020-03-05,39,ui,False
+more fixes towards scrolling back to top issue when contributing or rushing a railjack weapon or component. now when you contribute or rush the window will remain where the item is as to not force you to search for it again,Warframe,2020-03-05,39,ui,False
+fixed railjack configure ui screen overlapping with the trading window when invited and accepting to trade in the dojos. this also fixes being unable to accept invites while on the intrinsics menu,Warframe,2020-03-05,39,ui,False
+fixed railjack customization ui lingering after purchasing and equipping a railjack skin,Warframe,2020-03-05,39,ui,False
+fixed ability menu remaining open when entering a sanctuary onslaught conduit,Warframe,2020-03-05,39,ui,False
+fixed “melee attack with…” tooltip clipping into the wall in vor’s prize in other languages,Warframe,2020-03-05,39,ui,False
+fixed mission map lingering on screen after opening the kuva lich screen,Warframe,2020-02-18,40,ui,False
+fixed the companion arsenal ui overlapping with the other tabs in the arsenal when switching back and forth with a controller,Warframe,2020-02-18,40,ui,False
+fixed power menu ui remaining open when entering a data-conduit in sanctuary onslaught when using a controller,Warframe,2020-02-04,42,ui,False
+"fixed some items in the market having overlapping text (kavat incubator upgrade segment, etc)",Warframe,2020-01-23,43,ui,False
+removed decimals in the arsenal stats if damage falloff range is 1000 or greater to fix numbers overlapping and appearing messy,Warframe,2020-01-10,45,ui,False
+fixed railjack mission complete popup rendering behind the railjack hud,Warframe,2020-01-09,46,ui,False
+more fixes towards requiem mod ui lingering on the screen perpetually after failing to parazon stab the kuva lich,Warframe,2019-11-22,59,ui,False
+fixed issue with requiem mod ui lingering and not updating properly after performing a mercy on kuva lich as wisp,Warframe,2019-11-22,59,ui,False
+fixed kuva lich screen overlapping with the market ui if the market is opened while viewing said kuva lich screen,Warframe,2019-11-22,59,ui,False
+fixed requiem mod ui lingering on the screen perpetually after failing to parazon stab the kuva lich,Warframe,2019-11-19,60,ui,False
+fixed ui overlapping when opening a chat link while in the relic refinement screen,Warframe,2019-11-05,64,ui,False
+fixed the navigation alert bar overlapping your ui when viewing your profile,Warframe,2019-10-31,68,ui,False
+fixed overlapping ui when viewing a look link when in the arsenal,Warframe,2019-10-31,68,ui,False
+fixed title of ‘thank you’ messages running off screen,Warframe,2019-09-18,74,ui,False
+fixed overlapping nightwave ui after viewing an item diorama,Warframe,2019-08-29,80,ui,False
+fixed a host migration in any rescue mission before the players locate/free the hostage resulting in the remaining players having a broken ui,Warframe,2019-08-29,80,ui,False
+fixed grid icons sometimes being offset and leaving a small gap at the bottom in various menu screens,Warframe,2019-08-29,80,ui,False
+fixed clients getting overlapping ui in the index,Warframe,2019-08-29,80,ui,False
+fixed text overlap in some languages when viewing restored nightwave acts,Warframe,2019-08-14,81,ui,False
+fixed possibility of the squad overlay remaining on the screen when quickly clicking the copy loadout button right after starting to close the screen,Warframe,2019-08-09,82,ui,False
+"adjusted the emblem offset on the helminth charger, drahk pattern, and underbrush pattern kubrows to fix them disappearing completely",Warframe,2019-07-31,88,ui,False
+fixed puzzle section of puzzle events overlapping any event opened subsequently,Total War: WARHAMMER II,2019-09-06,5,ui,False
+fixed display of embedded agent icons on campaign armies which have 4 or more different types of hero in the army,Total War: WARHAMMER II,2019-09-06,5,ui,False
+fixed an issue where a white square was displayed behind the menace below button when playing as clan fester in multiplayer campaign,Total War: WARHAMMER II,2019-09-06,5,ui,False
+fixed several instances of overlapping banners in the quest battle menu,Total War: WARHAMMER II,2019-09-06,5,ui,False
+"fixed an issue in custom battle when changing between mounts, abilities, spells and icons that caused the icons to overlap",Total War: WARHAMMER II,2019-09-06,5,ui,False
+fixed text overlapping for the spanish localization on the breakfast in tijuana heist setup screen,PAYDAY 2,2020-07-01,0,ui,False
+fixed an issue with cut off text when buying a heist on death wish or death sentence in japanese,PAYDAY 2,2020-06-30,1,ui,False
+fixed a text overlap issue in russian when selecting weekly holdout,PAYDAY 2,2019-11-07,11,ui,False
+fixed occupation text clipping,Europa Universalis IV,2020-06-09,2,ui,False
+"fixed an issue where pirate missions would overlap with other non-generic mission trees in unpredictable ways, creating ugly results. they will now always appear last on the mission tree interface if there are other missions using that slot",Europa Universalis IV,2020-06-09,2,ui,False
+fixed issue where the scrying ui would occasionally show the “turns remaining” countdown too early,The Elder Scrolls Online,2020-06-02,2,ui,False
+fixed the positioning for the “show offline” filter in the friends/guild roster so it doesn't overlap the search box in russian,The Elder Scrolls Online,2020-06-02,2,ui,False
+fixed an issue where your character was hidden behind the interface while interacting with the outfit station in clockwork city while in gamepad mode,The Elder Scrolls Online,2020-02-20,9,ui,False
+fixed an issue where the buy crowns button could overlap with your crown gem amount,The Elder Scrolls Online,2020-02-20,9,ui,False
+fixed an issue that caused the pending sale item in the guild trader window to appear to remain pending after switching the current guild,The Elder Scrolls Online,2020-02-20,9,ui,False
+fixed an issue where your character’s nameplate was too low when riding spider-type mounts,The Elder Scrolls Online,2019-10-18,19,ui,False
+fixed an issue in the crown store where keybind text could overlap,The Elder Scrolls Online,2019-10-18,19,ui,False
+fixed an issue where the ''removing from area…'' timer would overlap with buff trackers,The Elder Scrolls Online,2019-10-18,19,ui,False
+fixed an issue where quests with multiple currency rewards would overlap the item rewards,The Elder Scrolls Online,2019-10-18,19,ui,False
+fixed an issue where 6 ingredient recipes would cause ui elements to overlap at crafting stations,The Elder Scrolls Online,2019-08-09,26,ui,False
+fixed overflow of resource icons in the state view,Hearts of Iron IV,2020-04-08,2,ui,False
+fixed too small boxes for total sinking counts in the naval losses/kills statistics tab,Hearts of Iron IV,2020-02-25,3,ui,False
+fixed issue with overflow in certain languages in the logistics view,Hearts of Iron IV,2020-02-25,3,ui,False
+fixed an issue where the objective health bar overlay was not showing for bull demon king in duel,SMITE,2019-12-11,10,ui,False
+"fixed an issue where if chernobog dashes into a wall while being chased by persephone’s plant, the over head icon remains",SMITE,2019-09-17,13,ui,False
+fixed report button remaining active after sending a report end of match lobby,SMITE,2019-08-20,14,ui,False
+fixed the issue where the titles in the chat group window overlapped with certain images there,Black Desert Online,2020-06-24,1,ui,False
+fixed the text overlap issue in the my bid list section sometimes obscured the remaining bid count of the guild auction house window,Black Desert Online,2020-06-10,3,ui,False
+"fixed the issue where if you tried to throw away an item from the inventory (i) but missed the trash can icon, the icon became emphasized and remained so even after visiting the world map (m) or beauty (f4) windows",Black Desert Online,2020-06-03,4,ui,False
+fixed the issue where the button for bidding and the explanatory text was overlapping in the view details part of the guild house window,Black Desert Online,2020-06-03,4,ui,False
+fixed the issue where the text describing certain guild houses did not cut off properly when it was too long,Black Desert Online,2020-05-20,6,ui,False
+fixed the issue where the texts for occupying areas from the guild window overlapped when there were too many of them,Black Desert Online,2020-04-29,8,ui,False
+fixed the issue where the inventory and storage balance from npc repair menu > equipment window overlapped with the relevant category's description text,Black Desert Online,2020-04-29,8,ui,False
+fixed the top right popup text for durability and weight notification to not overlap each other,Black Desert Online,2020-04-15,10,ui,False
+fixed the issue where the notification uis overlapped when the horse gear durability notification popped up while the ship equipment notification ui was on,Black Desert Online,2020-04-15,10,ui,False
+fixed the issue where the guild information window was displayed behind the guild member recruit window,Black Desert Online,2020-04-08,11,ui,False
+fixed the issue where some quest names overlapped with the icon in the list in the quest window,Black Desert Online,2020-04-08,11,ui,False
+fixed the issue where the item name from the crafting notes text bubble description overlapped with the words ''crafting notes'' above,Black Desert Online,2020-03-25,13,ui,False
+fixed the issue where text would overlap when the size of the war status window was reduced,Black Desert Online,2020-03-18,14,ui,False
+fixed the issue where the instruction text for the item restore window overlapped with the restore button,Black Desert Online,2020-03-11,15,ui,False
+fixed the issue where the find npc window opened behind the other windows,Black Desert Online,2020-02-19,18,ui,False
+fixed the issue where the ''retrieve all'' button would overlap with the description text of the farming guide text when it was too long within the installation list window in place mode,Black Desert Online,2020-02-12,19,ui,False
+fixed the issue where the level numbers in the image for dark rifts overlapped,Black Desert Online,2020-02-05,20,ui,False
+fixed the icons for ancient puturum dark rift and desert naga temple to not overlap with each other on the world map (m),Black Desert Online,2020-01-08,23,ui,False
+fixed the issue where the new icon overlapped with the lock menu icon in the menu ui,Black Desert Online,2020-01-08,23,ui,False
+fixed the issue where characters in the window for entering commands overlapped when fishing with a gamepad,Black Desert Online,2019-12-24,24,ui,False
+"fixed the issue where the dialogues and buttons which had appeared on the npc chat window through interactions, exchanges, or other actions remained in an abnormal way",Black Desert Online,2019-12-24,24,ui,False
+fixed the issue where the tooltips of the equipment and reform stone you had set in the item reform window remained on the screen,Black Desert Online,2019-12-24,24,ui,False
+fixed the issue where the navigation button that appears when your ship's durability is too low overlapped with the ocean current and wind ui,Black Desert Online,2019-12-17,25,ui,False
+fixed the issue where the cow milking minigame's mouse key guide overlapped with the minigame ui,Black Desert Online,2019-12-11,26,ui,False
+fixed the issue where the text ''skill points'' overlapped with the numerical value of your skill points in the skill window,Black Desert Online,2019-12-04,27,ui,False
+fixed the issue where text would overlap with the image in the herb brewer minigame,Black Desert Online,2019-11-20,29,ui,False
+fixed the issue where the 'looped auto-path' button's text that appears when using rmb in the world map (m) overflowed out of the ui. * only applicable to those countries that had the issue where the translation text for the 'looped auto-path' button was too long,Black Desert Online,2019-10-30,32,ui,False
+fixed the issue where the ship name text from the register ship window overflowed out of the ui,Black Desert Online,2019-10-30,32,ui,False
+fixed the issue where the region name displayed on the top of the minimap was cut or overflowed out of the ui when the text was too long,Black Desert Online,2019-10-23,33,ui,False
+fixed the issue where the text of the ship info window overlapped,Black Desert Online,2019-10-23,33,ui,False
+fixed the issue where the ship's skill name overflowed out of the screen,Black Desert Online,2019-10-23,33,ui,False
+fixed the issue where the description text overflowed out of the ui background while transferring a ship,Black Desert Online,2019-10-23,33,ui,False
+fixed the issue where the letters overlapped because the text was too long when selecting worker grade in the view workers continuously window,Black Desert Online,2019-10-16,34,ui,False
+fixed the issue where the quotation board window on the left side of the trade window would intermittently overlap with the bar below,Black Desert Online,2019-10-16,34,ui,False
+fixed the issue where the description of the unlearned skill in the manage mount skill window overflowed out of the window,Black Desert Online,2019-10-08,35,ui,False
+fixed the issue where the health ui and family buff ui overlapped if you toggle the health ui to be disabled and use a shortcut to toggle a preset ui that has the health ui enabled,Black Desert Online,2019-10-02,36,ui,False
+fixed the issue where the ui indicating low durability of your horse gear overlapped with the altar of blood matchmaking ui so you could not cancel matchmaking,Black Desert Online,2019-10-02,36,ui,False
+fixed the issue where the mount skill description text in the stable ui overflowed out of the window if it was longer,Black Desert Online,2019-10-02,36,ui,False
+fixed the issue where the sell window remained when you opened it through a transaction maid and went to world map,Black Desert Online,2019-09-10,38,ui,False
+"fixed the issue where the expiration date, trade item price guarantee expiration 2 hours, and equipped item durability 0 notifications (red background) in the inventory and equipment window overlapped with the item tier frame",Black Desert Online,2019-09-04,39,ui,False
+fixed the issue where skills looked overlapped in every skill tab from the skill (k) window,Black Desert Online,2019-08-28,41,ui,False
+fixed the overlapping issue of the text with the portrait in the ui that aids the quest progression during the quest ''my little first pony.'',Black Desert Online,2019-08-21,42,ui,False
+fixed the arrows and numbers in the level up information window to not overlap with each other,Black Desert Online,2019-07-31,45,ui,False
+fixed the issue where the text box of the drunk at the lunar halo inn in velia overlapped with the npc’s head,Black Desert Online,2019-07-24,46,ui,False
+fixed the garden information text on the world map (m) to not overlap,Black Desert Online,2019-07-10,48,ui,False
+fixed the issue where the movable ui got stuck during ui edit when they overlap with an unmovable ui,Black Desert Online,2019-07-10,48,ui,False
+fixed the issue where the notice on the top of the screen during fishing would overlap with other ui when text size is set to the largest size,Black Desert Online,2019-07-03,49,ui,False
