@@ -50,9 +50,6 @@
 ```
 game-qa/
 ├── docs/               설계 문서
-│   ├── ontology_v0.md                         온톨로지 v0: 버그 유형, 규칙, 개념 계층, 관계 정의
-│   ├── labeling_guide_v0.md                   클래스 목록 v0, 라벨링 가이드
-│   └── truelove2021_relational_bug_cases.csv  규칙 근거로 쓴 버그 사례 (Truelove et al., ICSE 2021)
 ├── ontology/           게임 UI 온톨로지: 개념, 관계, 규칙 정의
 ├── oracle/             판정기: 그래프 변환, 규칙 검증, 판정 리포트
 ├── training/           세그멘테이션 모델과 학습 파이프라인
