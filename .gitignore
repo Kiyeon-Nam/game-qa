@@ -1,2 +1,71 @@
 # oh-my-claudecode 로컬 세션 상태
 .omc/
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# 환경 변수·비밀 값
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# C++ 빌드 (inferlib)
+build/
+out/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.pyd
+*.exe
+*.pdb
+
+# 학습 산출물 (training)
+runs/
+wandb/
+mlruns/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.engine
+*.safetensors
+
+# 데이터: 이미지·영상 원본은 커밋하지 않음 (라벨 JSON, notes.md는 커밋)
+data/**/*.png
+data/**/*.jpg
+data/**/*.jpeg
+data/**/*.bmp
+data/**/*.webp
+data/**/*.mp4
+data/**/*.mkv
+data/**/*.avi
+data/**/*.mov
+data/**/*.zip
+
+# 판정 리포트 출력 (oracle)
+reports/
