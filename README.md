@@ -31,6 +31,8 @@
 
 ## 판정 파이프라인
 
+<img width="2688" height="1086" alt="파이프라인" src="https://github.com/user-attachments/assets/a5ea5d0b-5229-4baa-9995-12b3e1511474" />
+
 ```
 입력(플레이 녹화/스크린샷)
  → ① 프레임 추출
