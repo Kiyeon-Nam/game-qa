@@ -390,6 +390,6 @@ Screen (이미지 경계)
 
 ## 9. 부록
 
-`truelove_관계형버그_후보사례.csv`: 데이터셋에서 관련 범주(Information, UI, Bounds, Collision, Persistence, Position, Graphics) 중 2D 게임 전체 사례와 관계형 키워드(health bar, clip, sink, overlap, off-screen, float, behind 등) 포함 사례를 추린 983건 (2D 게임 349건을 위로 정렬). 근거 사례를 더 찾을 때 사용.
+`truelove2021_relational_bug_cases.csv`: 데이터셋에서 관련 범주(Information, UI, Bounds, Collision, Persistence, Position, Graphics) 중 2D 게임 전체 사례와 관계형 키워드(health bar, clip, sink, overlap, off-screen, float, behind 등) 포함 사례를 추린 983건 (2D 게임 349건을 위로 정렬). 근거 사례를 더 찾을 때 사용.
 
 `labeling_guide_v0.md`: 클래스 목록 v0와 라벨링 가이드 (B 및 라벨링 참여자 전달용). 6장 개념 계층의 "라벨링 클래스" 열에서 나온 문서.
