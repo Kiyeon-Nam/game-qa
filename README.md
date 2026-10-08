@@ -62,3 +62,7 @@ game-qa/
 └── data/               데이터셋
     └── labels/         라벨 (COCO instance segmentation + relations)
 ```
+
+## 환경 세팅 방법
+
+작성 예정
