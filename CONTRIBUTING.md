@@ -12,7 +12,8 @@
 - 완료 조건 명시
 
 ## 라벨
-- 모듈만 사용: ontology, oracle, training, labeling-tool, inferlib, schemas, data
+- 모듈: ontology, oracle, training, labeling-tool, inferlib, schemas, data
+- 상태: `작업 중`. 착수 시 부착, 머지 후 제거
 
 ## PR
 - 본문에 `Closes #이슈번호`
