@@ -22,7 +22,7 @@
 성질별 축으로 분리된 여러 트리
 
 - 화면 요소는 각 축의 노드 조합으로 표현
-    - *의미: 무엇을 나타내는가 (예: 값 표시 ⊃ 체력 표시)*
+    - *의미: 무엇을 나타내는가 (값 표시 ⊃ 체력 표시)*
     - *형태: 어떻게 그려지는가. 라벨링 클래스의 기준*
     - *배치: 월드 위치를 따라가는가, 화면에 고정되는가*
 
@@ -77,13 +77,17 @@
 
 주기적 정리: 미사용 노드 제거, 상위 개념화 검토, 코어·모듈 경계 조정
 
-## 문서 구성
+## 파일 구성
 
-| 문서 | 내용 |
-|---|---|
-| [1_bug_types.md](1_bug_types.md) | 버그 범주 분류, 버그 유형 채택·제외, 버그 → 규칙 대응 |
-| [2_rules.md](2_rules.md) | 규칙 요약, 규칙별 판정 방식·반례·임계값 초안 |
-| [3_concepts.md](3_concepts.md) | 개념 계층, 라벨링 클래스 |
-| [4_relations.md](4_relations.md) | 관계 정의, 후처리·스키마 요구사항 |
-| [labeling_guide_v0.md](labeling_guide_v0.md) | 클래스 목록과 라벨링 기준. 3_concepts.md의 라벨링 클래스에서 도출 |
-| [truelove2021_relational_bug_cases.csv](truelove2021_relational_bug_cases.csv) | 데이터셋에서 관련 범주(Information, UI, Bounds, Collision, Persistence, Position, Graphics) 중 2D 게임 전체 사례와 관계형 키워드(health bar, clip, sink, overlap, off-screen, float, behind 등) 포함 사례를 추린 983건 (2D 게임 349건을 위로 정렬). 근거 사례를 더 찾을 때 사용. |
+```
+ontology/
+├── README.md        설계 원칙, 도출 절차, 파일 구성
+├── 0_cases.md       [절차 1, 2] 사례 수집 출처·추출 기준, 제외 사유 요약
+├── 1_rules.md       [절차 3, 4] 규칙, 전제 목록, 반례 처리, 근거 사례
+├── 2_concepts.md    [절차 5] 축별 개념 계층, 도입 근거
+├── 3_relations.md   [절차 6] 관계 정의
+├── mappings/        [절차 7] 게임별 매핑. 첫 매핑 작성 시 생성
+└── resources/       도출에 쓰는 원본 자료. 수정하지 않음
+```
+
+- 0~3은 v0 내용으로, 이슈 #10~#13에서 개편 예정

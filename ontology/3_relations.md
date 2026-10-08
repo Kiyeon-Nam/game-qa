@@ -21,4 +21,4 @@
 - 가림 측정 방식(R-RND-01) 확정 필요: 지형 접촉 경계 비율, 가시 면적 비
 - 지시 UI × 대상의 **1:1 할당 결과**와 거리 행렬 출력 (R-IND-03)
 - 텍스트 마스크가 패널 경계선에 닿는지 여부 (R-UI-02)
-- JSON의 `class` 값은 `3_concepts.md` 기준 라벨링 클래스 이름 11개를 그대로 사용 (Character, LooseObject, Equipment, GroundedObject, Terrain, Platform, ForegroundDecoration, HealthBar, HUDElement, UIPanel, TextLabel)
+- JSON의 `class` 값은 `2_concepts.md` 기준 라벨링 클래스 이름 11개를 그대로 사용 (Character, LooseObject, Equipment, GroundedObject, Terrain, Platform, ForegroundDecoration, HealthBar, HUDElement, UIPanel, TextLabel)
