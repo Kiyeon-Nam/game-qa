@@ -2,6 +2,7 @@
 
 > **출처**: Truelove et al., "We'll Fix It in Post", ICSE 2021 — 표 II 분류 체계 + 공개 데이터셋(`github.com/truelova/ICSE_2021_UpdateNotes`, 버그 수정 12,122건)
 > **선정 조건**: ① 단일 화면으로 판별 가능 ② 화면 요소 간 관계 오류 ③ 2D 플랫포머에서 발생 가능
+> **사례 자료**: `resources/truelove2021_relational_bug_cases.csv`. 데이터셋에서 관련 범주(Information, UI, Bounds, Collision, Persistence, Position, Graphics) 중 2D 게임 전체 사례와 관계형 키워드(health bar, clip, sink, overlap, off-screen, float, behind 등) 포함 사례를 추린 983건 (2D 게임 349건을 위로 정렬)
 > **데이터 참고**: 데이터셋 30개 게임 중 2D 게임은 Terraria(511건)와 Brawlhalla(75건)뿐이라, 이 두 게임을 우선 근거로 쓰고 나머지 게임 사례는 2D 플랫포머 상황으로 바꿔 해석함
 
 ## 버그 범주 분류 (Truelove 표 II, 20개 범주)
