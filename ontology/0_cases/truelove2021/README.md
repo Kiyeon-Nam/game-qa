@@ -3,6 +3,7 @@
 - 출처: Truelove et al., "We'll Fix It in Post", ICSE 2021. 표 II 분류 체계와 공개 데이터셋(`github.com/truelova/ICSE_2021_UpdateNotes`, 버그 수정 12,122건)
 - 자료: `cases.csv`. 원본에서 추출한 983건
   - 열: Bug Fix, Game, Update Date, Update ID, Category, is_2D
+- 인용 식별자: CSV 행 번호 (헤더가 1행). 예: T21-658
 
 ## 추출 기준
 

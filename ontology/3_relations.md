@@ -2,13 +2,13 @@
 
 | 관계 | 정의역 → 치역 | 정의 | 사용 규칙 | 얻는 방법 |
 |---|---|---|---|---|
-| represents | WorldIndicator → WorldEntity, HUDElement → WorldEntity | UI가 그 개체의 상태를 나타냄 | R-IND-01~03 | 라벨링 태깅(정답) / 추론 시 거리 기반 1:1 할당 / HUD는 게임 매핑에서 선언 |
-| near | WorldIndicator → WorldEntity | 지시 UI 하단 중심과 대상 bbox 상단 중심 사이 거리 / 대상 bbox 높이 | R-IND-01, 02, 03 | 후처리 계산 |
-| overlaps | WorldEntity → Terrain, HUDElement → HUDElement | area(A∩B) / area(A) (지형은 가려진 부분을 추정한 마스크 사용). HUD끼리는 area(A∩B) / min(area(A), area(B)) | R-PHY-01, 02, R-UI-01 | 후처리 계산 |
-| contains | UIPanel → TextLabel, Screen → TextLabel, HUDElement → HUDElement | area(A∩B) / area(B) (B가 A 안에 들어간 비율) + B가 A 경계선에 닿는지 | R-UI-01, 02 | 후처리 계산 |
-| supportedBy | GroundedObject → Terrain, Platform | 오브젝트 하단과 바로 아래 지형·발판 상단 사이 수직 간격 / 오브젝트 높이 | R-PHY-03 | 후처리 계산 |
-| occludes | Terrain → Character | 캐릭터 경계 중 지형과 맞닿은 비율, 캐릭터 가시 면적 / 기대 면적 | R-RND-01 | 후처리 계산 (측정 방식 확정 필요) |
-| attachedTo | Equipment → Character | 장비 마스크와 가장 가까운 캐릭터 마스크 사이 최소 경계 거리 / 캐릭터 bbox 높이 | R-ATT-01 | 라벨링 태깅(정답) / 후처리 계산 |
+| represents | WorldIndicator → WorldEntity, HUDElement → WorldEntity | UI가 그 개체의 상태를 나타냄 | R-001~R-003 | 라벨링 태깅(정답) / 추론 시 거리 기반 1:1 할당 / HUD는 게임 매핑에서 선언 |
+| near | WorldIndicator → WorldEntity | 지시 UI 하단 중심과 대상 bbox 상단 중심 사이 거리 / 대상 bbox 높이 | R-001, R-002, R-003 | 후처리 계산 |
+| overlaps | WorldEntity → Terrain, HUDElement → HUDElement | area(A∩B) / area(A) (지형은 가려진 부분을 추정한 마스크 사용). HUD끼리는 area(A∩B) / min(area(A), area(B)) | R-004, R-005, R-009 | 후처리 계산 |
+| contains | UIPanel → TextLabel, Screen → TextLabel, HUDElement → HUDElement | area(A∩B) / area(B) (B가 A 안에 들어간 비율) + B가 A 경계선에 닿는지 | R-009, R-010 | 후처리 계산 |
+| supportedBy | GroundedObject → Terrain, Platform | 오브젝트 하단과 바로 아래 지형·발판 상단 사이 수직 간격 / 오브젝트 높이 | R-006 | 후처리 계산 |
+| occludes | Terrain → Character | 캐릭터 경계 중 지형과 맞닿은 비율, 캐릭터 가시 면적 / 기대 면적 | R-007 | 후처리 계산 (측정 방식 확정 필요) |
+| attachedTo | Equipment → Character | 장비 마스크와 가장 가까운 캐릭터 마스크 사이 최소 경계 거리 / 캐릭터 bbox 높이 | R-008 | 라벨링 태깅(정답) / 후처리 계산 |
 
 라벨링 도구에서 사람이 태깅해야 하는 관계는 `represents`(HealthBar → Character)와 `attachedTo`(Equipment → Character) 두 개다. 나머지는 모두 마스크에서 계산한다.
 
@@ -17,8 +17,29 @@
 ## 후처리·스키마 요구사항
 
 - 거리 계열 측정값은 모두 **대상 bbox 높이로 정규화**한 값도 함께 출력
-- 지형 마스크의 **가려진 부분 추정**(구멍 메우기) 후처리 필요 (R-PHY-01, 02)
-- 가림 측정 방식(R-RND-01) 확정 필요: 지형 접촉 경계 비율, 가시 면적 비
-- 지시 UI × 대상의 **1:1 할당 결과**와 거리 행렬 출력 (R-IND-03)
-- 텍스트 마스크가 패널 경계선에 닿는지 여부 (R-UI-02)
+- 지형 마스크의 **가려진 부분 추정**(구멍 메우기) 후처리 필요 (R-004, R-005)
+- 가림 측정 방식(R-007) 확정 필요: 지형 접촉 경계 비율, 가시 면적 비
+- 지시 UI × 대상의 **1:1 할당 결과**와 거리 행렬 출력 (R-003)
+- 텍스트 마스크가 패널 경계선에 닿는지 여부 (R-010)
 - JSON의 `class` 값은 `2_concepts.md` 기준 라벨링 클래스 이름 11개를 그대로 사용 (Character, LooseObject, Equipment, GroundedObject, Terrain, Platform, ForegroundDecoration, HealthBar, HUDElement, UIPanel, TextLabel)
+
+---
+
+## 규칙별 측정 메모
+
+- R-001: represents는 지시 UI에서 탐색 반경 안의 가장 가까운 대상으로 연결. 거리는 지시 UI 하단 중심 ↔ 대상 bbox 상단 중심, 대상 bbox 높이로 정규화
+- R-002: R-001과 같은 거리 사용. 상대 위치(위·아래·좌·우)는 판정에 쓰지 않고 리포트 근거로만 출력
+- R-003: 지시 UI × 대상 전체 거리 행렬로 1:1 할당(헝가리안 매칭 등)
+- R-004, R-005: 세그멘테이션은 보이는 부분만 마스크로 내므로, 캐릭터가 지형 위에 그려지면 지형 마스크에 구멍이 생길 뿐 두 마스크는 겹치지 않음. 지형의 가려진 부분을 추정한 마스크 필요
+  - 방법 A (후처리): 지형 마스크의 구멍을 메워 가려진 지형 추정 (모폴로지 closing, 타일 격자 보간)
+  - 방법 B (라벨링): 지형을 캐릭터에 가려진 부분까지 포함해 칠하고 모델이 학습
+  - 방법 A를 먼저 시도하고, 정확도가 부족하면 B 검토
+  - overlap_ratio = |대상 ∩ 추정 지형| / |대상|
+- R-006: 오브젝트 하단 경계와 그 바로 아래 지형·발판 상단 사이 수직 간격
+- R-007: 가려진 캐릭터는 보이는 부분만 검출되므로 "원래 있어야 할 부분이 지형에 잘렸다"를 추정해야 함 (가장 어려움)
+  - 후보 측정: 캐릭터 마스크 경계 중 지형과 맞닿은 경계의 비율, 캐릭터 가시 면적 / 기대 면적
+  - R-004과 구분: 파묻힘은 캐릭터가 지형 위에 그려진 것(추정 지형과 캐릭터가 겹침), 레이어 오류는 지형이 캐릭터 위에 그려진 것(캐릭터가 지형 경계에서 잘림)
+  - 가시 마스크만으로는 두 경우가 비슷하게 보여 측정 방식 확정 필요
+- R-008: 장비 마스크와 가장 가까운 캐릭터 마스크 사이의 최소 경계 거리
+- R-009: |A∩B| / min(|A|, |B|). HUD도 보이는 마스크만 나오므로 bbox 기준 겹침을 함께 사용 (HUD는 대부분 사각형이라 bbox 오차가 작음)
+- R-010: |텍스트 ∩ 패널| / |텍스트|, 텍스트 bbox와 화면 경계 사이 거리, 텍스트 마스크가 패널 경계선에 닿는지 여부. 텍스트가 패널 경계에서 잘리면 보이는 마스크는 패널 안에 있어 포함 비율이 정상으로 나오므로 경계 접촉을 함께 판정
