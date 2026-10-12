@@ -50,6 +50,7 @@
 | hud_overlap_min | 0.02 | 작은 요소 면적 대비 겹침 비율 | |
 | hud_contain_min | 0.95 | 작은 요소 면적 대비 겹침 비율 | |
 | text_contain_min | 0.98 | 텍스트 면적 대비 패널 포함 비율 | |
+| foreground_cover_min | 미정 | 영역 면적 대비 ForegroundDecoration 비율 | |
 
 ## 반례 처리
 
