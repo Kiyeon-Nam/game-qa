@@ -1,0 +1,30 @@
+{
+  "images": [
+    {"id": 1, "file_name": "example_001.png", "width": 1920, "height": 1080}
+  ],
+  "annotations": [
+    {"id": 1, "image_id": 1, "category_id": 0, "segmentation": [[400, 700, 460, 700, 460, 800, 400, 800]], "bbox": [400, 700, 60, 100], "area": 6000, "iscrowd": 0},
+    {"id": 2, "image_id": 1, "category_id": 2, "segmentation": [[455, 750, 500, 750, 500, 765, 455, 765]], "bbox": [455, 750, 45, 15], "area": 675, "iscrowd": 0},
+    {"id": 3, "image_id": 1, "category_id": 7, "segmentation": [[400, 680, 460, 680, 460, 688, 400, 688]], "bbox": [400, 680, 60, 8], "area": 480, "iscrowd": 0},
+    {"id": 4, "image_id": 1, "category_id": 4, "segmentation": [[0, 800, 1920, 800, 1920, 1080, 0, 1080]], "bbox": [0, 800, 1920, 280], "area": 537600, "iscrowd": 0},
+    {"id": 5, "image_id": 1, "category_id": 8, "segmentation": [[20, 20, 240, 20, 240, 90, 20, 90]], "bbox": [20, 20, 220, 70], "area": 15400, "iscrowd": 0},
+    {"id": 6, "image_id": 1, "category_id": 10, "segmentation": [[1760, 20, 1900, 20, 1900, 50, 1760, 50]], "bbox": [1760, 20, 140, 30], "area": 4200, "iscrowd": 0}
+  ],
+  "categories": [
+    {"id": 0, "name": "Character"},
+    {"id": 1, "name": "LooseObject"},
+    {"id": 2, "name": "Equipment"},
+    {"id": 3, "name": "GroundedObject"},
+    {"id": 4, "name": "Terrain"},
+    {"id": 5, "name": "Platform"},
+    {"id": 6, "name": "ForegroundDecoration"},
+    {"id": 7, "name": "HealthBar"},
+    {"id": 8, "name": "HUDElement"},
+    {"id": 9, "name": "UIPanel"},
+    {"id": 10, "name": "TextLabel"}
+  ],
+  "relations": [
+    {"type": "attachedTo", "subject": 2, "object": 1},
+    {"type": "represents", "subject": 3, "object": 1}
+  ]
+}
