@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "라벨",
+  "description": "COCO instance segmentation + relations. 의미 규칙은 schemas/README.md",
+  "type": "object",
+  "required": ["images", "annotations", "categories", "relations"],
+  "properties": {
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "file_name", "width", "height"],
+        "properties": {
+          "id": {"type": "integer"},
+          "file_name": {"type": "string"},
+          "width": {"type": "integer", "minimum": 1},
+          "height": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "annotations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "image_id", "category_id", "segmentation", "bbox", "area", "iscrowd"],
+        "properties": {
+          "id": {"type": "integer"},
+          "image_id": {"type": "integer"},
+          "category_id": {"type": "integer", "minimum": 0},
+          "segmentation": {
+            "oneOf": [
+              {
+                "type": "array",
+                "minItems": 1,
+                "items": {"type": "array", "minItems": 6, "items": {"type": "number"}}
+              },
+              {
+                "type": "object",
+                "required": ["size", "counts"],
+                "properties": {
+                  "size": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+                  "counts": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "integer"}}]}
+                }
+              }
+            ]
+          },
+          "bbox": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4},
+          "area": {"type": "number", "minimum": 0},
+          "iscrowd": {"const": 0}
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {"type": "integer", "minimum": 0},
+          "name": {"type": "string"}
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "subject", "object"],
+        "properties": {
+          "type": {"enum": ["represents", "attachedTo"]},
+          "subject": {"type": "integer"},
+          "object": {"type": "integer"}
+        }
+      }
+    }
+  }
+}
