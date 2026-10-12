@@ -2,7 +2,7 @@
 
 > **대상**: 라벨링 참여자 전원
 > **근거 문서**: `ontology/2_concepts.md`(개념 계층), `ontology/3_relations.md`(관계 정의)
-> **라벨 형식**: COCO instance segmentation + `relations` 필드
+> **라벨 형식**: [schemas/README.md](../schemas/README.md#라벨)
 > **변경 원칙**: 클래스 추가·병합 결정 시 이 문서의 버전을 올린다. 라벨링 중 애매한 사례는 임의로 정하지 말고 10장의 방식으로 기록한다.
 
 ---
@@ -171,14 +171,7 @@ UI 요소 안에 다른 UI가 들어 있으면 **바깥 요소를 안쪽 요소�
 
 나머지 관계(겹침, 포함, 지지, 가림)는 마스크에서 자동 계산하므로 태깅하지 않는다.
 
-라벨 JSON의 `relations` 필드 예시:
-```json
-"relations": [
-  {"type": "represents", "subject": 12, "object": 3},
-  {"type": "attachedTo", "subject": 15, "object": 3}
-]
-```
-`subject`, `object`는 같은 이미지 안의 annotation id.
+표기 방식은 [라벨 형식](../schemas/README.md#라벨) 참고
 
 ---
 
