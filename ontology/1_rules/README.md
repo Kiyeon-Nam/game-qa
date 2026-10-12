@@ -48,6 +48,7 @@
 | hud_contain_min | 0.95 | 작은 요소 면적 대비 겹침 비율 | |
 | text_contain_min | 0.98 | 텍스트 면적 대비 패널 포함 비율 | |
 | foreground_cover_min | 미정 | 영역 면적 대비 ForegroundDecoration 비율 | |
+| fg_search_radius | 미정 | 지시 UI bbox 너비 배수. 나타내는 개체가 없어 개체 bbox 높이를 쓸 수 없음 | O |
 
 ## 반례 처리
 
