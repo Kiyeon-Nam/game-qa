@@ -132,7 +132,7 @@ UI 요소 안에 다른 UI가 들어 있으면 **바깥 요소를 안쪽 요소�
 | | 화면 상단에 고정된 보스 체력바 (→ 8 HUDElement) |
 
 **판단 기준**: **개체를 따라 움직이면 HealthBar, 화면에 고정돼 있으면 HUDElement**.
-**관계 태깅 필수**: HealthBar마다 그것이 나타내는 Character와 `represents` 관계를 태깅한다. 체력바만 있고 대상이 화면에 없으면 태깅하지 않는다 (이 경우가 바로 R-001 위반).
+**관계 태깅 필수**: HealthBar마다 그것이 나타내는 개체(Character 또는 Object)와 `represents` 관계를 태깅한다. 체력바만 있고 대상이 화면에 없으면 태깅하지 않는다 (이 경우가 바로 R-001 위반).
 **v0 미포함**: 이름표, 조준 표시는 v0에서 칠하지 않는다. 대상 게임에 자주 나오면 이슈로 등록해 클래스 추가를 결정한다.
 
 ### 8. HUDElement
@@ -166,7 +166,7 @@ UI 요소 안에 다른 UI가 들어 있으면 **바깥 요소를 안쪽 요소�
 
 | 관계 | 방향 | 언제 태깅하나 |
 |---|---|---|
-| represents | HealthBar → Character | 모든 HealthBar. 대상이 화면에 없으면 태깅하지 않음 |
+| represents | HealthBar → Character, LooseObject, Equipment, GroundedObject | 모든 HealthBar. 대상이 화면에 없으면 태깅하지 않음 |
 | attachedTo | Equipment → Character | 모든 Equipment |
 
 나머지 관계(겹침, 포함, 지지, 가림)는 마스크에서 자동 계산하므로 태깅하지 않는다.
