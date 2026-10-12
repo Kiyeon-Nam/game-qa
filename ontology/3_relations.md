@@ -28,4 +28,5 @@
 | contact_boundary_ratio(c, t) | Character, Terrain | 캐릭터 경계 중 지형과 맞닿은 부분의 비율 | 캐릭터 경계 길이 |
 | visible_area_ratio(c) | Character | 캐릭터의 보이는 면적 | 같은 인스턴스 bbox로 추정한 기대 면적 |
 | edge_distance(q, c) | Equipment, Character | 두 마스크 경계 사이 최소 거리 | 캐릭터 bbox 높이 |
-| foreground_coverage(r) | 영역 | 영역 중 ForegroundDecoration이 덮는 비율 | 영역 면적 |
+| foreground_coverage(i) | Display ∧ World | i 하단 중심에서 반지름 fg_search_radius인 원 중 ForegroundDecoration이 덮는 비율 | 원 면적 |
+| foreground_coverage(o) | GroundedObject | o 바로 아래, 너비 o bbox 너비·높이 support_gap_max인 사각형 중 ForegroundDecoration이 덮는 비율 | 사각형 면적. 높이는 o bbox 높이 기준 |
