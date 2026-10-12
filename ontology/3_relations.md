@@ -2,10 +2,10 @@
 
 | 관계 | 정의역 → 치역 | 정의 | 사용 규칙 | 얻는 방법 |
 |---|---|---|---|---|
-| represents | WorldIndicator → WorldEntity, HUDElement → WorldEntity | UI가 그 개체의 상태를 나타냄 | R-001~R-003 | 라벨링 태깅(정답) / 추론 시 거리 기반 1:1 할당 / HUD는 게임 매핑에서 선언 |
-| near | WorldIndicator → WorldEntity | 지시 UI 하단 중심과 대상 bbox 상단 중심 사이 거리 / 대상 bbox 높이 | R-001, R-002, R-003 | 후처리 계산 |
-| overlaps | WorldEntity → Terrain, HUDElement → HUDElement | area(A∩B) / area(A) (지형은 가려진 부분을 추정한 마스크 사용). HUD끼리는 area(A∩B) / min(area(A), area(B)) | R-004, R-005, R-009 | 후처리 계산 |
-| contains | UIPanel → TextLabel, Screen → TextLabel, HUDElement → HUDElement | area(A∩B) / area(B) (B가 A 안에 들어간 비율) + B가 A 경계선에 닿는지 | R-009, R-010 | 후처리 계산 |
+| represents | Display ∧ World → Entity, HUDElement → Entity | UI가 그 개체의 상태를 나타냄 | R-001~R-003 | 라벨링 태깅(정답) / 추론 시 거리 기반 1:1 할당 / HUD는 게임 매핑에서 선언 |
+| near | Display ∧ World → Entity | 지시 UI 하단 중심과 대상 bbox 상단 중심 사이 거리 / 대상 bbox 높이 | R-001, R-002, R-003 | 후처리 계산 |
+| overlaps | Entity → Terrain, HUDElement → HUDElement | area(A∩B) / area(A) (지형은 가려진 부분을 추정한 마스크 사용). HUD끼리는 area(A∩B) / min(area(A), area(B)) | R-004, R-005, R-009 | 후처리 계산 |
+| contains | UIPanel → TextLabel, ScreenBounds → TextLabel, HUDElement → HUDElement | area(A∩B) / area(B) (B가 A 안에 들어간 비율) + B가 A 경계선에 닿는지 | R-009, R-010 | 후처리 계산 |
 | supportedBy | GroundedObject → Terrain, Platform | 오브젝트 하단과 바로 아래 지형·발판 상단 사이 수직 간격 / 오브젝트 높이 | R-006 | 후처리 계산 |
 | occludes | Terrain → Character | 캐릭터 경계 중 지형과 맞닿은 비율, 캐릭터 가시 면적 / 기대 면적 | R-007 | 후처리 계산 (측정 방식 확정 필요) |
 | attachedTo | Equipment → Character | 장비 마스크와 가장 가까운 캐릭터 마스크 사이 최소 경계 거리 / 캐릭터 bbox 높이 | R-008 | 라벨링 태깅(정답) / 후처리 계산 |
