@@ -1,0 +1,6 @@
+{
+  "frame": {"source": "example.mp4", "index": 121},
+  "violations": [
+    {"rule": "R-004", "targets": [1, 4]}
+  ]
+}

@@ -6,6 +6,7 @@
 |---|---|---|---|
 | 라벨 | [label.schema.json](label.schema.json) | [examples/label.json](examples/label.json) | 구축 루프 ① 라벨링 → ② 데이터셋, 사전 라벨링 |
 | 추론 결과 | [inference.schema.json](inference.schema.json) | [examples/inference.json](examples/inference.json) | 판정 파이프라인 ③ 후처리·공간 관계 계산 → ④ 그래프 변환 |
+| 판정 리포트 | [report.schema.json](report.schema.json) | [examples/report.json](examples/report.json) | 판정 파이프라인 ⑥ 리포트 생성 → 버그 주입 평가 |
 
 ## 라벨
 
@@ -36,3 +37,14 @@
 - `score`: 오판이 인식 오류인지 규칙 문제인지 구분하는 데 사용
 - `ScreenBounds`: 인스턴스 id 대신 문자열 `"ScreenBounds"`로 참조
 - 측정값은 규칙이 쓰는 클래스 조합의 모든 쌍에 대해 출력. 빠진 쌍을 0으로 간주하지 않음
+
+## 판정 리포트
+
+프레임 하나의 위반 목록. 위반이 없는 프레임도 빈 목록으로 출력
+
+| 항목 | 내용 |
+|---|---|
+| `frame` | 추론 결과의 `frame`과 같은 입력 파일·프레임 번호 |
+| `violations` | 위반 목록. 위반한 규칙 ID와 대상 인스턴스 |
+
+- `targets`: 같은 프레임 추론 결과의 인스턴스 id. 순서는 규칙 위반 조건에 나오는 순서
