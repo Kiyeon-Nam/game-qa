@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "추론 결과",
+  "description": "프레임 하나의 인스턴스, 관계, 측정값. 의미 규칙은 schemas/README.md",
+  "type": "object",
+  "required": ["frame", "instances", "relations", "measurements"],
+  "$defs": {
+    "ref": {
+      "oneOf": [
+        {"type": "integer"},
+        {"const": "ScreenBounds"}
+      ]
+    }
+  },
+  "properties": {
+    "frame": {
+      "type": "object",
+      "required": ["source", "index", "width", "height"],
+      "properties": {
+        "source": {"type": "string"},
+        "index": {"type": "integer", "minimum": 0},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    },
+    "instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "class", "score", "segmentation"],
+        "properties": {
+          "id": {"type": "integer"},
+          "class": {"type": "string"},
+          "score": {"type": "number", "minimum": 0, "maximum": 1},
+          "segmentation": {
+            "type": "object",
+            "required": ["size", "counts"],
+            "properties": {
+              "size": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+              "counts": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "integer"}}]}
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "subject", "object"],
+        "properties": {
+          "type": {"enum": ["represents", "attachedTo", "belongsTo", "touches"]},
+          "subject": {"type": "integer"},
+          "object": {"$ref": "#/$defs/ref"}
+        }
+      }
+    },
+    "measurements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "args", "value"],
+        "properties": {
+          "name": {
+            "enum": [
+              "distance", "overlap_ratio", "mutual_overlap", "contain_ratio", "support_gap",
+              "contact_boundary_ratio", "visible_area_ratio", "edge_distance", "foreground_coverage"
+            ]
+          },
+          "args": {"type": "array", "minItems": 1, "maxItems": 2, "items": {"$ref": "#/$defs/ref"}},
+          "value": {"type": "number"}
+        }
+      }
+    }
+  }
+}
