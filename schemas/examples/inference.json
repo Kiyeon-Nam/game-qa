@@ -1,0 +1,24 @@
+{
+  "frame": {"source": "example.mp4", "index": 120, "width": 32, "height": 18},
+  "instances": [
+    {"id": 1, "class": "Character", "score": 0.95, "segmentation": {"size": [18, 32], "counts": [118, 5, 13, 5, 13, 5, 417]}},
+    {"id": 2, "class": "Equipment", "score": 0.81, "segmentation": {"size": [18, 32], "counts": [174, 1, 17, 1, 383]}},
+    {"id": 3, "class": "HealthBar", "score": 0.9, "segmentation": {"size": [18, 32], "counts": [116, 1, 17, 1, 17, 1, 423]}},
+    {"id": 4, "class": "Terrain", "score": 0.97, "segmentation": {"size": [18, 32], "counts": [15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3]}},
+    {"id": 5, "class": "HUDElement", "score": 0.93, "segmentation": {"size": [18, 32], "counts": [19, 2, 16, 2, 16, 2, 16, 2, 16, 2, 16, 2, 465]}},
+    {"id": 6, "class": "TextLabel", "score": 0.88, "segmentation": {"size": [18, 32], "counts": [487, 1, 17, 1, 17, 1, 17, 1, 34]}}
+  ],
+  "relations": [
+    {"type": "represents", "subject": 3, "object": 1},
+    {"type": "attachedTo", "subject": 2, "object": 1}
+  ],
+  "measurements": [
+    {"name": "distance", "args": [3, 1], "value": 0.2},
+    {"name": "foreground_coverage", "args": [3], "value": 0.0},
+    {"name": "edge_distance", "args": [2, 1], "value": 0.0},
+    {"name": "overlap_ratio", "args": [1, 4], "value": 0.0},
+    {"name": "contact_boundary_ratio", "args": [1, 4], "value": 0.19},
+    {"name": "visible_area_ratio", "args": [1], "value": 1.0},
+    {"name": "contain_ratio", "args": ["ScreenBounds", 6], "value": 1.0}
+  ]
+}
