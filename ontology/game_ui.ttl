@@ -51,20 +51,20 @@ gq:HUDElement a owl:Class ; gq:classId 8 ; owl:equivalentClass [ owl:intersectio
 gq:UIPanel a owl:Class ; gq:classId 9 ; owl:equivalentClass [ owl:intersectionOf ( gq:Panel gq:ScreenFixed ) ] .
 gq:TextLabel a owl:Class ; gq:classId 10 ; owl:equivalentClass [ owl:intersectionOf ( gq:Text gq:ScreenFixed ) ] .
 
-# 관계
+# 관계. 결정 근거는 3_relations.md
 
 gq:represents a owl:ObjectProperty ; rdfs:domain gq:Display ; rdfs:range gq:Entity ;
-    rdfs:comment "표시가 그 개체의 정보를 나타냄. World 표시는 distance ≤ search_radius인 쌍 중 대응한 쌍의 distance 합 + 대응하지 못한 표시 수 × search_radius가 최소인 1:1 대응, ScreenFixed 표시는 게임별 매핑에서 선언" .
+    rdfs:comment "표시가 그 개체의 정보를 나타냄" .
 gq:attachedTo a owl:ObjectProperty ; rdfs:domain gq:Equipment ; rdfs:range gq:Character ;
-    rdfs:comment "장비를 든 캐릭터. edge_distance가 가장 작은 캐릭터" .
+    rdfs:comment "장비를 든 캐릭터" .
 gq:belongsTo a owl:ObjectProperty ; rdfs:domain gq:TextLabel ; rdfs:range gq:UIPanel ;
-    rdfs:comment "텍스트가 속한 패널. contain_ratio가 가장 큰 패널, 겹치는 패널이 없으면 소속 없음" .
+    rdfs:comment "텍스트가 속한 패널" .
 gq:touches a owl:ObjectProperty ;
     rdfs:domain [ owl:unionOf ( gq:TextLabel gq:Display ) ] ;
     rdfs:range [ owl:unionOf ( gq:UIPanel gq:ScreenBounds ) ] ;
-    rdfs:comment "앞의 요소가 뒤의 요소 경계선에 닿음 (TextLabel → UIPanel 또는 ScreenBounds, Display → ScreenBounds). 마스크 경계 접촉" .
+    rdfs:comment "앞의 요소가 뒤의 요소 경계선에 닿음" .
 
-# 측정값: 인스턴스 1~2개에 대한 수치를 노드로 표현 (W3C n-ary 관계 패턴)
+# 측정값: 인스턴스 1~2개에 대한 수치를 노드로 표현 (W3C n-ary 관계 패턴). 정의는 3_relations.md
 
 gq:Measurement a owl:Class ; rdfs:comment "측정값 하나. 인자는 measuredSubject, measuredObject 순서" .
 gq:measuredSubject a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain gq:Measurement ; rdfs:comment "측정값 정의의 첫 번째 인자" .
@@ -72,16 +72,16 @@ gq:measuredObject a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain gq:
 gq:value a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain gq:Measurement ; rdfs:range xsd:double .
 
 gq:Distance a owl:Class ; rdfs:subClassOf gq:Measurement ;
-    rdfs:comment "distance(i, e): 표시 하단 중심과 개체 bbox 상단 중심 사이 거리 / 개체 bbox 높이. i: Display ∧ World, e: Entity" .
+    rdfs:comment "distance(i, e)" .
 gq:OverlapRatio a owl:Class ; rdfs:subClassOf gq:Measurement ;
-    rdfs:comment "overlap_ratio(a): 대상 중 추정 지형과 겹치는 면적 / 대상 면적. 추정 지형: 모든 Terrain + 대상의 행·열마다 연속 구간의 바로 바깥 양쪽 픽셀(4-이웃)이 모두 Terrain인 구간. a: Entity" .
+    rdfs:comment "overlap_ratio(a)" .
 gq:MutualOverlap a owl:Class ; rdfs:subClassOf gq:Measurement ;
-    rdfs:comment "mutual_overlap(a, b): 두 요소가 겹치는 면적 / 작은 요소 면적. a, b: HUDElement" .
+    rdfs:comment "mutual_overlap(a, b)" .
 gq:ContainRatio a owl:Class ; rdfs:subClassOf gq:Measurement ;
-    rdfs:comment "contain_ratio(p, x): 텍스트 중 p 안에 있는 면적 / 텍스트 면적. p: UIPanel, x: TextLabel" .
+    rdfs:comment "contain_ratio(p, x)" .
 gq:SupportGap a owl:Class ; rdfs:subClassOf gq:Measurement ;
-    rdfs:comment "support_gap(o): 오브젝트 하단과 바로 아래 Terrain 또는 Platform 상단 사이 수직 간격 / 오브젝트 높이. 화면 안에 없으면 화면 하단까지 간격(실제 간격의 하한). o: GroundedObject" .
+    rdfs:comment "support_gap(o)" .
 gq:EdgeDistance a owl:Class ; rdfs:subClassOf gq:Measurement ;
-    rdfs:comment "edge_distance(q, c): 두 마스크 경계 사이 최소 거리 / 캐릭터 bbox 높이. q: Equipment, c: Character" .
+    rdfs:comment "edge_distance(q, c)" .
 gq:ForegroundCoverage a owl:Class ; rdfs:subClassOf gq:Measurement ;
-    rdfs:comment "foreground_coverage(x): 탐색 영역 중 ForegroundDecoration이 덮는 비율 / 탐색 영역 중 화면 안 면적. Display ∧ World i: 하단 중심에서 반지름 fg_search_radius(i bbox 너비 배수)인 원. GroundedObject o: o 바로 아래, 너비 o bbox 너비·높이 support_gap_max(o bbox 높이 배수)인 사각형" .
+    rdfs:comment "foreground_coverage(x)" .
