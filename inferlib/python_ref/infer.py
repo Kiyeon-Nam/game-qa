@@ -22,7 +22,9 @@ SCREEN = "ScreenBounds"
 def infer_frame(frame, instances, params):
     """frame: source, index, width, height
     instances: id, class, score, mask(bool 배열) 목록
-    params: PARAMS 값"""
+    params: PARAMS 값
+    빈 마스크 인스턴스는 계산과 출력에서 제외"""
+    instances = [x for x in instances if x["mask"].any()]
     shape = (frame["height"], frame["width"])
 
     def with_concepts(*concepts):
@@ -133,7 +135,7 @@ def main(label_path, params_path, out_dir):
     out.mkdir(parents=True, exist_ok=True)
     for result in from_labels(labels, params):
         path = out / (Path(result["frame"]["source"]).stem + ".json")
-        path.write_text(json.dumps(result, ensure_ascii=False), encoding="utf-8")
+        path.write_text(json.dumps(result, ensure_ascii=False, allow_nan=False), encoding="utf-8")
 
 
 if __name__ == "__main__":

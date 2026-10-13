@@ -9,6 +9,8 @@ FOUR = ndimage.generate_binary_structure(2, 1)
 
 def decode(segmentation, height, width):
     """COCO polygon, 비압축 RLE, 압축 RLE를 bool 마스크로 변환"""
+    if isinstance(segmentation, dict) and list(segmentation["size"]) != [height, width]:
+        raise ValueError(f"RLE 크기 {segmentation['size']}와 이미지 크기 {[height, width]} 불일치")
     if isinstance(segmentation, list):
         rle = cocomask.merge(cocomask.frPyObjects(segmentation, height, width))
     elif isinstance(segmentation["counts"], list):

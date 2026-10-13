@@ -22,7 +22,8 @@ def distance(i, e):
 
 
 def estimated_terrain(t):
-    """지형 마스크의 구멍(지형에 둘러싸인 영역)을 채운 마스크. 가장자리에 걸친 가림은 추정하지 않음"""
+    """지형 마스크의 구멍(지형에 둘러싸인 영역)을 채운 마스크.
+    한계: 위로 열린 홈(바닥에 파묻힌 캐릭터)은 채우지 않고, 지형으로 막힌 빈 공간은 채움. 정의 보완은 #38"""
     return ndimage.binary_fill_holes(t)
 
 
@@ -58,8 +59,8 @@ def contact_boundary_ratio(c, t):
 
 
 def edge_distance(q, c):
-    """두 마스크 사이 최소 간격(픽셀) / 캐릭터 bbox 높이. 맞닿거나 겹치면 0"""
-    gap = ndimage.distance_transform_edt(~c)[q].min() - 1
+    """두 마스크 사이 최소 간격(8방향 기준 픽셀 수) / 캐릭터 bbox 높이. 대각선 포함 맞닿거나 겹치면 0"""
+    gap = ndimage.distance_transform_cdt(~c, metric="chessboard")[q].min() - 1
     return max(float(gap), 0.0) / _height(c)
 
 

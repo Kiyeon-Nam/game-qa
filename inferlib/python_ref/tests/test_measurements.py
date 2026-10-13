@@ -57,6 +57,7 @@ def test_edge_distance():
     c = rect(10, 10, 20, 30)
     assert m.edge_distance(rect(20, 15, 25, 18), c) == 0
     assert m.edge_distance(rect(23, 15, 25, 18), c) == pytest.approx(3 / 20)
+    assert m.edge_distance(rect(20, 30, 22, 32), c) == 0
 
 
 def test_foreground_coverage_display():
