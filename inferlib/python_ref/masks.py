@@ -32,11 +32,6 @@ def bbox(mask):
     return int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1
 
 
-def inner_boundary(mask):
-    """마스크 픽셀 중 4방향 이웃에 마스크 밖 픽셀이 있는 픽셀"""
-    return mask & ~ndimage.binary_erosion(mask, FOUR, border_value=0)
-
-
 def neighbors(mask):
     """마스크와 4방향으로 맞닿은 픽셀 (마스크 포함)"""
     return ndimage.binary_dilation(mask, FOUR)

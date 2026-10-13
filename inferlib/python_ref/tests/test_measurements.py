@@ -26,6 +26,17 @@ def test_overlap_ratio_embedded_character():
     assert m.overlap_ratio(rect(10, 10, 15, 20), wall) == 1
 
 
+def test_overlap_ratio_sunk_into_floor():
+    # 캐릭터 하단 5행이 바닥에 파묻힘. 바닥 마스크는 위로 열린 홈
+    c = rect(10, 15, 15, 25)
+    assert m.overlap_ratio(c, rect(0, 20, 40, 40) & ~c) == pytest.approx(0.5)
+
+
+def test_overlap_ratio_standing_in_closed_room():
+    room = rect(0, 0, 40, 40) & ~rect(5, 5, 35, 30)
+    assert m.overlap_ratio(rect(10, 20, 15, 30), room) == 0
+
+
 def test_overlap_ratio_character_on_floor():
     assert m.overlap_ratio(rect(10, 10, 15, 20), rect(0, 20, 40, 40)) == 0
 
@@ -46,11 +57,6 @@ def test_support_gap():
 
 def test_support_gap_without_support_measures_to_screen_bottom():
     assert m.support_gap(rect(10, 20, 20, 30), np.zeros((H, W), bool)) == pytest.approx(1.0)
-
-
-def test_contact_boundary_ratio():
-    # 10x10 캐릭터, 경계 픽셀 36개 중 왼쪽 열 10개가 지형과 맞닿음
-    assert m.contact_boundary_ratio(rect(10, 10, 20, 20), rect(0, 0, 10, 40)) == pytest.approx(10 / 36)
 
 
 def test_edge_distance():
@@ -75,6 +81,11 @@ def test_foreground_coverage_object():
 def test_represents_one_to_one_within_radius():
     assert sorted(r.represents([[0.1, 0.2], [0.15, 1.0]], 2.0)) == [(0, 1), (1, 0)]
     assert r.represents([[3.0]], 2.0) == []
+
+
+def test_represents_leaves_display_unmatched_rather_than_breaking_good_pair():
+    # 대응 수를 늘리려고 0.1 쌍을 깨지 않음
+    assert r.represents([[0.1, 1.9], [1.9, 9.0]], 2.0) == [(0, 0)]
 
 
 def test_touches():

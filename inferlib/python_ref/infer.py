@@ -44,7 +44,7 @@ def infer_frame(frame, instances, params):
     def rel(type_, subject, obj):
         rels.append({"type": type_, "subject": subject["id"], "object": obj if obj == SCREEN else obj["id"]})
 
-    characters, terrains = of_class("Character"), of_class("Terrain")
+    characters = of_class("Character")
     foreground = union(of_class("ForegroundDecoration"))
     screen = np.ones(shape, bool)
 
@@ -58,13 +58,10 @@ def infer_frame(frame, instances, params):
     for a, b in relations.represents(dist, params["search_radius"]):
         rel("represents", world[a], entities[b])
 
-    # 개체와 지형: overlap_ratio, contact_boundary_ratio
+    # 개체와 지형: overlap_ratio
+    terrain = union(of_class("Terrain"))
     for a in of_class("Character", "LooseObject"):
-        for t in terrains:
-            value("overlap_ratio", [a, t], measurements.overlap_ratio(a["mask"], t["mask"]))
-    for c in characters:
-        for t in terrains:
-            value("contact_boundary_ratio", [c, t], measurements.contact_boundary_ratio(c["mask"], t["mask"]))
+        value("overlap_ratio", [a], measurements.overlap_ratio(a["mask"], terrain))
 
     # 고정 오브젝트: support_gap, foreground_coverage
     support = union(of_class("Terrain", "Platform"))
@@ -85,7 +82,7 @@ def infer_frame(frame, instances, params):
     for a, b in combinations(of_class("HUDElement"), 2):
         value("mutual_overlap", [a, b], measurements.mutual_overlap(a["mask"], b["mask"]))
 
-    # 텍스트와 패널·화면: contain_ratio, touches, belongsTo
+    # 텍스트와 패널·화면: contain_ratio, belongsTo, touches
     panels = of_class("UIPanel")
     for x in of_class("TextLabel"):
         ratios = [measurements.contain_ratio(p["mask"], x["mask"]) for p in panels]
@@ -93,7 +90,8 @@ def infer_frame(frame, instances, params):
             value("contain_ratio", [p, x], v)
             if relations.touches(x["mask"], p["mask"]):
                 rel("touches", x, p)
-        value("contain_ratio", [SCREEN, x], measurements.contain_ratio(screen, x["mask"]))
+        if relations.touches(x["mask"], screen):
+            rel("touches", x, SCREEN)
         k = relations.largest_positive(ratios)
         if k is not None:
             rel("belongsTo", x, panels[k])

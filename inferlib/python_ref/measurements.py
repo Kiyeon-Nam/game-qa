@@ -5,7 +5,7 @@ import math
 import numpy as np
 from scipy import ndimage
 
-from masks import bbox, inner_boundary, neighbors
+from masks import bbox
 
 
 def _height(mask):
@@ -21,15 +21,26 @@ def distance(i, e):
     return d / (ey1 - ey0)
 
 
-def estimated_terrain(t):
-    """지형 마스크의 구멍(지형에 둘러싸인 영역)을 채운 마스크.
-    한계: 위로 열린 홈(바닥에 파묻힌 캐릭터)은 채우지 않고, 지형으로 막힌 빈 공간은 채움. 정의 보완은 #38"""
-    return ndimage.binary_fill_holes(t)
+def _fill_runs(a, terrain, out):
+    """a의 행마다 연속 구간의 바로 바깥 양쪽 픽셀이 모두 terrain이면 그 구간을 out에 채움"""
+    for y in np.flatnonzero(a.any(axis=1)):
+        edges = np.diff(np.concatenate(([0], a[y].astype(np.int8), [0])))
+        for s, e in zip(np.flatnonzero(edges == 1), np.flatnonzero(edges == -1)):
+            if s > 0 and e < a.shape[1] and terrain[y, s - 1] and terrain[y, e]:
+                out[y, s:e] = True
 
 
-def overlap_ratio(a, t):
-    """대상 중 추정 지형과 겹치는 면적 / 대상 면적"""
-    return float((a & estimated_terrain(t)).sum() / a.sum())
+def estimated_terrain(a, terrain):
+    """모든 Terrain + 대상의 행·열 연속 구간 중 바로 바깥 양쪽이 모두 Terrain인 구간"""
+    est = terrain.copy()
+    _fill_runs(a, terrain, est)
+    _fill_runs(a.T, terrain.T, est.T)
+    return est
+
+
+def overlap_ratio(a, terrain):
+    """대상 중 추정 지형과 겹치는 면적 / 대상 면적. terrain은 모든 Terrain의 합집합"""
+    return float((a & estimated_terrain(a, terrain)).sum() / a.sum())
 
 
 def mutual_overlap(a, b):
@@ -50,12 +61,6 @@ def support_gap(o, support):
     rows = [np.argmax(col) for col in below.T if col.any()]
     gap = min(rows) if rows else below.shape[0]
     return gap / (y1 - y0)
-
-
-def contact_boundary_ratio(c, t):
-    """캐릭터 경계 픽셀 중 지형과 맞닿은 픽셀 / 캐릭터 경계 픽셀"""
-    boundary = inner_boundary(c)
-    return float((boundary & neighbors(t)).sum() / boundary.sum())
 
 
 def edge_distance(q, c):

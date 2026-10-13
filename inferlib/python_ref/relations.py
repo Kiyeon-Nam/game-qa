@@ -7,13 +7,18 @@ from masks import neighbors
 
 
 def represents(distances, search_radius):
-    """표시 × 개체 거리 행렬에서 search_radius 이내 1:1 대응. (표시 위치, 개체 위치) 목록"""
-    d = np.asarray(distances, dtype=float)
-    if d.size == 0:
+    """대응한 쌍의 거리 합 + 대응하지 못한 표시 수 × search_radius가 최소인 1:1 대응.
+    search_radius를 넘는 쌍은 후보에서 제외. (표시 위치, 개체 위치) 목록"""
+    if not len(distances) or not len(distances[0]):
         return []
-    cost = np.where(d <= search_radius, d, d.max() + search_radius + 1)
+    d = np.asarray(distances, dtype=float)
+    n, m = d.shape
+    # 표시마다 자기 전용 미대응 열(비용 search_radius)을 붙임. 반경 밖 쌍은 미대응보다 비싸게
+    unmatched = np.full((n, n), np.inf)
+    np.fill_diagonal(unmatched, search_radius)
+    cost = np.hstack([np.where(d <= search_radius, d, np.inf), unmatched])
     rows, cols = linear_sum_assignment(cost)
-    return [(r, c) for r, c in zip(rows, cols) if d[r, c] <= search_radius]
+    return [(r, c) for r, c in zip(rows, cols) if c < m]
 
 
 def nearest(values):

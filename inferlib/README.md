@@ -2,7 +2,7 @@
 
 python_ref/ : 후처리 Python 구현 (정답지)
 - `concepts.py`: 라벨링 클래스별 개념
-- `masks.py`: COCO 마스크 변환, bbox, 경계 픽셀
+- `masks.py`: COCO 마스크 변환, bbox, 이웃 픽셀
 - `measurements.py`: 측정값 계산
 - `relations.py`: 관계 결정
 - `infer.py`: 프레임 하나의 추론 결과 생성, 라벨 파일 입력 실행
