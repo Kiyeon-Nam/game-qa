@@ -1,0 +1,109 @@
+@prefix gq:   <https://github.com/Kiyeon-Nam/game-qa/ontology#> .
+@prefix gqr:  <https://github.com/Kiyeon-Nam/game-qa/rules#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# 규칙 SHACL 형상. 규칙 정의는 ontology/1_rules/
+# 파라미터는 검증 시 데이터로 추가: [] gqr:name "<파라미터>" ; gqr:value <값>
+# 결과 메시지 형식: "<규칙 ID> <대상 인스턴스 URI ...>" (대상이 여러 개라 SHACL 결과의 value 하나로 담을 수 없음)
+
+gqr:prefixes
+    sh:declare [ sh:prefix "gq" ; sh:namespace "https://github.com/Kiyeon-Nam/game-qa/ontology#"^^xsd:anyURI ] ,
+               [ sh:prefix "gqr" ; sh:namespace "https://github.com/Kiyeon-Nam/game-qa/rules#"^^xsd:anyURI ] .
+
+# R-004: Character c에 대해 overlap_ratio(c) > char_terrain_overlap_max
+gqr:R-004 a sh:NodeShape ;
+    sh:targetClass gq:Character ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-004 {$this}" ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                ?m a gq:OverlapRatio ; gq:measuredSubject $this ; gq:value ?value .
+                ?p gqr:name "char_terrain_overlap_max" ; gqr:value ?max .
+                FILTER (?value > ?max)
+            }""" ] .
+
+# R-008: attachedTo(q, c)에 대해 edge_distance(q, c) > equip_gap_max
+gqr:R-008 a sh:NodeShape ;
+    sh:targetClass gq:Equipment ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-008 {$this} {?c}" ;
+        sh:select """
+            SELECT $this ?c ?value WHERE {
+                $this gq:attachedTo ?c .
+                ?m a gq:EdgeDistance ; gq:measuredSubject $this ; gq:measuredObject ?c ; gq:value ?value .
+                ?p gqr:name "equip_gap_max" ; gqr:value ?max .
+                FILTER (?value > ?max)
+            }""" ] .
+
+# R-001: Display ∧ World i에 대해 distance(i, e) ≤ search_radius인 Entity e가 없음
+#   제외: touches(i, ScreenBounds), foreground_coverage(i) ≥ foreground_cover_min
+gqr:R-001 a sh:NodeShape ;
+    sh:targetClass gq:Display ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-001 {$this}" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a gq:World .
+                ?p1 gqr:name "search_radius" ; gqr:value ?radius .
+                ?p2 gqr:name "foreground_cover_min" ; gqr:value ?cover .
+                FILTER NOT EXISTS {
+                    ?m a gq:Distance ; gq:measuredSubject $this ; gq:measuredObject ?e ; gq:value ?d .
+                    ?e a gq:Entity .
+                    FILTER (?d <= ?radius)
+                }
+                FILTER NOT EXISTS { $this gq:touches ?s . ?s a gq:ScreenBounds }
+                FILTER NOT EXISTS {
+                    ?f a gq:ForegroundCoverage ; gq:measuredSubject $this ; gq:value ?c .
+                    FILTER (?c >= ?cover)
+                }
+            }""" ] .
+
+# R-003 조건 1: 가장 가까운 대상과의 distance가 attach_distance를 넘는 Display ∧ World i가
+#   가장 가까운 두 대상 e1, e2에 대해 distance(i, e1) / distance(i, e2) ≥ midpoint_ratio
+gqr:R-003-midpoint a sh:NodeShape ;
+    sh:targetClass gq:Display ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-003 {$this} {?e1} {?e2}" ;
+        sh:select """
+            SELECT $this ?e1 ?e2 WHERE {
+                $this a gq:World .
+                ?m1 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e1 ; gq:value ?d1 .
+                ?p1 gqr:name "attach_distance" ; gqr:value ?attach .
+                FILTER (?d1 > ?attach)
+                # e1이 가장 가까움
+                FILTER NOT EXISTS {
+                    ?m0 gq:measuredSubject $this ; a gq:Distance ; gq:value ?d0 .
+                    FILTER (?d0 < ?d1)
+                }
+                ?m2 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e2 ; gq:value ?d2 .
+                ?p2 gqr:name "midpoint_ratio" ; gqr:value ?ratio .
+                FILTER (?e1 != ?e2 && ?d1 <= ?d2 && ?d1 / ?d2 >= ?ratio)
+                # e2가 두 번째로 가까움
+                FILTER NOT EXISTS {
+                    ?m3 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e3 ; gq:value ?d3 .
+                    FILTER (?e3 != ?e1 && ?e3 != ?e2 && ?d3 < ?d2)
+                }
+                FILTER (STR(?e1) < STR(?e2) || ?d1 < ?d2)
+            }""" ] .
+
+# R-003 조건 2: 한 대상 e에 distance(i, e) ≤ attach_distance인 Display ∧ World 중 같은 하위 개념이 2개 이상
+gqr:R-003-duplicate a sh:NodeShape ;
+    sh:targetClass gq:Entity ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-003 {$this} {?i1} {?i2}" ;
+        sh:select """
+            SELECT $this ?i1 ?i2 WHERE {
+                ?p gqr:name "attach_distance" ; gqr:value ?attach .
+                ?m1 gq:measuredObject $this ; a gq:Distance ; gq:value ?d1 ; gq:measuredSubject ?i1 .
+                FILTER (?d1 <= ?attach)
+                ?i1 a gq:HealthDisplay, gq:World .
+                ?m2 gq:measuredObject $this ; a gq:Distance ; gq:value ?d2 ; gq:measuredSubject ?i2 .
+                FILTER (?d2 <= ?attach && STR(?i1) < STR(?i2))
+                ?i2 a gq:HealthDisplay, gq:World .
+            }""" ] .

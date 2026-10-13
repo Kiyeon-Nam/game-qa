@@ -1,2 +1,5 @@
 rdflib
+pyshacl
+oxrdflib
+owlrl
 pytest
