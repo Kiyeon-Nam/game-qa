@@ -22,7 +22,7 @@ def distance(i, e):
 
 
 def estimated_terrain(t):
-    """다른 요소에 가려진 부분까지 추정한 지형. 지형에 둘러싸인 구멍을 채움"""
+    """지형 마스크의 구멍(지형에 둘러싸인 영역)을 채운 마스크. 가장자리에 걸친 가림은 추정하지 않음"""
     return ndimage.binary_fill_holes(t)
 
 

@@ -10,8 +10,8 @@ from pathlib import Path
 
 import numpy as np
 
-import measurements as m
-import relations as r
+import measurements
+import relations
 from concepts import has
 from masks import decode, encode
 
@@ -22,79 +22,90 @@ SCREEN = "ScreenBounds"
 def infer_frame(frame, instances, params):
     """frame: source, index, width, height
     instances: id, class, score, mask(bool 배열) 목록
-    params: PARAMS의 값 (게임별 매핑 적용 값)"""
-    def by(*concepts):
+    params: PARAMS 값"""
+    shape = (frame["height"], frame["width"])
+
+    def with_concepts(*concepts):
         return [x for x in instances if has(x["class"], *concepts)]
 
-    def of(cls):
-        return [x for x in instances if x["class"] == cls]
+    def of_class(*classes):
+        return [x for x in instances if x["class"] in classes]
 
     def union(xs):
-        masks = [x["mask"] for x in xs]
-        return np.logical_or.reduce(masks) if masks else np.zeros((frame["height"], frame["width"]), bool)
+        return np.logical_or.reduce([x["mask"] for x in xs]) if xs else np.zeros(shape, bool)
 
-    displays, world, entities = by("Display"), by("Display", "World"), by("Entity")
-    characters, terrains, grounded = of("Character"), of("Terrain"), of("GroundedObject")
-    equipment, huds, panels, texts = of("Equipment"), of("HUDElement"), of("UIPanel"), of("TextLabel")
-    foreground = union(of("ForegroundDecoration"))
-    support = union(terrains + of("Platform"))
-    screen = np.ones((frame["height"], frame["width"]), bool)
+    values, rels = [], []
 
-    out, rel = [], []
+    def value(name, args, v):
+        values.append({"name": name, "args": [a if a == SCREEN else a["id"] for a in args], "value": float(v)})
 
-    def add(name, args, value):
-        out.append({"name": name, "args": args, "value": round(float(value), 6)})
+    def rel(type_, subject, obj):
+        rels.append({"type": type_, "subject": subject["id"], "object": obj if obj == SCREEN else obj["id"]})
 
-    dist = [[m.distance(i["mask"], e["mask"]) for e in entities] for i in world]
-    for a, i in enumerate(world):
-        for b, e in enumerate(entities):
-            add("distance", [i["id"], e["id"]], dist[a][b])
-        add("foreground_coverage", [i["id"]], m.foreground_coverage_display(i["mask"], foreground, params["fg_search_radius"]))
-    for a, b in r.represents(dist, params["search_radius"]):
-        rel.append({"type": "represents", "subject": world[a]["id"], "object": entities[b]["id"]})
+    characters, terrains = of_class("Character"), of_class("Terrain")
+    foreground = union(of_class("ForegroundDecoration"))
+    screen = np.ones(shape, bool)
 
-    for a in characters + of("LooseObject"):
+    # 월드 표시와 개체: distance, foreground_coverage, represents
+    world, entities = with_concepts("Display", "World"), with_concepts("Entity")
+    dist = [[measurements.distance(i["mask"], e["mask"]) for e in entities] for i in world]
+    for i, row in zip(world, dist):
+        for e, d in zip(entities, row):
+            value("distance", [i, e], d)
+        value("foreground_coverage", [i], measurements.foreground_coverage_display(i["mask"], foreground, params["fg_search_radius"]))
+    for a, b in relations.represents(dist, params["search_radius"]):
+        rel("represents", world[a], entities[b])
+
+    # 개체와 지형: overlap_ratio, contact_boundary_ratio
+    for a in of_class("Character", "LooseObject"):
         for t in terrains:
-            add("overlap_ratio", [a["id"], t["id"]], m.overlap_ratio(a["mask"], t["mask"]))
+            value("overlap_ratio", [a, t], measurements.overlap_ratio(a["mask"], t["mask"]))
     for c in characters:
         for t in terrains:
-            add("contact_boundary_ratio", [c["id"], t["id"]], m.contact_boundary_ratio(c["mask"], t["mask"]))
+            value("contact_boundary_ratio", [c, t], measurements.contact_boundary_ratio(c["mask"], t["mask"]))
 
-    for o in grounded:
-        add("support_gap", [o["id"]], m.support_gap(o["mask"], support))
-        add("foreground_coverage", [o["id"]], m.foreground_coverage_object(o["mask"], foreground, params["support_gap_max"]))
+    # 고정 오브젝트: support_gap, foreground_coverage
+    support = union(of_class("Terrain", "Platform"))
+    for o in of_class("GroundedObject"):
+        value("support_gap", [o], measurements.support_gap(o["mask"], support))
+        value("foreground_coverage", [o], measurements.foreground_coverage_object(o["mask"], foreground, params["support_gap_max"]))
 
-    for q in equipment:
-        gaps = [m.edge_distance(q["mask"], c["mask"]) for c in characters]
+    # 장비와 캐릭터: edge_distance, attachedTo
+    for q in of_class("Equipment"):
+        gaps = [measurements.edge_distance(q["mask"], c["mask"]) for c in characters]
         for c, g in zip(characters, gaps):
-            add("edge_distance", [q["id"], c["id"]], g)
-        k = r.nearest(gaps)
+            value("edge_distance", [q, c], g)
+        k = relations.nearest(gaps)
         if k is not None:
-            rel.append({"type": "attachedTo", "subject": q["id"], "object": characters[k]["id"]})
+            rel("attachedTo", q, characters[k])
 
-    for a, b in combinations(huds, 2):
-        add("mutual_overlap", [a["id"], b["id"]], m.mutual_overlap(a["mask"], b["mask"]))
+    # HUD 요소 사이: mutual_overlap
+    for a, b in combinations(of_class("HUDElement"), 2):
+        value("mutual_overlap", [a, b], measurements.mutual_overlap(a["mask"], b["mask"]))
 
-    for x in texts:
-        ratios = [m.contain_ratio(p["mask"], x["mask"]) for p in panels]
+    # 텍스트와 패널·화면: contain_ratio, touches, belongsTo
+    panels = of_class("UIPanel")
+    for x in of_class("TextLabel"):
+        ratios = [measurements.contain_ratio(p["mask"], x["mask"]) for p in panels]
         for p, v in zip(panels, ratios):
-            add("contain_ratio", [p["id"], x["id"]], v)
-            if r.touches(x["mask"], p["mask"]):
-                rel.append({"type": "touches", "subject": x["id"], "object": p["id"]})
-        add("contain_ratio", [SCREEN, x["id"]], m.contain_ratio(screen, x["mask"]))
-        k = r.largest_positive(ratios)
+            value("contain_ratio", [p, x], v)
+            if relations.touches(x["mask"], p["mask"]):
+                rel("touches", x, p)
+        value("contain_ratio", [SCREEN, x], measurements.contain_ratio(screen, x["mask"]))
+        k = relations.largest_positive(ratios)
         if k is not None:
-            rel.append({"type": "belongsTo", "subject": x["id"], "object": panels[k]["id"]})
+            rel("belongsTo", x, panels[k])
 
-    for i in displays:
-        if r.touches(i["mask"], screen):
-            rel.append({"type": "touches", "subject": i["id"], "object": SCREEN})
+    # 표시와 화면 경계: touches
+    for i in with_concepts("Display"):
+        if relations.touches(i["mask"], screen):
+            rel("touches", i, SCREEN)
 
     return {
         "frame": frame,
         "instances": [{"id": x["id"], "class": x["class"], "score": x["score"], "segmentation": encode(x["mask"])} for x in instances],
-        "relations": rel,
-        "measurements": out,
+        "relations": rels,
+        "measurements": values,
     }
 
 
