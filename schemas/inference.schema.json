@@ -64,7 +64,7 @@
           "name": {
             "enum": [
               "distance", "overlap_ratio", "mutual_overlap", "contain_ratio", "support_gap",
-              "contact_boundary_ratio", "visible_area_ratio", "edge_distance", "foreground_coverage"
+              "edge_distance", "foreground_coverage"
             ]
           },
           "args": {"type": "array", "minItems": 1, "maxItems": 2, "items": {"$ref": "#/$defs/ref"}},
