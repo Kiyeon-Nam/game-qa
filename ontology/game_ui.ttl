@@ -1,0 +1,87 @@
+@prefix gq:   <https://github.com/Kiyeon-Nam/game-qa/ontology#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<https://github.com/Kiyeon-Nam/game-qa/ontology> a owl:Ontology ;
+    rdfs:comment "게임 UI 온톨로지: 개념 계층, 관계, 측정값. 근거는 2_concepts.md, 3_relations.md" .
+
+gq:axis a owl:AnnotationProperty ; rdfs:comment "개념이 속한 축" .
+gq:classId a owl:AnnotationProperty ; rdfs:comment "라벨링 클래스 ID" .
+
+# 개념
+
+gq:Entity a owl:Class ; gq:axis "역할" ; rdfs:comment "게임 세계 안의 개별 개체" .
+gq:Character a owl:Class ; rdfs:subClassOf gq:Entity ; gq:axis "역할" ;
+    rdfs:comment "게임 세계에서 스스로 움직이거나 조작되는 행위 주체 (플레이어가 조작하는 대상, 적, NPC, 소환수 등). 탈것에 탄 경우 탈것 포함. 제외: 배경 그림 속 인물" .
+gq:Object a owl:Class ; rdfs:subClassOf gq:Entity ; gq:axis "역할" ;
+    rdfs:comment "캐릭터가 아닌 개별 물건 (아이템, 투사체, 장비, 상자·문·가구 등)" .
+gq:Structure a owl:Class ; gq:axis "역할" ; rdfs:comment "게임 세계의 지형·구조물. 제외: 하늘, 원경" .
+gq:Display a owl:Class ; gq:axis "역할" ; rdfs:comment "정보를 나타내는 표시 (체력, 이름, 점수, 미니맵, 아이콘 등)" .
+gq:HealthDisplay a owl:Class ; rdfs:subClassOf gq:Display ; gq:axis "역할" ; rdfs:comment "체력 표시" .
+gq:Panel a owl:Class ; gq:axis "역할" ; rdfs:comment "텍스트를 담는 상자 (대화창, 메뉴 창, 툴팁, 팝업)" .
+gq:Text a owl:Class ; gq:axis "역할" ; rdfs:comment "글자 덩어리" .
+
+gq:World a owl:Class ; gq:axis "배치" ; rdfs:comment "게임 세계 위치를 따라 움직임" .
+gq:ScreenFixed a owl:Class ; gq:axis "배치" ; rdfs:comment "화면에 고정" .
+
+gq:Solid a owl:Class ; gq:axis "충돌성" ; rdfs:comment "캐릭터가 밟거나 부딪힘. 제외: 배경 벽, 액체" .
+gq:OneWay a owl:Class ; gq:axis "충돌성" ; rdfs:comment "아래에서 통과하고 위에서 밟음" .
+
+gq:Grounded a owl:Class ; gq:axis "지지 방식" ; rdfs:comment "바닥에 놓여 있어야 정상. 제외: 벽·천장 부착물" .
+gq:Attached a owl:Class ; gq:axis "지지 방식" ; rdfs:comment "다른 개체에 붙어 있음 (손에 든 장비)" .
+gq:Free a owl:Class ; gq:axis "지지 방식" ; rdfs:comment "떠 있거나 움직여도 정상 (아이템, 투사체, 던진 무기)" .
+
+gq:Foreground a owl:Class ; gq:axis "그리기 층" ; rdfs:comment "캐릭터보다 앞에 그려짐. 제외: 캐릭터 뒤에 그려지는 장식" .
+
+gq:ScreenBounds a owl:Class ; rdfs:comment "이미지 경계. 축 밖의 특수 개념" .
+
+# 라벨링 클래스 (축 값의 조합)
+
+gq:Character gq:classId 0 .
+gq:LooseObject a owl:Class ; gq:classId 1 ; owl:equivalentClass [ owl:intersectionOf ( gq:Object gq:Free ) ] .
+gq:Equipment a owl:Class ; gq:classId 2 ; owl:equivalentClass [ owl:intersectionOf ( gq:Object gq:Attached ) ] .
+gq:GroundedObject a owl:Class ; gq:classId 3 ; owl:equivalentClass [ owl:intersectionOf ( gq:Object gq:Grounded ) ] .
+gq:Terrain a owl:Class ; gq:classId 4 ; owl:equivalentClass [ owl:intersectionOf ( gq:Structure gq:Solid ) ] .
+gq:Platform a owl:Class ; gq:classId 5 ; owl:equivalentClass [ owl:intersectionOf ( gq:Structure gq:OneWay ) ] .
+gq:ForegroundDecoration a owl:Class ; gq:classId 6 ; owl:equivalentClass [ owl:intersectionOf ( gq:Structure gq:Foreground ) ] .
+gq:HealthBar a owl:Class ; gq:classId 7 ; owl:equivalentClass [ owl:intersectionOf ( gq:HealthDisplay gq:World ) ] .
+gq:HUDElement a owl:Class ; gq:classId 8 ; owl:equivalentClass [ owl:intersectionOf ( gq:Display gq:ScreenFixed ) ] .
+gq:UIPanel a owl:Class ; gq:classId 9 ; owl:equivalentClass [ owl:intersectionOf ( gq:Panel gq:ScreenFixed ) ] .
+gq:TextLabel a owl:Class ; gq:classId 10 ; owl:equivalentClass [ owl:intersectionOf ( gq:Text gq:ScreenFixed ) ] .
+
+# 관계
+
+gq:represents a owl:ObjectProperty ; rdfs:domain gq:Display ; rdfs:range gq:Entity ;
+    rdfs:comment "표시가 그 개체의 정보를 나타냄. World 표시는 distance ≤ search_radius인 쌍 중 대응한 쌍의 distance 합 + 대응하지 못한 표시 수 × search_radius가 최소인 1:1 대응, ScreenFixed 표시는 게임별 매핑에서 선언" .
+gq:attachedTo a owl:ObjectProperty ; rdfs:domain gq:Equipment ; rdfs:range gq:Character ;
+    rdfs:comment "장비를 든 캐릭터. edge_distance가 가장 작은 캐릭터" .
+gq:belongsTo a owl:ObjectProperty ; rdfs:domain gq:TextLabel ; rdfs:range gq:UIPanel ;
+    rdfs:comment "텍스트가 속한 패널. contain_ratio가 가장 큰 패널, 겹치는 패널이 없으면 소속 없음" .
+gq:touches a owl:ObjectProperty ;
+    rdfs:domain [ owl:unionOf ( gq:TextLabel gq:Display ) ] ;
+    rdfs:range [ owl:unionOf ( gq:UIPanel gq:ScreenBounds ) ] ;
+    rdfs:comment "앞의 요소가 뒤의 요소 경계선에 닿음 (TextLabel → UIPanel 또는 ScreenBounds, Display → ScreenBounds). 마스크 경계 접촉" .
+
+# 측정값: 인스턴스 1~2개에 대한 수치를 노드로 표현 (W3C n-ary 관계 패턴)
+
+gq:Measurement a owl:Class ; rdfs:comment "측정값 하나. 인자는 measuredSubject, measuredObject 순서" .
+gq:measuredSubject a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain gq:Measurement ; rdfs:comment "측정값 정의의 첫 번째 인자" .
+gq:measuredObject a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain gq:Measurement ; rdfs:comment "측정값 정의의 두 번째 인자" .
+gq:value a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain gq:Measurement ; rdfs:range xsd:double .
+
+gq:Distance a owl:Class ; rdfs:subClassOf gq:Measurement ;
+    rdfs:comment "distance(i, e): 표시 하단 중심과 개체 bbox 상단 중심 사이 거리 / 개체 bbox 높이. i: Display ∧ World, e: Entity" .
+gq:OverlapRatio a owl:Class ; rdfs:subClassOf gq:Measurement ;
+    rdfs:comment "overlap_ratio(a): 대상 중 추정 지형과 겹치는 면적 / 대상 면적. 추정 지형: 모든 Terrain + 대상의 행·열마다 연속 구간의 바로 바깥 양쪽 픽셀(4-이웃)이 모두 Terrain인 구간. a: Entity" .
+gq:MutualOverlap a owl:Class ; rdfs:subClassOf gq:Measurement ;
+    rdfs:comment "mutual_overlap(a, b): 두 요소가 겹치는 면적 / 작은 요소 면적. a, b: HUDElement" .
+gq:ContainRatio a owl:Class ; rdfs:subClassOf gq:Measurement ;
+    rdfs:comment "contain_ratio(p, x): 텍스트 중 p 안에 있는 면적 / 텍스트 면적. p: UIPanel, x: TextLabel" .
+gq:SupportGap a owl:Class ; rdfs:subClassOf gq:Measurement ;
+    rdfs:comment "support_gap(o): 오브젝트 하단과 바로 아래 Terrain 또는 Platform 상단 사이 수직 간격 / 오브젝트 높이. 화면 안에 없으면 화면 하단까지 간격(실제 간격의 하한). o: GroundedObject" .
+gq:EdgeDistance a owl:Class ; rdfs:subClassOf gq:Measurement ;
+    rdfs:comment "edge_distance(q, c): 두 마스크 경계 사이 최소 거리 / 캐릭터 bbox 높이. q: Equipment, c: Character" .
+gq:ForegroundCoverage a owl:Class ; rdfs:subClassOf gq:Measurement ;
+    rdfs:comment "foreground_coverage(x): 탐색 영역 중 ForegroundDecoration이 덮는 비율 / 탐색 영역 중 화면 안 면적. Display ∧ World i: 하단 중심에서 반지름 fg_search_radius(i bbox 너비 배수)인 원. GroundedObject o: o 바로 아래, 너비 o bbox 너비·높이 support_gap_max(o bbox 높이 배수)인 사각형" .
