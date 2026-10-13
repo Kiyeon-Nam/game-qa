@@ -16,7 +16,6 @@
     {"name": "distance", "args": [3, 1], "value": 0.2},
     {"name": "foreground_coverage", "args": [3], "value": 0.0},
     {"name": "edge_distance", "args": [2, 1], "value": 0.0},
-    {"name": "overlap_ratio", "args": [1, 4], "value": 0.0},
-    {"name": "contain_ratio", "args": ["ScreenBounds", 6], "value": 1.0}
+    {"name": "overlap_ratio", "args": [1], "value": 0.0}
   ]
 }

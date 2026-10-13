@@ -8,7 +8,7 @@
 
 | 관계 | 정의역 → 치역 | 의미 | 학습 데이터 | 판정 시 결정 근거 |
 |---|---|---|---|---|
-| represents | Display ∧ World → Entity | 표시가 그 개체의 정보를 나타냄 | 라벨링 태깅 | distance ≤ search_radius인 쌍 중 대응 수 최대, 그중 distance 합 최소인 1:1 대응 |
+| represents | Display ∧ World → Entity | 표시가 그 개체의 정보를 나타냄 | 라벨링 태깅 | distance ≤ search_radius인 쌍 중, 대응한 쌍의 distance 합 + 대응하지 못한 표시 수 × search_radius가 최소인 1:1 대응 |
 | represents | Display ∧ ScreenFixed → Entity | 표시가 그 개체의 정보를 나타냄 | | 게임별 매핑에서 선언 |
 | attachedTo | Equipment → Character | 장비를 든 캐릭터 | 라벨링 태깅 | edge_distance가 가장 작은 캐릭터 |
 | belongsTo | TextLabel → UIPanel | 텍스트가 속한 패널 | | contain_ratio가 가장 큰 패널. 겹치는 패널이 없으면 소속 없음 |
@@ -21,7 +21,7 @@
 | 측정값 | 대상 | 의미 | 정규화 기준 |
 |---|---|---|---|
 | distance(i, e) | Display ∧ World, Entity | 표시 하단 중심과 개체 bbox 상단 중심 사이 거리 | 개체 bbox 높이 |
-| overlap_ratio(a, t) | Entity, Terrain | 대상 중 추정 지형과 겹치는 면적 비율. 추정 지형: 지형 + 대상의 각 행에서 좌우 끝이 모두 지형과 맞닿은 구간 + 각 열에서 상하 끝이 모두 지형과 맞닿은 구간 | 대상 면적 |
+| overlap_ratio(a) | Entity | 대상 중 추정 지형과 겹치는 면적 비율. 추정 지형: 모든 Terrain + 대상의 행·열마다 연속 구간의 바로 바깥 양쪽 픽셀(4-이웃)이 모두 Terrain인 구간 | 대상 면적 |
 | mutual_overlap(a, b) | HUDElement, HUDElement | 두 요소가 겹치는 면적 | 작은 요소 면적 |
 | contain_ratio(p, x) | UIPanel, TextLabel | 텍스트 중 p 안에 있는 면적 비율 | 텍스트 면적 |
 | support_gap(o) | GroundedObject | 오브젝트 하단과 바로 아래 Terrain 또는 Platform 상단 사이 수직 간격. 화면 안에 없으면 화면 하단까지 간격(실제 간격의 하한) | 오브젝트 높이 |
