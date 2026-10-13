@@ -53,7 +53,7 @@ gqr:R-002 a sh:NodeShape ;
                 ?p2 gqr:name "search_radius" ; gqr:value ?radius .
                 ?p3 gqr:name "midpoint_ratio" ; gqr:value ?ratio .
                 FILTER (?d > ?attach && ?d <= ?radius)
-                OPTIONAL { SELECT $this (MIN(?dd) AS ?d1) WHERE { ?mm gq:measuredSubject $this ; a gq:Distance ; gq:value ?dd } GROUP BY $this }
+                { SELECT $this (MIN(?dd) AS ?d1) WHERE { ?mm gq:measuredSubject $this ; a gq:Distance ; gq:value ?dd } GROUP BY $this }
                 FILTER NOT EXISTS {
                     ?m1 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e1 ; gq:value ?d1 .
                     ?m2 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e2 ; gq:value ?d2 .
