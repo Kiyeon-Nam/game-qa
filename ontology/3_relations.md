@@ -25,8 +25,6 @@
 | mutual_overlap(a, b) | HUDElement, HUDElement | 두 요소가 겹치는 면적 | 작은 요소 면적 |
 | contain_ratio(p, x) | UIPanel 또는 ScreenBounds, TextLabel | 텍스트 중 p 안에 있는 면적 비율 | 텍스트 면적 |
 | support_gap(o) | GroundedObject | 오브젝트 하단과 바로 아래 Terrain 또는 Platform 상단 사이 수직 간격 | 오브젝트 높이 |
-| contact_boundary_ratio(c, t) | Character, Terrain | 캐릭터 경계 중 지형과 맞닿은 부분의 비율 | 캐릭터 경계 길이 |
-| visible_area_ratio(c) | Character | 캐릭터의 보이는 면적 | 같은 인스턴스 bbox로 추정한 기대 면적 |
 | edge_distance(q, c) | Equipment, Character | 두 마스크 경계 사이 최소 거리 | 캐릭터 bbox 높이 |
 | foreground_coverage(i) | Display ∧ World | i 하단 중심에서 반지름 fg_search_radius인 원 중 ForegroundDecoration이 덮는 비율 | 원 면적 |
 | foreground_coverage(o) | GroundedObject | o 바로 아래, 너비 o bbox 너비·높이 support_gap_max인 사각형 중 ForegroundDecoration이 덮는 비율 | 사각형 면적. 높이는 o bbox 높이 기준 |
