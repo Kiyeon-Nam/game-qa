@@ -1,16 +1,20 @@
 @prefix gq:   <https://github.com/Kiyeon-Nam/game-qa/ontology#> .
 @prefix gqr:  <https://github.com/Kiyeon-Nam/game-qa/rules#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 
 # 규칙 SHACL 형상. 규칙 정의는 ontology/1_rules/
 # 파라미터는 검증 시 데이터로 추가: [] gqr:name "<파라미터>" ; gqr:value <값>
 # 결과 메시지 형식: "<규칙 ID> <대상 인스턴스 URI ...>". 대상 순서는 규칙 위반 조건의 변수 순서
+# 거리가 같은 대상은 인스턴스 id 순으로 앞섬 (id = 인스턴스 URI의 "instance:" 뒤 정수)
 #   (대상이 여러 개라 SHACL 결과의 value 하나로 담을 수 없음)
 
 gqr:prefixes
     sh:declare [ sh:prefix "gq" ; sh:namespace "https://github.com/Kiyeon-Nam/game-qa/ontology#"^^xsd:anyURI ] ,
-               [ sh:prefix "gqr" ; sh:namespace "https://github.com/Kiyeon-Nam/game-qa/rules#"^^xsd:anyURI ] .
+               [ sh:prefix "gqr" ; sh:namespace "https://github.com/Kiyeon-Nam/game-qa/rules#"^^xsd:anyURI ] ,
+               [ sh:prefix "rdfs" ; sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ] ,
+               [ sh:prefix "xsd" ; sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ] .
 
 # R-001: Display ∧ World i에 대해 distance(i, e) ≤ search_radius인 Entity e가 없음
 #   제외: touches(i, ScreenBounds), foreground_coverage(i) ≥ foreground_cover_min
@@ -76,31 +80,35 @@ gqr:R-003-midpoint a sh:NodeShape ;
                 { SELECT $this (MIN(?d) AS ?d1) WHERE { ?m gq:measuredSubject $this ; a gq:Distance ; gq:value ?d } GROUP BY $this }
                 FILTER (?d1 > ?attach)
                 ?m1 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e1 ; gq:value ?d1 .
+                BIND (xsd:integer(STRAFTER(STR(?e1), "instance:")) AS ?k1)
+                FILTER NOT EXISTS {
+                    ?m0 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e0 ; gq:value ?d1 .
+                    FILTER (xsd:integer(STRAFTER(STR(?e0), "instance:")) < ?k1)
+                }
                 ?m2 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e2 ; gq:value ?d2 .
+                BIND (xsd:integer(STRAFTER(STR(?e2), "instance:")) AS ?k2)
                 FILTER (?e2 != ?e1 && ?d1 / ?d2 >= ?ratio)
                 FILTER NOT EXISTS {
                     ?m3 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e3 ; gq:value ?d3 .
-                    FILTER (?e3 != ?e1 && ?e3 != ?e2 && ?d3 < ?d2)
+                    FILTER (?e3 != ?e1 && (?d3 < ?d2 || (?d3 = ?d2 && xsd:integer(STRAFTER(STR(?e3), "instance:")) < ?k2)))
                 }
-                FILTER (?d1 < ?d2 || STR(?e1) < STR(?e2))
             }""" ] .
 
 # R-003 조건 2: 한 대상 e에 distance(i, e) ≤ attach_distance인 Display ∧ World 중 같은 하위 개념이 2개 이상
+#   하위 개념: 역할 축에서 Display의 하위 클래스. 대상과 하위 개념마다 위반 1건, 표시 목록 순서는 의미 없음
 gqr:R-003-duplicate a sh:NodeShape ;
     sh:targetClass gq:Entity ;
     sh:sparql [
         sh:prefixes gqr:prefixes ;
-        sh:message "R-003 {$this} {?i1} {?i2}" ;
+        sh:message "R-003 {$this} {?displays}" ;
         sh:select """
-            SELECT $this ?i1 ?i2 WHERE {
+            SELECT $this (GROUP_CONCAT(STR(?i); separator=" ") AS ?displays) WHERE {
                 ?p gqr:name "attach_distance" ; gqr:value ?attach .
-                ?m1 gq:measuredObject $this ; a gq:Distance ; gq:value ?d1 ; gq:measuredSubject ?i1 .
-                FILTER (?d1 <= ?attach)
-                ?i1 a gq:HealthDisplay, gq:World .
-                ?m2 gq:measuredObject $this ; a gq:Distance ; gq:value ?d2 ; gq:measuredSubject ?i2 .
-                FILTER (?d2 <= ?attach && STR(?i1) < STR(?i2))
-                ?i2 a gq:HealthDisplay, gq:World .
-            }""" ] .
+                ?m gq:measuredObject $this ; a gq:Distance ; gq:value ?d ; gq:measuredSubject ?i .
+                FILTER (?d <= ?attach)
+                ?i a gq:World, ?k .
+                ?k rdfs:subClassOf gq:Display ; gq:axis "역할" .
+            } GROUP BY $this ?k HAVING (COUNT(?i) >= 2)""" ] .
 
 # R-004: Character c에 대해 overlap_ratio(c) > char_terrain_overlap_max
 gqr:R-004 a sh:NodeShape ;
@@ -162,6 +170,7 @@ gqr:R-008 a sh:NodeShape ;
             }""" ] .
 
 # R-009: 두 HUDElement a, b에 대해 hud_overlap_min < mutual_overlap(a, b) < hud_contain_min
+#   측정값 방향과 무관하게 인스턴스 id 순으로 쌍마다 1건
 gqr:R-009 a sh:NodeShape ;
     sh:targetClass gq:HUDElement ;
     sh:sparql [
@@ -169,7 +178,10 @@ gqr:R-009 a sh:NodeShape ;
         sh:message "R-009 {$this} {?b}" ;
         sh:select """
             SELECT $this ?b WHERE {
-                ?m gq:measuredSubject $this ; a gq:MutualOverlap ; gq:measuredObject ?b ; gq:value ?v .
+                { ?m gq:measuredSubject $this ; a gq:MutualOverlap ; gq:measuredObject ?b ; gq:value ?v }
+                UNION
+                { ?m gq:measuredSubject ?b ; a gq:MutualOverlap ; gq:measuredObject $this ; gq:value ?v }
+                FILTER (xsd:integer(STRAFTER(STR($this), "instance:")) < xsd:integer(STRAFTER(STR(?b), "instance:")))
                 ?p1 gqr:name "hud_overlap_min" ; gqr:value ?low .
                 ?p2 gqr:name "hud_contain_min" ; gqr:value ?high .
                 FILTER (?v > ?low && ?v < ?high)
@@ -205,9 +217,9 @@ gqr:R-010-screen-edge a sh:NodeShape ;
     sh:targetClass gq:TextLabel ;
     sh:sparql [
         sh:prefixes gqr:prefixes ;
-        sh:message "R-010 {$this}" ;
+        sh:message "R-010 {$this} {?s}" ;
         sh:select """
-            SELECT $this WHERE {
+            SELECT $this ?s WHERE {
                 $this gq:touches ?s .
                 ?s a gq:ScreenBounds .
             }""" ] .

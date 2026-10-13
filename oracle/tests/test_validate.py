@@ -1,6 +1,6 @@
 import pytest
 
-from validate import violations
+from validate import missing_measurements, violations
 
 # 초안 임계값 (ontology/1_rules/README.md). foreground_cover_min은 미정이라 임의 값
 PARAMS = {
@@ -18,12 +18,20 @@ PARAMS = {
 }
 
 
+# 테스트가 다루지 않는 측정값은 위반이 없는 값으로 채움. distance는 판정에 직접 쓰여 채우지 않음
+NEUTRAL = {"overlap_ratio": 0.0, "support_gap": 0.0, "foreground_coverage": 0.0, "edge_distance": 0.0, "contain_ratio": 1.0, "mutual_overlap": 0.0}
+
+
 def frame(instances, relations=(), measurements=()):
-    return {
+    f = {
         "instances": [{"id": i, "class": c} for i, c in instances],
         "relations": [{"type": t, "subject": s, "object": o} for t, s, o in relations],
         "measurements": [{"name": n, "args": list(a), "value": v} for n, a, v in measurements],
     }
+    for name, args in missing_measurements(f):
+        if name in NEUTRAL:
+            f["measurements"].append({"name": name, "args": list(args), "value": NEUTRAL[name]})
+    return f
 
 
 def test_r004_embedded_character():
@@ -68,7 +76,8 @@ def test_r003_two_bars_on_one_target():
         [(1, "HealthBar"), (2, "HealthBar"), (3, "Character")],
         measurements=[("distance", [1, 3], 0.1), ("distance", [2, 3], 0.3), ("foreground_coverage", [1], 0.0), ("foreground_coverage", [2], 0.0)],
     )
-    assert violations(f, PARAMS) == [("R-003", (3, 1, 2))]
+    ((rule, targets),) = violations(f, PARAMS)
+    assert rule == "R-003" and targets[0] == 3 and sorted(targets[1:]) == [1, 2]
 
 
 def test_oxigraph_store_matches_default_store():
@@ -77,7 +86,7 @@ def test_oxigraph_store_matches_default_store():
         [(1, "HealthBar"), (2, "HealthBar"), (3, "Character"), (4, "Character"), (5, "Equipment")],
         relations=[("attachedTo", 5, 3)],
         measurements=[
-            ("distance", [1, 3], 0.1), ("distance", [1, 4], 2.5), ("distance", [2, 3], 0.3), ("distance", [2, 4], 0.35),
+            ("distance", [1, 3], 0.1), ("distance", [1, 4], 2.5), ("distance", [2, 3], 0.3), ("distance", [2, 4], 0.35), ("distance", [1, 5], 3.0), ("distance", [2, 5], 3.0),
             ("foreground_coverage", [1], 0.0), ("foreground_coverage", [2], 0.0),
             ("overlap_ratio", [3], 0.3), ("overlap_ratio", [4], 0.0), ("edge_distance", [5, 3], 0.2),
         ],
@@ -131,7 +140,7 @@ def test_r010_text_conditions():
     assert violations(overflow, PARAMS) == [("R-010", (1, 2))]
     assert violations(clipped, PARAMS) == [("R-010", (1, 2))]
     assert violations(other_panel, PARAMS) == []
-    assert violations(off_screen, PARAMS) == [("R-010", (1,))]
+    assert violations(off_screen, PARAMS) == [("R-010", (1, "ScreenBounds"))]
 
 
 def test_missing_parameter_raises():
@@ -139,3 +148,31 @@ def test_missing_parameter_raises():
     del params["equip_gap_max"]
     with pytest.raises(ValueError):
         violations(frame([]), params)
+
+
+def test_r003_ties_give_one_violation_per_display():
+    f = frame(
+        [(1, "HealthBar"), (2, "Character"), (3, "Character"), (10, "Character")],
+        measurements=[("distance", [1, 2], 1.0), ("distance", [1, 3], 1.0), ("distance", [1, 10], 1.0)],
+    )
+    assert violations(f, PARAMS) == [("R-003", (1, 2, 3))]
+
+
+def test_r003_three_bars_on_one_target_is_one_violation():
+    f = frame(
+        [(1, "HealthBar"), (2, "HealthBar"), (4, "HealthBar"), (3, "Character")],
+        measurements=[("distance", [1, 3], 0.1), ("distance", [2, 3], 0.2), ("distance", [4, 3], 0.3)],
+    )
+    ((rule, targets),) = violations(f, PARAMS)
+    assert rule == "R-003" and targets[0] == 3 and sorted(targets[1:]) == [1, 2, 4]
+
+
+def test_r009_either_direction_is_one_violation():
+    f = frame([(2, "HUDElement"), (10, "HUDElement")], measurements=[("mutual_overlap", [10, 2], 0.3), ("mutual_overlap", [2, 10], 0.3)])
+    assert violations(f, PARAMS) == [("R-009", (2, 10))]
+
+
+def test_missing_measurement_raises():
+    f = frame([(1, "HealthBar"), (2, "Character")])
+    with pytest.raises(ValueError):
+        violations(f, PARAMS)
