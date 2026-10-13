@@ -1,12 +1,19 @@
+import pytest
+
 from validate import violations
 
 # 초안 임계값 (ontology/1_rules/README.md). foreground_cover_min은 미정이라 임의 값
 PARAMS = {
-    "char_terrain_overlap_max": 0.15,
-    "equip_gap_max": 0.05,
     "search_radius": 2.0,
     "attach_distance": 0.5,
     "midpoint_ratio": 0.8,
+    "char_terrain_overlap_max": 0.15,
+    "item_terrain_overlap_max": 0.3,
+    "support_gap_max": 0.1,
+    "equip_gap_max": 0.05,
+    "hud_overlap_min": 0.02,
+    "hud_contain_min": 0.95,
+    "text_contain_min": 0.98,
     "foreground_cover_min": 0.5,
 }
 
@@ -77,3 +84,58 @@ def test_oxigraph_store_matches_default_store():
     )
     assert violations(f, PARAMS) == violations(f, PARAMS, store="Memory")
     assert violations(f, PARAMS)
+
+
+def test_r002_display_far_from_its_target():
+    f = frame([(1, "HealthBar"), (2, "Character")], relations=[("represents", 1, 2)], measurements=[("distance", [1, 2], 1.2), ("foreground_coverage", [1], 0.0)])
+    assert violations(f, PARAMS) == [("R-002", (1, 2))]
+
+
+def test_r002_defers_midpoint_case_to_r003():
+    f = frame(
+        [(1, "HealthBar"), (2, "Character"), (3, "Character")],
+        relations=[("represents", 1, 2)],
+        measurements=[("distance", [1, 2], 1.0), ("distance", [1, 3], 1.1), ("foreground_coverage", [1], 0.0)],
+    )
+    assert violations(f, PARAMS) == [("R-003", (1, 2, 3))]
+
+
+def test_r005_item_in_terrain():
+    f = frame([(1, "LooseObject")], measurements=[("overlap_ratio", [1], 0.5)])
+    assert violations(f, PARAMS) == [("R-005", (1,))]
+
+
+def test_r006_floating_object_and_exclusion():
+    floating = frame([(1, "GroundedObject")], measurements=[("support_gap", [1], 0.5), ("foreground_coverage", [1], 0.0)])
+    hidden = frame([(1, "GroundedObject")], measurements=[("support_gap", [1], 0.5), ("foreground_coverage", [1], 0.8)])
+    assert violations(floating, PARAMS) == [("R-006", (1,))]
+    assert violations(hidden, PARAMS) == []
+
+
+def test_r009_partial_hud_overlap():
+    partial = frame([(1, "HUDElement"), (2, "HUDElement")], measurements=[("mutual_overlap", [1, 2], 0.3)])
+    nested = frame([(1, "HUDElement"), (2, "HUDElement")], measurements=[("mutual_overlap", [1, 2], 1.0)])
+    assert violations(partial, PARAMS) == [("R-009", (1, 2))]
+    assert violations(nested, PARAMS) == []
+
+
+def test_r010_text_conditions():
+    overflow = frame([(1, "TextLabel"), (2, "UIPanel")], relations=[("belongsTo", 1, 2)], measurements=[("contain_ratio", [2, 1], 0.8)])
+    clipped = frame([(1, "TextLabel"), (2, "UIPanel")], relations=[("belongsTo", 1, 2), ("touches", 1, 2)], measurements=[("contain_ratio", [2, 1], 1.0)])
+    other_panel = frame(
+        [(1, "TextLabel"), (2, "UIPanel"), (3, "UIPanel")],
+        relations=[("belongsTo", 1, 2), ("touches", 1, 3)],
+        measurements=[("contain_ratio", [2, 1], 1.0), ("contain_ratio", [3, 1], 0.1)],
+    )
+    off_screen = frame([(1, "TextLabel")], relations=[("touches", 1, "ScreenBounds")])
+    assert violations(overflow, PARAMS) == [("R-010", (1, 2))]
+    assert violations(clipped, PARAMS) == [("R-010", (1, 2))]
+    assert violations(other_panel, PARAMS) == []
+    assert violations(off_screen, PARAMS) == [("R-010", (1,))]
+
+
+def test_missing_parameter_raises():
+    params = dict(PARAMS)
+    del params["equip_gap_max"]
+    with pytest.raises(ValueError):
+        violations(frame([]), params)

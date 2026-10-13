@@ -5,38 +5,12 @@
 
 # 규칙 SHACL 형상. 규칙 정의는 ontology/1_rules/
 # 파라미터는 검증 시 데이터로 추가: [] gqr:name "<파라미터>" ; gqr:value <값>
-# 결과 메시지 형식: "<규칙 ID> <대상 인스턴스 URI ...>" (대상이 여러 개라 SHACL 결과의 value 하나로 담을 수 없음)
+# 결과 메시지 형식: "<규칙 ID> <대상 인스턴스 URI ...>". 대상 순서는 규칙 위반 조건의 변수 순서
+#   (대상이 여러 개라 SHACL 결과의 value 하나로 담을 수 없음)
 
 gqr:prefixes
     sh:declare [ sh:prefix "gq" ; sh:namespace "https://github.com/Kiyeon-Nam/game-qa/ontology#"^^xsd:anyURI ] ,
                [ sh:prefix "gqr" ; sh:namespace "https://github.com/Kiyeon-Nam/game-qa/rules#"^^xsd:anyURI ] .
-
-# R-004: Character c에 대해 overlap_ratio(c) > char_terrain_overlap_max
-gqr:R-004 a sh:NodeShape ;
-    sh:targetClass gq:Character ;
-    sh:sparql [
-        sh:prefixes gqr:prefixes ;
-        sh:message "R-004 {$this}" ;
-        sh:select """
-            SELECT $this ?value WHERE {
-                ?m a gq:OverlapRatio ; gq:measuredSubject $this ; gq:value ?value .
-                ?p gqr:name "char_terrain_overlap_max" ; gqr:value ?max .
-                FILTER (?value > ?max)
-            }""" ] .
-
-# R-008: attachedTo(q, c)에 대해 edge_distance(q, c) > equip_gap_max
-gqr:R-008 a sh:NodeShape ;
-    sh:targetClass gq:Equipment ;
-    sh:sparql [
-        sh:prefixes gqr:prefixes ;
-        sh:message "R-008 {$this} {?c}" ;
-        sh:select """
-            SELECT $this ?c ?value WHERE {
-                $this gq:attachedTo ?c .
-                ?m a gq:EdgeDistance ; gq:measuredSubject $this ; gq:measuredObject ?c ; gq:value ?value .
-                ?p gqr:name "equip_gap_max" ; gqr:value ?max .
-                FILTER (?value > ?max)
-            }""" ] .
 
 # R-001: Display ∧ World i에 대해 distance(i, e) ≤ search_radius인 Entity e가 없음
 #   제외: touches(i, ScreenBounds), foreground_coverage(i) ≥ foreground_cover_min
@@ -51,14 +25,39 @@ gqr:R-001 a sh:NodeShape ;
                 ?p1 gqr:name "search_radius" ; gqr:value ?radius .
                 ?p2 gqr:name "foreground_cover_min" ; gqr:value ?cover .
                 FILTER NOT EXISTS {
-                    ?m a gq:Distance ; gq:measuredSubject $this ; gq:measuredObject ?e ; gq:value ?d .
+                    ?m gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e ; gq:value ?d .
                     ?e a gq:Entity .
                     FILTER (?d <= ?radius)
                 }
                 FILTER NOT EXISTS { $this gq:touches ?s . ?s a gq:ScreenBounds }
                 FILTER NOT EXISTS {
-                    ?f a gq:ForegroundCoverage ; gq:measuredSubject $this ; gq:value ?c .
+                    ?f gq:measuredSubject $this ; a gq:ForegroundCoverage ; gq:value ?c .
                     FILTER (?c >= ?cover)
+                }
+            }""" ] .
+
+# R-002: represents(i, e)에 대해 attach_distance < distance(i, e) ≤ search_radius
+#   두 대상 사이에 떠 있는 경우(R-003 조건 1)는 제외
+#   R-003 조건 1의 존재 판정: 가장 가까운 대상 e1(distance d1)과 다른 대상 e2에 대해 d1 / distance(i, e2) ≥ midpoint_ratio인 e2가 있으면
+#   두 번째로 가까운 대상도 조건을 만족하므로 두 번째 대상을 찾지 않음
+gqr:R-002 a sh:NodeShape ;
+    sh:targetClass gq:Display ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-002 {$this} {?e}" ;
+        sh:select """
+            SELECT $this ?e WHERE {
+                $this a gq:World ; gq:represents ?e .
+                ?m gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e ; gq:value ?d .
+                ?p1 gqr:name "attach_distance" ; gqr:value ?attach .
+                ?p2 gqr:name "search_radius" ; gqr:value ?radius .
+                ?p3 gqr:name "midpoint_ratio" ; gqr:value ?ratio .
+                FILTER (?d > ?attach && ?d <= ?radius)
+                OPTIONAL { SELECT $this (MIN(?dd) AS ?d1) WHERE { ?mm gq:measuredSubject $this ; a gq:Distance ; gq:value ?dd } GROUP BY $this }
+                FILTER NOT EXISTS {
+                    ?m1 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e1 ; gq:value ?d1 .
+                    ?m2 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e2 ; gq:value ?d2 .
+                    FILTER (?d1 > ?attach && ?e2 != ?e1 && ?d1 / ?d2 >= ?ratio)
                 }
             }""" ] .
 
@@ -72,23 +71,18 @@ gqr:R-003-midpoint a sh:NodeShape ;
         sh:select """
             SELECT $this ?e1 ?e2 WHERE {
                 $this a gq:World .
-                ?m1 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e1 ; gq:value ?d1 .
                 ?p1 gqr:name "attach_distance" ; gqr:value ?attach .
-                FILTER (?d1 > ?attach)
-                # e1이 가장 가까움
-                FILTER NOT EXISTS {
-                    ?m0 gq:measuredSubject $this ; a gq:Distance ; gq:value ?d0 .
-                    FILTER (?d0 < ?d1)
-                }
-                ?m2 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e2 ; gq:value ?d2 .
                 ?p2 gqr:name "midpoint_ratio" ; gqr:value ?ratio .
-                FILTER (?e1 != ?e2 && ?d1 <= ?d2 && ?d1 / ?d2 >= ?ratio)
-                # e2가 두 번째로 가까움
+                { SELECT $this (MIN(?d) AS ?d1) WHERE { ?m gq:measuredSubject $this ; a gq:Distance ; gq:value ?d } GROUP BY $this }
+                FILTER (?d1 > ?attach)
+                ?m1 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e1 ; gq:value ?d1 .
+                ?m2 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e2 ; gq:value ?d2 .
+                FILTER (?e2 != ?e1 && ?d1 / ?d2 >= ?ratio)
                 FILTER NOT EXISTS {
                     ?m3 gq:measuredSubject $this ; a gq:Distance ; gq:measuredObject ?e3 ; gq:value ?d3 .
                     FILTER (?e3 != ?e1 && ?e3 != ?e2 && ?d3 < ?d2)
                 }
-                FILTER (STR(?e1) < STR(?e2) || ?d1 < ?d2)
+                FILTER (?d1 < ?d2 || STR(?e1) < STR(?e2))
             }""" ] .
 
 # R-003 조건 2: 한 대상 e에 distance(i, e) ≤ attach_distance인 Display ∧ World 중 같은 하위 개념이 2개 이상
@@ -106,4 +100,114 @@ gqr:R-003-duplicate a sh:NodeShape ;
                 ?m2 gq:measuredObject $this ; a gq:Distance ; gq:value ?d2 ; gq:measuredSubject ?i2 .
                 FILTER (?d2 <= ?attach && STR(?i1) < STR(?i2))
                 ?i2 a gq:HealthDisplay, gq:World .
+            }""" ] .
+
+# R-004: Character c에 대해 overlap_ratio(c) > char_terrain_overlap_max
+gqr:R-004 a sh:NodeShape ;
+    sh:targetClass gq:Character ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-004 {$this}" ;
+        sh:select """
+            SELECT $this WHERE {
+                ?m gq:measuredSubject $this ; a gq:OverlapRatio ; gq:value ?v .
+                ?p gqr:name "char_terrain_overlap_max" ; gqr:value ?max .
+                FILTER (?v > ?max)
+            }""" ] .
+
+# R-005: LooseObject o에 대해 overlap_ratio(o) > item_terrain_overlap_max
+gqr:R-005 a sh:NodeShape ;
+    sh:targetClass gq:LooseObject ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-005 {$this}" ;
+        sh:select """
+            SELECT $this WHERE {
+                ?m gq:measuredSubject $this ; a gq:OverlapRatio ; gq:value ?v .
+                ?p gqr:name "item_terrain_overlap_max" ; gqr:value ?max .
+                FILTER (?v > ?max)
+            }""" ] .
+
+# R-006: GroundedObject o에 대해 support_gap(o) > support_gap_max
+#   제외: foreground_coverage(o) ≥ foreground_cover_min
+gqr:R-006 a sh:NodeShape ;
+    sh:targetClass gq:GroundedObject ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-006 {$this}" ;
+        sh:select """
+            SELECT $this WHERE {
+                ?m gq:measuredSubject $this ; a gq:SupportGap ; gq:value ?v .
+                ?p1 gqr:name "support_gap_max" ; gqr:value ?max .
+                ?p2 gqr:name "foreground_cover_min" ; gqr:value ?cover .
+                FILTER (?v > ?max)
+                FILTER NOT EXISTS {
+                    ?f gq:measuredSubject $this ; a gq:ForegroundCoverage ; gq:value ?c .
+                    FILTER (?c >= ?cover)
+                }
+            }""" ] .
+
+# R-008: attachedTo(q, c)에 대해 edge_distance(q, c) > equip_gap_max
+gqr:R-008 a sh:NodeShape ;
+    sh:targetClass gq:Equipment ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-008 {$this} {?c}" ;
+        sh:select """
+            SELECT $this ?c WHERE {
+                $this gq:attachedTo ?c .
+                ?m gq:measuredSubject $this ; a gq:EdgeDistance ; gq:measuredObject ?c ; gq:value ?v .
+                ?p gqr:name "equip_gap_max" ; gqr:value ?max .
+                FILTER (?v > ?max)
+            }""" ] .
+
+# R-009: 두 HUDElement a, b에 대해 hud_overlap_min < mutual_overlap(a, b) < hud_contain_min
+gqr:R-009 a sh:NodeShape ;
+    sh:targetClass gq:HUDElement ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-009 {$this} {?b}" ;
+        sh:select """
+            SELECT $this ?b WHERE {
+                ?m gq:measuredSubject $this ; a gq:MutualOverlap ; gq:measuredObject ?b ; gq:value ?v .
+                ?p1 gqr:name "hud_overlap_min" ; gqr:value ?low .
+                ?p2 gqr:name "hud_contain_min" ; gqr:value ?high .
+                FILTER (?v > ?low && ?v < ?high)
+            }""" ] .
+
+# R-010 조건 1: belongsTo(x, p)인 p에 대해 contain_ratio(p, x) < text_contain_min
+gqr:R-010-contain a sh:NodeShape ;
+    sh:targetClass gq:TextLabel ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-010 {$this} {?p}" ;
+        sh:select """
+            SELECT $this ?p WHERE {
+                $this gq:belongsTo ?p .
+                ?m gq:measuredSubject ?p ; a gq:ContainRatio ; gq:measuredObject $this ; gq:value ?v .
+                ?q gqr:name "text_contain_min" ; gqr:value ?min .
+                FILTER (?v < ?min)
+            }""" ] .
+
+# R-010 조건 2: belongsTo(x, p)인 p에 대해 touches(x, p)
+gqr:R-010-panel-edge a sh:NodeShape ;
+    sh:targetClass gq:TextLabel ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-010 {$this} {?p}" ;
+        sh:select """
+            SELECT $this ?p WHERE {
+                $this gq:belongsTo ?p ; gq:touches ?p .
+            }""" ] .
+
+# R-010 조건 3: touches(x, ScreenBounds)
+gqr:R-010-screen-edge a sh:NodeShape ;
+    sh:targetClass gq:TextLabel ;
+    sh:sparql [
+        sh:prefixes gqr:prefixes ;
+        sh:message "R-010 {$this}" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this gq:touches ?s .
+                ?s a gq:ScreenBounds .
             }""" ] .
