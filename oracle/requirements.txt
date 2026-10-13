@@ -2,4 +2,6 @@ rdflib
 pyshacl
 oxrdflib
 owlrl
+pycocotools
+pillow
 pytest
