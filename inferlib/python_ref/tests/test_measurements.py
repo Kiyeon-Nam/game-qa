@@ -32,6 +32,17 @@ def test_overlap_ratio_sunk_into_floor():
     assert m.overlap_ratio(c, rect(0, 20, 40, 40) & ~c) == pytest.approx(0.5)
 
 
+def test_overlap_ratio_sunk_into_side_wall():
+    c = rect(15, 10, 25, 20)
+    assert m.overlap_ratio(c, rect(20, 0, 30, 40) & ~c) == pytest.approx(0.5)
+
+
+def test_overlap_ratio_floor_split_by_character():
+    # 1타일 폭 캐릭터가 바닥을 관통해 보이는 바닥이 두 덩어리로 갈림
+    floor = rect(0, 20, 12, 40) | rect(15, 20, 40, 40)
+    assert m.overlap_ratio(rect(12, 15, 15, 25), floor) == pytest.approx(0.5)
+
+
 def test_overlap_ratio_standing_in_closed_room():
     room = rect(0, 0, 40, 40) & ~rect(5, 5, 35, 30)
     assert m.overlap_ratio(rect(10, 20, 15, 30), room) == 0
@@ -81,6 +92,8 @@ def test_foreground_coverage_object():
 def test_represents_one_to_one_within_radius():
     assert sorted(r.represents([[0.1, 0.2], [0.15, 1.0]], 2.0)) == [(0, 1), (1, 0)]
     assert r.represents([[3.0]], 2.0) == []
+    assert r.represents([], 2.0) == []
+    assert r.represents([[], []], 2.0) == []
 
 
 def test_represents_leaves_display_unmatched_rather_than_breaking_good_pair():
