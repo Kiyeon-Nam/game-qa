@@ -8,6 +8,7 @@
 # 파라미터는 검증 시 데이터로 추가: [] gqr:name "<파라미터>" ; gqr:value <값>
 # 결과 메시지 형식: "<규칙 ID> <대상 인스턴스 URI ...>". 대상 순서는 규칙 위반 조건의 변수 순서
 # 거리가 같은 대상은 인스턴스 id 순으로 앞섬 (id = 인스턴스 URI의 "instance:" 뒤 정수)
+# "|" 뒤의 대상은 순서가 없는 목록. 검증 결과에서 id 순으로 정렬
 #   (대상이 여러 개라 SHACL 결과의 value 하나로 담을 수 없음)
 
 gqr:prefixes
@@ -95,12 +96,12 @@ gqr:R-003-midpoint a sh:NodeShape ;
             }""" ] .
 
 # R-003 조건 2: 한 대상 e에 distance(i, e) ≤ attach_distance인 Display ∧ World 중 같은 하위 개념이 2개 이상
-#   하위 개념: 역할 축에서 Display의 하위 클래스. 대상과 하위 개념마다 위반 1건, 표시 목록 순서는 의미 없음
+#   하위 개념: 역할 축에서 Display의 하위 클래스. 대상과 하위 개념마다 위반 1건
 gqr:R-003-duplicate a sh:NodeShape ;
     sh:targetClass gq:Entity ;
     sh:sparql [
         sh:prefixes gqr:prefixes ;
-        sh:message "R-003 {$this} {?displays}" ;
+        sh:message "R-003 {$this} | {?displays}" ;
         sh:select """
             SELECT $this (GROUP_CONCAT(STR(?i); separator=" ") AS ?displays) WHERE {
                 ?p gqr:name "attach_distance" ; gqr:value ?attach .

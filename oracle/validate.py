@@ -100,6 +100,8 @@ def violations(result, params, store="Oxigraph"):
     _, report, _ = shacl_validate(data_graph(result, params, store), shacl_graph=rules(), inference="none", advanced=True, inplace=True)
     found = set()
     for r in report.subjects(SH.resultSeverity, None):
-        rule, *targets = str(report.value(r, SH.resultMessage)).split()
-        found.add((rule, tuple(instance_id(t) for t in targets)))
+        rule, *rest = str(report.value(r, SH.resultMessage)).split()
+        ordered, _, unordered = " ".join(rest).partition("|")
+        targets = [instance_id(t) for t in ordered.split()] + sorted(instance_id(t) for t in unordered.split())
+        found.add((rule, tuple(targets)))
     return sorted(found)

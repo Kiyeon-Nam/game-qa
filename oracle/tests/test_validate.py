@@ -76,8 +76,7 @@ def test_r003_two_bars_on_one_target():
         [(1, "HealthBar"), (2, "HealthBar"), (3, "Character")],
         measurements=[("distance", [1, 3], 0.1), ("distance", [2, 3], 0.3), ("foreground_coverage", [1], 0.0), ("foreground_coverage", [2], 0.0)],
     )
-    ((rule, targets),) = violations(f, PARAMS)
-    assert rule == "R-003" and targets[0] == 3 and sorted(targets[1:]) == [1, 2]
+    assert violations(f, PARAMS) == [("R-003", (3, 1, 2))]
 
 
 def test_oxigraph_store_matches_default_store():
@@ -163,8 +162,7 @@ def test_r003_three_bars_on_one_target_is_one_violation():
         [(1, "HealthBar"), (2, "HealthBar"), (4, "HealthBar"), (3, "Character")],
         measurements=[("distance", [1, 3], 0.1), ("distance", [2, 3], 0.2), ("distance", [4, 3], 0.3)],
     )
-    ((rule, targets),) = violations(f, PARAMS)
-    assert rule == "R-003" and targets[0] == 3 and sorted(targets[1:]) == [1, 2, 4]
+    assert violations(f, PARAMS) == [("R-003", (3, 1, 2, 4))]
 
 
 def test_r009_either_direction_is_one_violation():
