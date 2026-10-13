@@ -5,6 +5,7 @@
 - 상위 개념: 검증 시 추론 대신 온톨로지의 하위 클래스 관계로 인스턴스 타입을 미리 펼침
 """
 
+import re
 from functools import cache
 from pathlib import Path
 
@@ -49,8 +50,16 @@ def data_graph(result, params, store="Oxigraph"):
     return g
 
 
+def required_params():
+    """규칙이 읽는 파라미터 이름. 빠지면 해당 규칙이 위반을 내지 않으므로 검증 전에 확인"""
+    return set(re.findall(r'gqr:name "(\w+)"', RULES.read_text(encoding="utf-8")))
+
+
 def violations(result, params, store="Oxigraph"):
     """추론 결과의 위반 목록. (규칙 ID, 대상 인스턴스 id 목록). store="Memory"는 rdflib 기본 저장소"""
+    missing = required_params() - params.keys()
+    if missing:
+        raise ValueError(f"파라미터 누락: {', '.join(sorted(missing))}")
     _, report, _ = shacl_validate(data_graph(result, params, store), shacl_graph=rules(), inference="none", advanced=True, inplace=True)
     found = set()
     for r in report.subjects(SH.resultSeverity, None):
