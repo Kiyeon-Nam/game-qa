@@ -1,0 +1,5 @@
+numpy
+pycocotools
+opencv-python-headless
+pyyaml
+pytest
