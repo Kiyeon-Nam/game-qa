@@ -1,1 +1,12 @@
 3. AI 라벨링 도구
+- `labeling_guide_v0.md`: 클래스 목록, 라벨링 가이드
+- 초기 라벨링: 자체 도구 전까지 LabelMe 사용
+  - `from_labelme.py`: LabelMe JSON(이미지별)을 라벨 파일(`schemas/label.schema.json`)로 변환
+  - 설치: `pip install labelme` (경로가 길면 Windows에서 설치 실패. 짧은 경로의 가상환경 사용), `pip install -r labeling-tool/requirements.txt`
+  - 실행: `labelme <이미지 폴더> --output <JSON 폴더> --labels <클래스 목록> --validate-label exact`
+    - 클래스 목록: `python labeling-tool/from_labelme.py --labels` 출력
+  - 도형: polygon, rectangle만 사용
+  - 떨어진 조각(가이드 2-2): 같은 group_id 지정
+  - relations: 초기 라벨링에서 태깅하지 않음 (학습에 미사용, 판정은 마스크에서 계산)
+  - 변환: `python labeling-tool/from_labelme.py <JSON 폴더> <출력 라벨.json>`
+- 테스트: `pytest labeling-tool`
