@@ -1,6 +1,7 @@
 4. C++ 추론 라이브러리
 
 python_ref/ : 후처리 Python 구현 (정답지)
+- `frames.py`: 플레이 녹화에서 판정 대상 프레임 추출 (판정 파이프라인 입력·①). 선별 기준은 화면 변화 감지
 - `concepts.py`: 라벨링 클래스별 개념
 - `masks.py`: COCO 마스크 변환, bbox, 이웃 픽셀
 - `measurements.py`: 측정값 계산
@@ -10,7 +11,10 @@ python_ref/ : 후처리 Python 구현 (정답지)
 - 설치: `pip install -r python_ref/requirements.txt`
 - 라벨로 추론 결과 생성: `python python_ref/infer.py <라벨.json> <파라미터.json> <출력 폴더>`
   - 파라미터 파일: search_radius, fg_search_radius, support_gap_max 값을 담은 JSON. 값은 `ontology/1_rules/README.md` 임계값 목록 (fg_search_radius는 미정이라 임의 값)
-- 이미지로 추론 결과 생성: `python python_ref/segment.py <모델.onnx> <파라미터.json> <출력 폴더> <이미지 ...> [--score 0.25]`
+- 프레임 추출: `python python_ref/frames.py <출력 폴더> <영상·이미지 ...> [--min-change 0] [--step 1]`
+  - min-change: 마지막으로 고른 프레임과의 최소 차이 (0~1). 값은 녹화로 결정, 기본 0은 모든 프레임
+  - 출력: 프레임 이미지, frames.json (file, source, index)
+- 이미지로 추론 결과 생성: `python python_ref/segment.py <모델.onnx> <파라미터.json> <출력 폴더> <이미지 또는 frames.json ...> [--score 0.25]`
   - 추가 설치: `training/README.md`의 학습 환경 (ultralytics)
   - 모델 클래스 이름은 라벨링 클래스 이름이어야 함
 - 테스트: `pytest python_ref`

@@ -35,7 +35,7 @@
 
 ```
 입력(플레이 녹화/스크린샷)
- → ① 프레임 추출
+ → ① 프레임 추출           inferlib/
  → ② 세그멘테이션          training/, inferlib/
  → ③ 후처리·공간 관계 계산  inferlib/
  → ④ 그래프 변환           oracle/
