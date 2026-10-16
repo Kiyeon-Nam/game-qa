@@ -1,0 +1,4 @@
+pycocotools
+rdflib
+jsonschema
+pytest
