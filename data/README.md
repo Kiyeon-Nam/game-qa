@@ -20,5 +20,6 @@
 
 ```
 data/
-└── labels/   라벨 (COCO instance segmentation + relations)
+├── labels/   라벨 (COCO instance segmentation + relations)
+└── screens/  화면 수집 목록 (이미지 원본은 레포 밖)
 ```
