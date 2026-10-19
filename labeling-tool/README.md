@@ -7,8 +7,10 @@
     - 라벨링 설정: `python labeling-tool/from_label_studio.py --config` 출력을 붙여넣기
     - 이미지 가져오기, 라벨링 후 JSON 형식으로 내보내기
   - 영역: polygon
+    - 겹치는 영역(가이드 2-3)은 안쪽부터 그림. 기존 영역 안을 클릭하면 그 영역이 선택됨
   - 관계: 주체 영역 → 대상 영역 방향으로 연결
     - represents, attachedTo: 가이드 6장
     - sameInstance: 떨어진 조각을 한 인스턴스로 (가이드 2-2)
+    - 관계 종류는 고르지 않아도 됨 (주체·대상 클래스로 정해짐)
   - 변환: `python labeling-tool/from_label_studio.py <내보낸 JSON> <출력 라벨.json>`
 - 테스트: `pytest labeling-tool`
