@@ -1,0 +1,222 @@
+[
+ {
+  "id": 1,
+  "data": {
+   "image": "/data/upload/1/f0e30818-images.jpg"
+  },
+  "file_upload": "f0e30818-images.jpg",
+  "annotations": [
+   {
+    "id": 1,
+    "result": [
+     {
+      "original_width": 596,
+      "original_height": 335,
+      "image_rotation": 0,
+      "value": {
+       "points": [
+        [
+         3.203971119133577,
+         4.7998275769168615
+        ],
+        [
+         21.61552346570397,
+         9.616897462147744
+        ],
+        [
+         22.247292418772563,
+         18.92989924026078
+        ],
+        [
+         4.287003610108304,
+         20.85672719435314
+        ]
+       ],
+       "closed": true,
+       "polygonlabels": [
+        "UIPanel"
+       ]
+      },
+      "id": "crB-snBR_g",
+      "from_name": "label",
+      "to_name": "image",
+      "type": "polygonlabels",
+      "origin": "manual"
+     },
+     {
+      "original_width": 596,
+      "original_height": 335,
+      "image_rotation": 0,
+      "value": {
+       "points": [
+        [
+         13.583032490974727,
+         26.63721105663021
+        ],
+        [
+         18.727436823104686,
+         15.557950320599165
+        ],
+        [
+         24.32310469314079,
+         26.316073064281486
+        ]
+       ],
+       "closed": true,
+       "polygonlabels": [
+        "TextLabel"
+       ]
+      },
+      "id": "wa2xXhq5Go",
+      "from_name": "label",
+      "to_name": "image",
+      "type": "polygonlabels",
+      "origin": "manual"
+     },
+     {
+      "original_width": 596,
+      "original_height": 335,
+      "image_rotation": 0,
+      "value": {
+       "points": [
+        [
+         38.49277978339351,
+         54.09450940244626
+        ],
+        [
+         49.14259927797834,
+         52.007112452179555
+        ],
+        [
+         50.135379061371836,
+         60.99897623794385
+        ],
+        [
+         39.75631768953069,
+         60.356700253246416
+        ]
+       ],
+       "closed": true,
+       "polygonlabels": [
+        "HealthBar"
+       ]
+      },
+      "id": "D8_bbDx9QB",
+      "from_name": "label",
+      "to_name": "image",
+      "type": "polygonlabels",
+      "origin": "manual"
+     },
+     {
+      "original_width": 596,
+      "original_height": 335,
+      "image_rotation": 0,
+      "value": {
+       "points": [
+        [
+         48.14981949458483,
+         65.97661511934909
+        ],
+        [
+         49.41335740072202,
+         78.17985882860069
+        ],
+        [
+         56.99458483754511,
+         79.14327280564686
+        ],
+        [
+         57.445848375451256,
+         68.38515006196454
+        ]
+       ],
+       "closed": true,
+       "polygonlabels": [
+        "Character"
+       ]
+      },
+      "id": "sskv-jalLh",
+      "from_name": "label",
+      "to_name": "image",
+      "type": "polygonlabels",
+      "origin": "manual"
+     },
+     {
+      "original_width": 596,
+      "original_height": 335,
+      "image_rotation": 0,
+      "value": {
+       "points": [
+        [
+         19.35920577617328,
+         69.50913303518509
+        ],
+        [
+         20.261732851985553,
+         74.48677191659034
+        ],
+        [
+         28.92599277978339,
+         71.11482299692871
+        ],
+        [
+         28.384476534296024,
+         68.86685705048762
+        ]
+       ],
+       "closed": true,
+       "polygonlabels": [
+        "TextLabel"
+       ]
+      },
+      "id": "sGVhRdAq4C",
+      "from_name": "label",
+      "to_name": "image",
+      "type": "polygonlabels",
+      "origin": "manual"
+     },
+     {
+      "original_width": 596,
+      "original_height": 335,
+      "image_rotation": 0,
+      "value": {
+       "points": [
+        [
+         16.110108303249092,
+         67.10059809256964
+        ],
+        [
+         18.817689530685918,
+         83.63920469852901
+        ],
+        [
+         33.79963898916967,
+         70.15140901988254
+        ],
+        [
+         31.72382671480144,
+         63.728649172908014
+        ]
+       ],
+       "closed": true,
+       "polygonlabels": [
+        "UIPanel"
+       ]
+      },
+      "id": "FJ4_Mh15v5",
+      "from_name": "label",
+      "to_name": "image",
+      "type": "polygonlabels",
+      "origin": "manual"
+     },
+     {
+      "from_id": "D8_bbDx9QB",
+      "to_id": "sskv-jalLh",
+      "type": "relation",
+      "direction": "right"
+     }
+    ]
+   }
+  ]
+ }
+]

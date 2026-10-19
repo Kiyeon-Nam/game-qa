@@ -1,0 +1,229 @@
+[
+ {
+  "id": 2,
+  "data": {
+   "image": "/data/upload/2/4b771ad5-corgi_001.png"
+  },
+  "file_upload": "4b771ad5-corgi_001.png",
+  "annotations": [
+   {
+    "id": 2,
+    "result": [
+     {
+      "id": "c1",
+      "type": "polygonlabels",
+      "from_name": "label",
+      "to_name": "image",
+      "original_width": 200,
+      "original_height": 100,
+      "value": {
+       "points": [
+        [
+         10.0,
+         20.0
+        ],
+        [
+         20.0,
+         20.0
+        ],
+        [
+         20.0,
+         60.0
+        ],
+        [
+         10.0,
+         60.0
+        ]
+       ],
+       "polygonlabels": [
+        "Character"
+       ]
+      }
+     },
+     {
+      "id": "c2",
+      "type": "polygonlabels",
+      "from_name": "label",
+      "to_name": "image",
+      "original_width": 200,
+      "original_height": 100,
+      "value": {
+       "points": [
+        [
+         30.0,
+         20.0
+        ],
+        [
+         35.0,
+         20.0
+        ],
+        [
+         35.0,
+         30.0
+        ],
+        [
+         30.0,
+         30.0
+        ]
+       ],
+       "polygonlabels": [
+        "Character"
+       ]
+      }
+     },
+     {
+      "id": "e1",
+      "type": "polygonlabels",
+      "from_name": "label",
+      "to_name": "image",
+      "original_width": 200,
+      "original_height": 100,
+      "value": {
+       "points": [
+        [
+         20.0,
+         40.0
+        ],
+        [
+         27.5,
+         40.0
+        ],
+        [
+         27.5,
+         45.0
+        ],
+        [
+         20.0,
+         45.0
+        ]
+       ],
+       "polygonlabels": [
+        "Equipment"
+       ]
+      }
+     },
+     {
+      "id": "h1",
+      "type": "polygonlabels",
+      "from_name": "label",
+      "to_name": "image",
+      "original_width": 200,
+      "original_height": 100,
+      "value": {
+       "points": [
+        [
+         10.0,
+         10.0
+        ],
+        [
+         20.0,
+         10.0
+        ],
+        [
+         20.0,
+         14.0
+        ],
+        [
+         10.0,
+         14.0
+        ]
+       ],
+       "polygonlabels": [
+        "HealthBar"
+       ]
+      }
+     },
+     {
+      "id": "p1",
+      "type": "polygonlabels",
+      "from_name": "label",
+      "to_name": "image",
+      "original_width": 200,
+      "original_height": 100,
+      "value": {
+       "points": [
+        [
+         50.0,
+         5.0
+        ],
+        [
+         95.0,
+         5.0
+        ],
+        [
+         95.0,
+         40.0
+        ],
+        [
+         50.0,
+         40.0
+        ]
+       ],
+       "polygonlabels": [
+        "UIPanel"
+       ]
+      }
+     },
+     {
+      "id": "t1",
+      "type": "polygonlabels",
+      "from_name": "label",
+      "to_name": "image",
+      "original_width": 200,
+      "original_height": 100,
+      "value": {
+       "points": [
+        [
+         55.0,
+         10.0
+        ],
+        [
+         75.0,
+         10.0
+        ],
+        [
+         75.0,
+         20.0
+        ],
+        [
+         55.0,
+         20.0
+        ]
+       ],
+       "polygonlabels": [
+        "TextLabel"
+       ]
+      }
+     },
+     {
+      "type": "relation",
+      "from_id": "c2",
+      "to_id": "c1",
+      "direction": "right",
+      "labels": [
+       "sameInstance"
+      ]
+     },
+     {
+      "type": "relation",
+      "from_id": "c1",
+      "to_id": "h1",
+      "direction": "left",
+      "labels": [
+       "represents"
+      ]
+     },
+     {
+      "type": "relation",
+      "from_id": "e1",
+      "to_id": "c1",
+      "direction": "right",
+      "labels": [
+       "attachedTo"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+]
