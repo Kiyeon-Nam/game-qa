@@ -4,9 +4,9 @@
 - 영역: polygonlabels만 사용. 좌표는 이미지 크기 대비 %를 픽셀로 변환
 - 관계
   - represents, attachedTo: relations로 변환
-  - sameInstance: 이은 영역을 한 인스턴스로 (가이드 2-2 떨어진 조각, 같은 클래스만)
+  - sameInstance: 이은 영역을 한 인스턴스로 (가이드 2-2 떨어진 조각, 같은 클래스끼리)
+  - 종류: 가이드 6장 표에서 주체·대상 클래스로 하나로 정해짐. 관계 이름을 고르지 않으면 표로 정하고, 고르면 표와 맞는지 검사
   - 방향: right는 from → to, left는 to → from, bi는 에러
-  - 주체·대상 클래스는 가이드 6장 표대로 검사
 - 이미지 이름: 업로드 파일은 Label Studio가 붙인 접두어(8자-) 제거, 그 외는 경로의 파일 이름
 - 주석이 없는 작업은 제외, 주석이 여러 개인 작업은 에러
 
@@ -59,11 +59,15 @@ def file_name(task):
     return PurePosixPath(local[0] if local else urlparse(image).path).name
 
 
-def link(r):
-    """관계 하나를 (관계 이름, 주체 영역 id, 대상 영역 id)로"""
-    if len(r.get("labels") or []) != 1:
-        raise ValueError(f"관계 이름이 하나가 아님: {r.get('labels')} {r['from_id']} {r['to_id']}")
-    return (r["labels"][0], *edge(r))
+def link(r, label):
+    """관계 하나를 (관계 종류, 주체 영역 id, 대상 영역 id)로. label: 영역 id → 클래스"""
+    a, b = edge(r)
+    kinds = [k for k, (subjects, objects) in RELATIONS.items() if label[a] in subjects and label[b] in objects]
+    kinds += [SAME] if label[a] == label[b] else []
+    named = r.get("labels") or []
+    if len(kinds) != 1 or len(named) > 1 or (named and named[0] not in kinds):
+        raise ValueError(f"가이드 6장에 없는 관계: {label[a]} -{named}-> {label[b]}")
+    return kinds[0], a, b
 
 
 def edge(r):
@@ -71,7 +75,7 @@ def edge(r):
         return r["from_id"], r["to_id"]
     if r["direction"] == "left":
         return r["to_id"], r["from_id"]
-    raise ValueError(f"방향이 없는 관계: {r['labels']} {r['from_id']} {r['to_id']}")
+    raise ValueError(f"방향이 없는 관계: {r['from_id']} {r['to_id']}")
 
 
 def instances(regions, same):
@@ -103,7 +107,8 @@ def convert(tasks):
         w, h = first["original_width"], first["original_height"]
         images.append({"id": image_id, "file_name": name, "width": w, "height": h})
 
-        links = [link(r) for r in result if r["type"] == "relation"]
+        label = {k: r["value"]["polygonlabels"][0] for k, r in regions.items()}
+        links = [link(r, label) for r in result if r["type"] == "relation"]
         group = instances(regions, [(a, b) for kind, a, b in links if kind == SAME])
         members = {}
         for k, root in group.items():
@@ -121,15 +126,9 @@ def convert(tasks):
                 "segmentation": polys, "bbox": [float(v) for v in cocomask.toBbox(rle)],
                 "area": float(cocomask.area(rle)), "iscrowd": 0,
             })
-        label = {ann_id[root]: parts[0]["value"]["polygonlabels"][0] for root, parts in members.items()}
         for kind, a, b in links:
-            if kind in RELATIONS:
-                subject, obj = ann_id[group[a]], ann_id[group[b]]
-                if label[subject] not in RELATIONS[kind][0] or label[obj] not in RELATIONS[kind][1]:
-                    raise ValueError(f"{name}: 가이드 6장에 없는 관계 {label[subject]} -{kind}-> {label[obj]}")
-                relations.append({"type": kind, "subject": subject, "object": obj})
-            elif kind != SAME:
-                raise ValueError(f"{name}: 알 수 없는 관계 {kind}")
+            if kind != SAME:
+                relations.append({"type": kind, "subject": ann_id[group[a]], "object": ann_id[group[b]]})
     categories = [{"id": i, "name": n} for n, i in sorted(ids.items(), key=lambda x: x[1])]
     return {"images": images, "annotations": annotations, "categories": categories, "relations": relations}
 
