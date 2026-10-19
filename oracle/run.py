@@ -5,7 +5,8 @@
   - results/: 추론 결과
   - reports/: 판정 리포트
   - images/: 시각화 이미지
-- 파라미터 파일: 추론(inferlib/python_ref)과 규칙이 읽는 값을 함께 담은 JSON
+- 파라미터 파일: 추론(inferlib/python_ref)과 규칙이 읽는 값을 함께 담은 JSON. 빠진 값은 실행 전에 에러
+- 입력 파일 이름(확장자 제외)은 겹치지 않아야 함 (출력 파일 이름)
 - 세그멘테이션 실행에 학습 환경 필요 (training/README.md)
 
 실행: python run.py <모델.onnx> <파라미터.json> <출력 폴더> <영상·이미지 ...> [--step 1] [--score 0.25]
@@ -23,6 +24,7 @@ import frames  # noqa: E402
 import segment  # noqa: E402
 from infer import PARAMS  # noqa: E402
 from report import to_report  # noqa: E402
+from validate import required_params  # noqa: E402
 from visualize import render  # noqa: E402
 
 
@@ -32,12 +34,15 @@ def write(path, data):
 
 def run(model_path, params, out_dir, paths, step=1, score=0.25):
     """프레임별 판정 리포트 목록 반환"""
-    missing = [k for k in PARAMS if k not in params]
+    missing = (set(PARAMS) | required_params()) - params.keys()
     if missing:
-        raise ValueError(f"파라미터 누락: {', '.join(missing)}")
+        raise ValueError(f"파라미터 누락: {', '.join(sorted(missing))}")
+    stems = [Path(p).stem for p in paths]
+    if len(set(stems)) != len(stems):
+        raise ValueError(f"입력 파일 이름 중복: {stems}")
+    model = segment.load(model_path)
     out = Path(out_dir)
     manifest = frames.extract(out / "frames", paths, step)
-    model = segment.load(model_path)
     for name in ("results", "reports", "images"):
         (out / name).mkdir(parents=True, exist_ok=True)
     reports = []
@@ -46,7 +51,8 @@ def run(model_path, params, out_dir, paths, step=1, score=0.25):
         report = to_report(result, params)
         write(out / "results" / f"{image.stem}.json", result)
         write(out / "reports" / f"{image.stem}.json", report)
-        render(Image.open(image), result, report).save(out / "images" / f"{image.stem}.png")
+        with Image.open(image) as frame:
+            render(frame, result, report).save(out / "images" / f"{image.stem}.png")
         reports.append(report)
     return reports
 
