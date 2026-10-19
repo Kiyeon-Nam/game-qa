@@ -14,7 +14,7 @@ EXPORT = json.loads((Path(__file__).parent / "label_studio_export.json").read_te
 
 
 def tasks():
-    """Label Studio 1.23.2에서 내보낸 작업 (필요한 필드만)"""
+    """Label Studio 1.23.2에서 API로 만든 주석의 내보내기 (필요한 필드만)"""
     return copy.deepcopy(EXPORT)
 
 
@@ -38,9 +38,18 @@ def test_bidirectional_relation_rejected():
         convert(ts)
 
 
-def test_relation_without_name_rejected():
+def test_relation_without_name_decided_by_classes():
+    """관계 이름을 고르지 않아도 가이드 6장 표로 종류가 정해짐"""
     ts = tasks()
-    next(r for r in result(ts) if r["type"] == "relation")["labels"] = []
+    for r in result(ts):
+        if r["type"] == "relation":
+            del r["labels"]
+    assert convert(ts) == convert(tasks())
+
+
+def test_name_contradicting_classes_rejected():
+    ts = tasks()
+    next(r for r in result(ts) if r.get("labels") == ["represents"])["labels"] = ["attachedTo"]
     with pytest.raises(ValueError):
         convert(ts)
 
@@ -92,3 +101,12 @@ def test_reversed_relation_rejected():
     attached["direction"] = "left"
     with pytest.raises(ValueError):
         convert(ts)
+
+
+def test_ui_export_converted():
+    """화면에서 직접 그린 주석의 내보내기. 겹친 영역(안쪽 먼저), 이름을 고르지 않은 관계"""
+    ui = json.loads((Path(__file__).parent / "label_studio_export_ui.json").read_text(encoding="utf-8"))
+    out = convert(ui)
+    assert out["images"] == [{"id": 0, "file_name": "images.jpg", "width": 596, "height": 335}]
+    assert [a["category_id"] for a in out["annotations"]] == [9, 10, 7, 0, 10, 9]
+    assert out["relations"] == [{"type": "represents", "subject": 3, "object": 4}]
