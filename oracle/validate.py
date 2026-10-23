@@ -16,7 +16,7 @@ from pyshacl import validate as shacl_validate
 from rdflib import RDF, RDFS, BNode, Graph, Literal, Namespace
 from rdflib.namespace import SH, XSD
 
-from graph import GQ, instance_id, ontology, to_graph
+from game_qa.oracle.graph import GQ, instance_id, ontology, to_graph
 
 GQR = Namespace("https://github.com/Kiyeon-Nam/game-qa/rules#")
 RULES = Path(__file__).resolve().parents[1] / "ontology" / "rules.ttl"

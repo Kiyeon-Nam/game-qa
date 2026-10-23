@@ -3,7 +3,7 @@ import json
 import pytest
 from PIL import Image
 
-import run
+from game_qa.oracle import run
 from test_report import from_labels, load
 from test_validate import PARAMS
 

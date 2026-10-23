@@ -1,13 +1,11 @@
 import copy
 import json
-import sys
 from pathlib import Path
 
 import jsonschema
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from from_label_studio import config, convert  # noqa: E402
+from game_qa.labeling_tool.from_label_studio import config, convert
 
 ROOT = Path(__file__).resolve().parents[2]
 EXPORT = json.loads((Path(__file__).parent / "label_studio_export.json").read_text(encoding="utf-8"))
@@ -85,8 +83,7 @@ def test_config_lists_all_labeling_classes():
 
 
 def test_converted_label_feeds_training_converter(tmp_path):
-    sys.path.insert(0, str(ROOT / "training"))
-    from convert import convert as to_yolo
+    from game_qa.training.convert import convert as to_yolo
 
     (tmp_path / "corgi_001.png").write_bytes(b"")
     to_yolo(tmp_path, tmp_path / "ds", [convert(tasks())])

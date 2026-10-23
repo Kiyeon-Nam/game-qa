@@ -4,10 +4,10 @@ import numpy as np
 import pytest
 from PIL import Image
 
-from report import to_report
+from game_qa.oracle.report import to_report
 from test_report import load, from_labels
 from test_validate import PARAMS
-from visualize import VIOLATION, class_colors, decode, main, render
+from game_qa.oracle.visualize import VIOLATION, class_colors, decode, main, render
 
 
 def displaced_bar_frame():

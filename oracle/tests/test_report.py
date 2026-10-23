@@ -1,18 +1,15 @@
 import json
-import sys
 from pathlib import Path
 
 import jsonschema
 import numpy as np
 
-from report import to_report
-from validate import missing_measurements
+from game_qa.inferlib.infer import from_labels, infer_frame
+from game_qa.oracle.report import to_report
+from game_qa.oracle.validate import missing_measurements
 from test_validate import PARAMS
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "inferlib" / "python_ref"))
-
-from infer import from_labels, infer_frame  # noqa: E402
 
 
 def load(name):

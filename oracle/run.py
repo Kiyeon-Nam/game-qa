@@ -9,23 +9,20 @@
 - 입력 파일 이름(확장자 제외)은 겹치지 않아야 함 (출력 파일 이름)
 - 세그멘테이션 실행에 학습 환경 필요 (training/README.md)
 
-실행: python run.py <모델.onnx> <파라미터.json> <출력 폴더> <영상·이미지 ...> [--step 1] [--score 0.25]
+실행: python -m game_qa.oracle.run <모델.onnx> <파라미터.json> <출력 폴더> <영상·이미지 ...> [--step 1] [--score 0.25]
 """
 
 import argparse
 import json
-import sys
 from pathlib import Path
 
 from PIL import Image
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "inferlib" / "python_ref"))
-import frames  # noqa: E402
-import segment  # noqa: E402
-from infer import PARAMS  # noqa: E402
-from report import to_report  # noqa: E402
-from validate import required_params  # noqa: E402
-from visualize import render  # noqa: E402
+from game_qa.inferlib import segment
+from game_qa.inferlib.infer import PARAMS
+from game_qa.oracle import frames
+from game_qa.oracle.report import to_report
+from game_qa.oracle.validate import required_params
+from game_qa.oracle.visualize import render
 
 
 def write(path, data):

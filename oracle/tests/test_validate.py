@@ -1,6 +1,6 @@
 import pytest
 
-from validate import missing_measurements, violations
+from game_qa.oracle.validate import missing_measurements, violations
 
 # 초안 임계값 (ontology/1_rules/README.md). foreground_cover_min은 미정이라 임의 값
 PARAMS = {
