@@ -6,13 +6,13 @@
 - `report.py`: 판정 리포트 생성 (판정 파이프라인 ⑥)
 - `visualize.py`: 판정 결과 시각화. 원본 이미지에 클래스별 마스크, 위반 대상 상자·규칙 ID 표시
 - `run.py`: 영상·이미지 → 프레임 추출 → 세그멘테이션 → 리포트 → 시각화를 한 번에 실행
-- 설치: `pip install -r oracle/requirements.txt`
-- 프레임 추출: `python oracle/frames.py <출력 폴더> <영상·이미지 ...> [--step 1]`
+- 설치: 레포 루트에서 `pip install -e .`, `pip install -r oracle/requirements.txt`
+- 프레임 추출: `python -m game_qa.oracle.frames <출력 폴더> <영상·이미지 ...> [--step 1]`
   - 출력: 프레임 이미지, frames.json (file, source, index)
-- 실행: `python oracle/report.py <파라미터.json> <출력 폴더> <추론 결과.json ...>`
+- 실행: `python -m game_qa.oracle.report <파라미터.json> <출력 폴더> <추론 결과.json ...>`
   - 파라미터 파일: `ontology/1_rules/README.md` 임계값 목록의 값을 담은 JSON. 규칙이 읽는 파라미터가 빠지면 에러
-- 시각화: `python oracle/visualize.py <원본 이미지> <추론 결과.json> <리포트.json> <출력 이미지>`
-- 전체 실행: `python oracle/run.py <모델.onnx> <파라미터.json> <출력 폴더> <영상·이미지 ...> [--step 1] [--score 0.25]`
+- 시각화: `python -m game_qa.oracle.visualize <원본 이미지> <추론 결과.json> <리포트.json> <출력 이미지>`
+- 전체 실행: `python -m game_qa.oracle.run <모델.onnx> <파라미터.json> <출력 폴더> <영상·이미지 ...> [--step 1] [--score 0.25]`
   - 파라미터 파일: 추론(`inferlib/README.md`)과 규칙이 읽는 값을 함께 담은 JSON
   - 추가 설치: `training/README.md`의 학습 환경, `inferlib/python_ref/requirements.txt`
   - 출력: frames/, results/(추론 결과), reports/(리포트), images/(시각화)
