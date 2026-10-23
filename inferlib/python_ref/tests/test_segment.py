@@ -7,9 +7,10 @@ import jsonschema
 import numpy as np
 import pytest
 
-from segment import instances
+from segment import instances, segment
 
 ROOT = Path(__file__).resolve().parents[3]
+PARAMS = {"search_radius": 2.0, "fg_search_radius": 2.0, "support_gap_max": 0.1}
 
 
 class Tensor:
@@ -51,6 +52,23 @@ def test_result_converted_to_instances():
 
 def test_no_detection_gives_no_instances():
     assert instances(fake_result(None, [], [])) == []
+
+
+class FakeModel:
+    def predict(self, image, **kwargs):
+        masks = np.zeros((1, 8, 8), np.float32)
+        masks[0, 2:5, 2:5] = 0.9
+        return [SimpleNamespace(orig_shape=(8, 8), **vars(fake_result(masks, [0.0], [0.8])))]
+
+
+def test_frame_defaults_to_image_name():
+    result = segment(FakeModel(), Path("shots/a.png"), PARAMS)
+    assert result["frame"] == {"source": "a.png", "index": 0, "width": 8, "height": 8}
+
+
+def test_frame_keeps_given_source_index():
+    result = segment(FakeModel(), Path("frames/play_000003.png"), PARAMS, source="play.avi", index=3)
+    assert (result["frame"]["source"], result["frame"]["index"]) == ("play.avi", 3)
 
 
 @pytest.mark.parametrize("config", ["yolo11n-seg.yaml", "yolo26n-seg.yaml"])
