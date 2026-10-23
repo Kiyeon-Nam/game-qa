@@ -2,8 +2,7 @@
 - 프레임 추출, 그래프 변환, 판정 리포트, 시각화, 판정 파이프라인 전체 실행
 - `frames.py`: 플레이 녹화에서 판정 대상 프레임 추출 (판정 파이프라인 입력·①). 기본은 모든 프레임, 선별 기준은 미정
 - `graph.py`: 추론 결과를 RDF 그래프로 변환 (판정 파이프라인 ④)
-- `rules.ttl`: 규칙 SHACL 형상 (SHACL-SPARQL). 파라미터는 검증 시 데이터로 추가
-- `validate.py`: pySHACL 검증 (판정 파이프라인 ⑤). 저장소는 Oxigraph
+- `validate.py`: 규칙 SHACL 형상(`ontology/rules.ttl`)으로 pySHACL 검증 (판정 파이프라인 ⑤). 저장소는 Oxigraph
 - `report.py`: 판정 리포트 생성 (판정 파이프라인 ⑥)
 - `visualize.py`: 판정 결과 시각화. 원본 이미지에 클래스별 마스크, 위반 대상 상자·규칙 ID 표시
 - `run.py`: 영상·이미지 → 프레임 추출 → 세그멘테이션 → 리포트 → 시각화를 한 번에 실행

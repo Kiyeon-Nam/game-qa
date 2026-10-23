@@ -1,4 +1,4 @@
-"""판정 파이프라인 ⑤: 그래프를 규칙 SHACL 형상(rules.ttl)으로 검증
+"""판정 파이프라인 ⑤: 그래프를 규칙 SHACL 형상(ontology/rules.ttl)으로 검증
 
 - 검증 엔진: pySHACL. 그래프 저장소는 Oxigraph(oxrdflib)로 두어 SPARQL을 Oxigraph가 실행
   (rdflib 기본 저장소는 조인이 많은 규칙에서 프레임 하나에 수십 초 이상)
@@ -19,7 +19,7 @@ from rdflib.namespace import SH, XSD
 from graph import GQ, instance_id, ontology, to_graph
 
 GQR = Namespace("https://github.com/Kiyeon-Nam/game-qa/rules#")
-RULES = Path(__file__).resolve().parent / "rules.ttl"
+RULES = Path(__file__).resolve().parents[1] / "ontology" / "rules.ttl"
 
 
 @cache
