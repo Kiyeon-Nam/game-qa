@@ -4,8 +4,7 @@ import cv2
 import numpy as np
 import pytest
 
-from frames import extract
-from segment import inputs
+from frames import extract, load
 
 
 def write_video(path, values):
@@ -27,11 +26,7 @@ def test_video_and_screenshot_extracted_with_source_index(tmp_path):
         {"file": "shot.png", "source": "shot.png", "index": 0},
     ]
     assert all((tmp_path / "out" / e["file"]).exists() for e in entries)
-    assert inputs([manifest])[1] == (tmp_path / "out" / "play_000003.png", "play.avi", 3)
-
-
-def test_image_input_uses_file_name(tmp_path):
-    assert inputs([tmp_path / "a.png"]) == [(tmp_path / "a.png", "a.png", 0)]
+    assert load(manifest)[1] == (tmp_path / "out" / "play_000003.png", "play.avi", 3)
 
 
 def test_unreadable_video_rejected(tmp_path):

@@ -46,7 +46,7 @@ def run(model_path, params, out_dir, paths, step=1, score=0.25):
     for name in ("results", "reports", "images"):
         (out / name).mkdir(parents=True, exist_ok=True)
     reports = []
-    for image, source, index in segment.inputs([manifest]):
+    for image, source, index in frames.load(manifest):
         result = segment.segment(model, image, params, score, source, index)
         report = to_report(result, params)
         write(out / "results" / f"{image.stem}.json", result)

@@ -4,4 +4,5 @@ oxrdflib
 owlrl
 pycocotools
 pillow
+opencv-python-headless
 pytest
