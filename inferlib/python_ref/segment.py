@@ -3,9 +3,9 @@
 - 모델 실행: Ultralytics (내부 ONNX Runtime). YOLO11·YOLO26 출력 차이도 Ultralytics가 처리
 - 모델 클래스 이름은 라벨링 클래스 이름이어야 함 (학습 data.yaml의 names)
 - 마스크는 원본 이미지 크기로 복원 후 infer_frame에 전달
-- 프레임: frames.json(frames.py 출력)이면 그 source·index, 이미지면 파일 이름과 0
+- 프레임: source·index를 받지 않으면 이미지 파일 이름과 0
 
-실행: python segment.py <모델.onnx> <파라미터.json> <출력 폴더> <이미지 또는 frames.json ...> [--score 0.25]
+실행: python segment.py <모델.onnx> <파라미터.json> <출력 폴더> <이미지 ...> [--score 0.25]
   --score: 점수 임계값. 기본값은 Ultralytics 기본값
 """
 
@@ -41,18 +41,6 @@ def instances(result):
     ]
 
 
-def inputs(paths):
-    """이미지·frames.json 경로를 (이미지 경로, source, index) 목록으로"""
-    out = []
-    for path in map(Path, paths):
-        if path.suffix.lower() == ".json":
-            entries = json.loads(path.read_text(encoding="utf-8"))
-            out += [(path.parent / e["file"], e["source"], e["index"]) for e in entries]
-        else:
-            out.append((path, path.name, 0))
-    return out
-
-
 def segment(model, image_path, params, score=0.25, source=None, index=0):
     (result,) = model.predict(str(image_path), conf=score, retina_masks=True, verbose=False)
     height, width = result.orig_shape
@@ -75,8 +63,8 @@ def main():
     model = load(args.model)
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    for path, source, index in inputs(args.images):
-        result = segment(model, path, params, args.score, source, index)
+    for path in map(Path, args.images):
+        result = segment(model, path, params, args.score)
         (out / f"{path.stem}.json").write_text(json.dumps(result, ensure_ascii=False, allow_nan=False), encoding="utf-8")
 
 

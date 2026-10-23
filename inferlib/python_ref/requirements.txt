@@ -1,6 +1,5 @@
 numpy
 scipy
 pycocotools
-opencv-python-headless
 pytest
 jsonschema

@@ -53,6 +53,12 @@ def extract(out_dir, paths, step=1):
     return manifest
 
 
+def load(manifest):
+    """frames.json을 (이미지 경로, source, index) 목록으로"""
+    manifest = Path(manifest)
+    return [(manifest.parent / e["file"], e["source"], e["index"]) for e in json.loads(manifest.read_text(encoding="utf-8"))]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("out_dir")
