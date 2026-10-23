@@ -1,11 +1,11 @@
-"""md(2_concepts.md, 3_relations.md)와 온톨로지 파일(game_ui.ttl)의 정의 일치 검사"""
+"""md(1_rules/, 2_concepts.md, 3_relations.md)와 온톨로지 파일(game_ui.ttl, rules.ttl)의 정의 일치 검사"""
 
 import re
 from pathlib import Path
 
 import pytest
 import rdflib
-from rdflib import OWL, RDF, RDFS, Namespace
+from rdflib import OWL, RDF, RDFS, SH, Namespace
 
 ROOT = Path(__file__).resolve().parents[1]
 GQ = Namespace("https://github.com/Kiyeon-Nam/game-qa/ontology#")
@@ -97,3 +97,15 @@ def test_measurements(graph):
     md_sigs = {signature(r[0]) for r in rows(md("3_relations.md"), 4)[1:]}
     ttl_sigs = {signature(comment(graph, local(s))) for s in graph.subjects(RDFS.subClassOf, GQ.Measurement)}
     assert md_sigs == ttl_sigs
+
+
+def test_rules():
+    """규칙 목록의 규칙마다 SHACL 형상이 있고, 형상마다 결과 메시지가 자기 규칙 ID로 시작"""
+    rules = rdflib.Graph().parse(ROOT / "rules.ttl")
+    table = md("1_rules/README.md").split("## 규칙 목록")[1].split("\n## ")[0]
+    md_ids = {re.match(r"\[(R-\d{3})\]", r[0]).group(1) for r in rows(table, 3)[1:]}
+    shapes = {local(s): s for s in rules.subjects(RDF.type, SH.NodeShape)}
+    assert md_ids == {re.match(r"R-\d{3}", name).group() for name in shapes}
+    for name, shape in shapes.items():
+        message = str(rules.value(rules.value(shape, SH.sparql), SH.message))
+        assert message.split()[0] == name[:5], name
