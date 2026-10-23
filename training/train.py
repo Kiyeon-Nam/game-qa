@@ -3,7 +3,7 @@
 - 설정 파일: Ultralytics 학습 인자 (model 필수). 모델 비교는 설정 파일만 바꿔 같은 data.yaml로 학습
 - 출력: <출력 폴더>/<설정 파일 이름>/weights/best.pt, best.onnx
 
-실행: python train.py <설정.yaml> <data.yaml> <출력 폴더> [인자=값 ...]
+실행: python -m game_qa.training.train <설정.yaml> <data.yaml> <출력 폴더> [인자=값 ...]
 """
 
 import sys

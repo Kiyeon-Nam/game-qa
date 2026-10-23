@@ -5,7 +5,7 @@
 - 마스크는 원본 이미지 크기로 복원 후 infer_frame에 전달
 - 프레임: source·index를 받지 않으면 이미지 파일 이름과 0
 
-실행: python segment.py <모델.onnx> <파라미터.json> <출력 폴더> <이미지 ...> [--score 0.25]
+실행: python -m game_qa.inferlib.segment <모델.onnx> <파라미터.json> <출력 폴더> <이미지 ...> [--score 0.25]
   --score: 점수 임계값. 기본값은 Ultralytics 기본값
 """
 
@@ -14,8 +14,8 @@ import json
 import sys
 from pathlib import Path
 
-from concepts import CLASS_CONCEPTS
-from infer import PARAMS, infer_frame
+from game_qa.inferlib.concepts import CLASS_CONCEPTS
+from game_qa.inferlib.infer import PARAMS, infer_frame
 
 
 def load(model_path):

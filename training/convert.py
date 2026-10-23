@@ -5,7 +5,7 @@
 - relations는 학습에 쓰지 않음
 - 학습·검증 분할: 이미지 파일 이름 정렬 후 seed로 섞음. 같은 라벨·seed면 같은 분할
 
-실행: python convert.py <이미지 폴더> <출력 폴더> <라벨.json ...> [--val 0.2] [--seed 0]
+실행: python -m game_qa.training.convert <이미지 폴더> <출력 폴더> <라벨.json ...> [--val 0.2] [--seed 0]
 """
 
 import argparse

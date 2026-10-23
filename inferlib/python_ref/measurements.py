@@ -5,7 +5,7 @@ import math
 import numpy as np
 from scipy import ndimage
 
-from masks import bbox
+from game_qa.inferlib.masks import bbox
 
 
 def _height(mask):

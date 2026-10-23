@@ -5,8 +5,8 @@ import jsonschema
 import numpy as np
 import pytest
 
-from infer import from_labels, infer_frame
-from masks import decode
+from game_qa.inferlib.infer import from_labels, infer_frame
+from game_qa.inferlib.masks import decode
 
 SCHEMAS = Path(__file__).resolve().parents[3] / "schemas"
 # fg_search_radius는 임계값 목록에서 미정. 임의 값

@@ -4,7 +4,7 @@ from pathlib import Path
 from rdflib import OWL, RDF, RDFS, Literal
 from rdflib.namespace import XSD
 
-from graph import GQ, INST, instance_id, measurement_class, ontology, to_graph
+from game_qa.oracle.graph import GQ, INST, instance_id, measurement_class, ontology, to_graph
 
 SCHEMAS = Path(__file__).resolve().parents[2] / "schemas"
 
