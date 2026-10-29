@@ -10,9 +10,10 @@ requires-python = ">=3.10"
 # 모듈 폴더를 game_qa 이름공간의 패키지로 연결. 의존성은 모듈별 requirements.txt
 # 온톨로지·스키마 파일을 레포 경로로 읽으므로 편집 모드 설치(pip install -e .)만 지원
 [tool.setuptools]
-packages = ["game_qa.inferlib", "game_qa.oracle", "game_qa.training", "game_qa.labeling_tool"]
+packages = ["game_qa.ontology", "game_qa.inferlib", "game_qa.oracle", "game_qa.training", "game_qa.labeling_tool"]
 
 [tool.setuptools.package-dir]
+"game_qa.ontology" = "ontology"
 "game_qa.inferlib" = "inferlib/python_ref"
 "game_qa.oracle" = "oracle"
 "game_qa.training" = "training"
