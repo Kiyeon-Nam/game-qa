@@ -4,10 +4,10 @@
 - `train.py`: 설정 파일로 학습 후 ONNX 내보내기
 - `configs/`: 모델별 학습 설정. 기본 `yolo11n-seg`, 비교용 `yolo26n-seg`
   - 모델 비교는 같은 data.yaml로 설정 파일만 바꿔 학습
-- 설치: torch를 실행 환경(CPU·GPU)에 맞게 설치한 뒤 `pip install -r training/requirements.txt`
+- 설치: torch를 실행 환경(CPU·GPU)에 맞게 설치한 뒤 레포 루트에서 `pip install -e .`, `pip install -r training/requirements.txt`
 - 실행
-  - 변환: `python training/convert.py <이미지 폴더> <출력 폴더> <라벨.json ...> [--val 0.2] [--seed 0]`
-  - 학습: `python training/train.py <설정.yaml> <data.yaml> <출력 폴더> [인자=값 ...]`
+  - 변환: `python -m game_qa.training.convert <이미지 폴더> <출력 폴더> <라벨.json ...> [--val 0.2] [--seed 0]`
+  - 학습: `python -m game_qa.training.train <설정.yaml> <data.yaml> <출력 폴더> [인자=값 ...]`
   - 출력: `<출력 폴더>/<설정 이름>/weights/best.pt`, `best.onnx` (레포에 커밋하지 않음)
 - 테스트: `pytest training`
   - 학습 테스트는 ultralytics가 설치된 경우만 실행 (사전학습 가중치 내려받음)

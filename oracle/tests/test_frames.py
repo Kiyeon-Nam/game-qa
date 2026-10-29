@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import pytest
 
-from frames import extract, load
+from game_qa.oracle.frames import extract, load
 
 
 def write_video(path, values):

@@ -3,7 +3,7 @@
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 
-from masks import neighbors
+from game_qa.inferlib.masks import neighbors
 
 
 def represents(distances, search_radius):

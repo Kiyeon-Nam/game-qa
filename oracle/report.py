@@ -1,13 +1,13 @@
 """판정 파이프라인 ⑥: 추론 결과를 검증해 판정 리포트(schemas/report.schema.json) 생성
 
-실행: python report.py <파라미터.json> <출력 폴더> <추론 결과.json ...>
+실행: python -m game_qa.oracle.report <파라미터.json> <출력 폴더> <추론 결과.json ...>
 """
 
 import json
 import sys
 from pathlib import Path
 
-from validate import violations
+from game_qa.oracle.validate import violations
 
 
 def to_report(result, params):

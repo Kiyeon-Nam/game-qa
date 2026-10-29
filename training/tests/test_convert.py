@@ -6,7 +6,7 @@ import pytest
 import yaml
 from pycocotools import mask as cocomask
 
-from convert import convert, merge, polygons, split
+from game_qa.training.convert import convert, merge, polygons, split
 
 ROOT = Path(__file__).resolve().parents[2]
 

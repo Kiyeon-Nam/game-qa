@@ -1,5 +1,4 @@
 import json
-import sys
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -7,10 +6,16 @@ import jsonschema
 import numpy as np
 import pytest
 
-from segment import instances, segment
+from game_qa.inferlib.segment import instances, segment
 
 ROOT = Path(__file__).resolve().parents[3]
 PARAMS = {"search_radius": 2.0, "fg_search_radius": 2.0, "support_gap_max": 0.1}
+# 판정 리포트까지 확인할 때 쓰는 규칙 파라미터. 값은 ontology/1_rules/README.md 초안 (foreground_cover_min은 미정이라 임의 값)
+RULE_PARAMS = {
+    "attach_distance": 0.5, "midpoint_ratio": 0.8, "char_terrain_overlap_max": 0.15, "item_terrain_overlap_max": 0.3,
+    "equip_gap_max": 0.05, "hud_overlap_min": 0.02, "hud_contain_min": 0.95, "text_contain_min": 0.98,
+    "foreground_cover_min": 0.5,
+}
 
 
 class Tensor:
@@ -77,13 +82,10 @@ def test_image_to_report(tmp_path, config):
     pytest.importorskip("ultralytics")
     pytest.importorskip("pyshacl")
     import cv2
-
-    sys.path[:0] = [str(ROOT / "training"), str(ROOT / "oracle"), str(ROOT / "oracle" / "tests")]
-    from convert import convert
-    from train import train
-    from report import to_report
-    from segment import load, segment
-    from test_validate import PARAMS
+    from game_qa.inferlib.segment import load
+    from game_qa.oracle.report import to_report
+    from game_qa.training.convert import convert
+    from game_qa.training.train import train
 
     labels = json.loads((ROOT / "schemas" / "examples" / "label.json").read_text(encoding="utf-8"))
     images, annotations = [], []
@@ -103,9 +105,9 @@ def test_image_to_report(tmp_path, config):
     data = convert(tmp_path, tmp_path / "dataset", [labels])
     onnx = train(ROOT / "training" / "configs" / config, data, tmp_path / "runs",
                  epochs=1, imgsz=64, batch=2, device="cpu", workers=0, plots=False, verbose=False)
-    result = segment(load(onnx), tmp_path / "s0.png", {**PARAMS, "fg_search_radius": 2.0}, score=0.001)
+    result = segment(load(onnx), tmp_path / "s0.png", PARAMS, score=0.001)
 
     jsonschema.validate(result, json.loads((ROOT / "schemas" / "inference.schema.json").read_text(encoding="utf-8")))
     assert result["frame"] == {"source": "s0.png", "index": 0, "width": 64, "height": 64}
     assert result["instances"]
-    jsonschema.validate(to_report(result, PARAMS), json.loads((ROOT / "schemas" / "report.schema.json").read_text(encoding="utf-8")))
+    jsonschema.validate(to_report(result, {**PARAMS, **RULE_PARAMS}), json.loads((ROOT / "schemas" / "report.schema.json").read_text(encoding="utf-8")))

@@ -5,7 +5,7 @@
 - 스크린샷은 그대로 통과 (index 0)
 - 출력: 프레임 이미지와 frames.json (file, source, index). source·index는 추론 결과 frame과 같음
 
-실행: python frames.py <출력 폴더> <영상·이미지 ...> [--step 1]
+실행: python -m game_qa.oracle.frames <출력 폴더> <영상·이미지 ...> [--step 1]
 """
 
 import argparse

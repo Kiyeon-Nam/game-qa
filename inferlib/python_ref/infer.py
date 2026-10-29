@@ -1,6 +1,6 @@
 """인스턴스 마스크에서 추론 결과(schemas/inference.schema.json) 생성
 
-라벨 파일로 실행: python infer.py <라벨.json> <파라미터.json> <출력 폴더>
+라벨 파일로 실행: python -m game_qa.inferlib.infer <라벨.json> <파라미터.json> <출력 폴더>
 """
 
 import json
@@ -10,10 +10,9 @@ from pathlib import Path
 
 import numpy as np
 
-import measurements
-import relations
-from concepts import has
-from masks import decode, encode
+from game_qa.inferlib import measurements, relations
+from game_qa.inferlib.concepts import has
+from game_qa.inferlib.masks import decode, encode
 
 PARAMS = ("search_radius", "fg_search_radius", "support_gap_max")
 SCREEN = "ScreenBounds"

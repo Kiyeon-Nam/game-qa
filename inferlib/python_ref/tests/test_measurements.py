@@ -1,9 +1,8 @@
 import numpy as np
 import pytest
 
-import measurements as m
-import relations as r
-
+from game_qa.inferlib import measurements as m
+from game_qa.inferlib import relations as r
 H, W = 40, 40
 
 

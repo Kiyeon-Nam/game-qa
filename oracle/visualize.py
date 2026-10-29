@@ -3,7 +3,7 @@
 - 마스크: 라벨링 클래스별 색 (온톨로지 classId 순서로 팔레트 지정)
 - 위반 대상: 테두리 상자와 규칙 ID. ScreenBounds 대상은 표시하지 않음
 
-실행: python visualize.py <원본 이미지> <추론 결과.json> <리포트.json> <출력 이미지>
+실행: python -m game_qa.oracle.visualize <원본 이미지> <추론 결과.json> <리포트.json> <출력 이미지>
 """
 
 import json
@@ -15,7 +15,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from pycocotools import mask as cocomask
 
-from graph import GQ, ontology
+from game_qa.oracle.graph import GQ, ontology
 
 PALETTE = [
     (31, 119, 180), (255, 127, 14), (44, 160, 44), (148, 103, 189), (140, 86, 75), (227, 119, 194),

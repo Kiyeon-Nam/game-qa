@@ -5,10 +5,10 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from convert import convert
+from game_qa.training.convert import convert
 
 ultralytics = pytest.importorskip("ultralytics")
-from train import train  # noqa: E402
+from game_qa.training.train import train  # noqa: E402
 
 CONFIGS = Path(__file__).resolve().parents[1] / "configs"
 SIZE = 64

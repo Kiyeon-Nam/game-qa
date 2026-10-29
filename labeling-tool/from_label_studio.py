@@ -10,8 +10,8 @@
 - 이미지 이름: 업로드 파일은 Label Studio가 붙인 접두어(8자-) 제거, 그 외는 경로의 파일 이름
 - 주석이 없는 작업은 제외, 주석이 여러 개인 작업은 에러
 
-실행: python from_label_studio.py <내보낸 JSON> <출력 라벨.json>
-프로젝트 설정 출력: python from_label_studio.py --config
+실행: python -m game_qa.labeling_tool.from_label_studio <내보낸 JSON> <출력 라벨.json>
+프로젝트 설정 출력: python -m game_qa.labeling_tool.from_label_studio --config
 """
 
 import json
