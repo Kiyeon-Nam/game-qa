@@ -11,7 +11,7 @@ import re
 from rdflib import RDF, BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import XSD
 
-from game_qa.ontology.game_ui import GQ, ONTOLOGY
+from game_qa.ontology.game_ui import GQ
 
 INST = Namespace("urn:game-qa:instance:")
 SCREEN = "ScreenBounds"
@@ -55,6 +55,3 @@ def to_graph(result):
         g.add((n, GQ.value, Literal(m["value"], datatype=XSD.double)))
     return g
 
-
-def ontology():
-    return Graph().parse(ONTOLOGY)

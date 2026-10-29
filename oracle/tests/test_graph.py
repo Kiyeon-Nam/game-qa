@@ -4,7 +4,8 @@ from pathlib import Path
 from rdflib import OWL, RDF, RDFS, Literal
 from rdflib.namespace import XSD
 
-from game_qa.oracle.graph import GQ, INST, instance_id, measurement_class, ontology, to_graph
+from game_qa.ontology.game_ui import graph
+from game_qa.oracle.graph import GQ, INST, instance_id, measurement_class, to_graph
 
 SCHEMAS = Path(__file__).resolve().parents[2] / "schemas"
 
@@ -39,7 +40,7 @@ def test_instance_id_round_trip():
 
 def test_schema_vocabulary_exists_in_ontology():
     """추론 결과 형식의 클래스·관계·측정값 이름이 모두 온톨로지에 있음"""
-    onto = ontology()
+    onto = graph()
     schema = load("inference.schema.json")["properties"]
     for name in schema["relations"]["items"]["properties"]["type"]["enum"]:
         assert (GQ[name], RDF.type, OWL.ObjectProperty) in onto, name
