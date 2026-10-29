@@ -88,6 +88,20 @@ def test_relations(graph):
             assert cls in range_, (name, cls)
 
 
+def test_tagged_relations(graph):
+    """학습 데이터가 라벨링 태깅인 관계 행과 labelingSubject·labelingObject 선언이 같음"""
+    md_rows = {
+        (name, *(frozenset(side.split(" ∧ ")) for side in sig.split(" → ")))
+        for name, sig, _, data, _ in rows(md("3_relations.md"), 5)[1:]
+        if data == "라벨링 태깅"
+    }
+    ttl_rows = {
+        (local(r), *(frozenset(local(c) for c in graph.objects(r, p)) for p in (GQ.labelingSubject, GQ.labelingObject)))
+        for r in set(graph.subjects(GQ.labelingSubject, None))
+    }
+    assert md_rows == ttl_rows
+
+
 def signature(text):
     name, args = re.match(r"(\w+)\((.*)\)", text).groups()
     return name, len(args.split(","))

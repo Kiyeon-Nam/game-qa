@@ -1,5 +1,7 @@
 numpy
 scipy
+rdflib
+owlrl
 pycocotools
 pytest
 jsonschema

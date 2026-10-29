@@ -5,7 +5,7 @@
 - 관계
   - represents, attachedTo: relations로 변환
   - sameInstance: 이은 영역을 한 인스턴스로 (가이드 2-2 떨어진 조각, 같은 클래스끼리)
-  - 종류: 가이드 6장 표에서 주체·대상 클래스로 하나로 정해짐. 관계 이름을 고르지 않으면 표로 정하고, 고르면 표와 맞는지 검사
+  - 종류: 온톨로지 태깅 관계(가이드 6장)의 주체·대상 클래스로 하나로 정해짐. 관계 이름을 고르지 않으면 이것으로 정하고, 고르면 맞는지 검사
   - 방향: right는 from → to, left는 to → from, bi는 에러
 - 이미지 이름: 업로드 파일은 Label Studio가 붙인 접두어(8자-) 제거, 그 외는 경로의 파일 이름
 - 주석이 없는 작업은 제외, 주석이 여러 개인 작업은 에러
@@ -21,29 +21,17 @@ from pathlib import Path, PurePosixPath
 from urllib.parse import parse_qs, urlparse
 
 from pycocotools import mask as cocomask
-from rdflib import Graph, Namespace
 
-ONTOLOGY = Path(__file__).resolve().parents[1] / "ontology" / "game_ui.ttl"
-GQ = Namespace("https://github.com/Kiyeon-Nam/game-qa/ontology#")
-# 가이드 6장 관계 태깅 표: 관계 → (주체 클래스, 대상 클래스)
-RELATIONS = {
-    "represents": ({"HealthBar"}, {"Character", "LooseObject", "Equipment", "GroundedObject"}),
-    "attachedTo": ({"Equipment"}, {"Character"}),
-}
+from game_qa.ontology.game_ui import class_ids, tagged_relations
+
 SAME = "sameInstance"
 UPLOAD_PREFIX = re.compile(r"^[0-9a-f]{8}-")
-
-
-def class_ids():
-    """라벨링 클래스 이름 → classId"""
-    g = Graph().parse(ONTOLOGY)
-    return {str(c).removeprefix(str(GQ)): int(i) for c, i in g.subject_objects(GQ.classId)}
 
 
 def config():
     ids = class_ids()
     labels = "".join(f'<Label value="{n}"/>' for n in sorted(ids, key=ids.get))
-    relations = "".join(f'<Relation value="{r}"/>' for r in (*RELATIONS, SAME))
+    relations = "".join(f'<Relation value="{r}"/>' for r in (*tagged_relations(), SAME))
     return (
         '<View>\n  <Image name="image" value="$image"/>\n'
         f'  <PolygonLabels name="label" toName="image">{labels}</PolygonLabels>\n'
@@ -62,7 +50,7 @@ def file_name(task):
 def link(r, label):
     """관계 하나를 (관계 종류, 주체 영역 id, 대상 영역 id)로. label: 영역 id → 클래스"""
     a, b = edge(r)
-    kinds = [k for k, (subjects, objects) in RELATIONS.items() if label[a] in subjects and label[b] in objects]
+    kinds = [k for k, (subjects, objects) in tagged_relations().items() if label[a] in subjects and label[b] in objects]
     kinds += [SAME] if label[a] == label[b] else []
     named = r.get("labels") or []
     if len(kinds) != 1 or len(named) > 1 or (named and named[0] not in kinds):

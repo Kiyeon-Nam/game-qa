@@ -9,6 +9,8 @@
 
 gq:axis a owl:AnnotationProperty ; rdfs:comment "개념이 속한 축" .
 gq:classId a owl:AnnotationProperty ; rdfs:comment "라벨링 클래스 ID" .
+gq:labelingSubject a owl:AnnotationProperty ; rdfs:comment "라벨링에서 태깅하는 관계의 주체 개념 (값이 여럿이면 모두 만족)" .
+gq:labelingObject a owl:AnnotationProperty ; rdfs:comment "라벨링에서 태깅하는 관계의 대상 개념 (값이 여럿이면 모두 만족)" .
 
 # 개념
 
@@ -54,8 +56,10 @@ gq:TextLabel a owl:Class ; gq:classId 10 ; owl:equivalentClass [ owl:intersectio
 # 관계. 결정 근거는 3_relations.md
 
 gq:represents a owl:ObjectProperty ; rdfs:domain gq:Display ; rdfs:range gq:Entity ;
+    gq:labelingSubject gq:Display, gq:World ; gq:labelingObject gq:Entity ;
     rdfs:comment "표시가 그 개체의 정보를 나타냄" .
 gq:attachedTo a owl:ObjectProperty ; rdfs:domain gq:Equipment ; rdfs:range gq:Character ;
+    gq:labelingSubject gq:Equipment ; gq:labelingObject gq:Character ;
     rdfs:comment "장비를 든 캐릭터" .
 gq:belongsTo a owl:ObjectProperty ; rdfs:domain gq:TextLabel ; rdfs:range gq:UIPanel ;
     rdfs:comment "텍스트가 속한 패널" .

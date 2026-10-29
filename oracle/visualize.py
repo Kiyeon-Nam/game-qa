@@ -15,7 +15,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from pycocotools import mask as cocomask
 
-from game_qa.oracle.graph import GQ, ontology
+from game_qa.ontology.game_ui import class_ids
 
 PALETTE = [
     (31, 119, 180), (255, 127, 14), (44, 160, 44), (148, 103, 189), (140, 86, 75), (227, 119, 194),
@@ -27,7 +27,7 @@ ALPHA = 0.45
 
 @cache
 def class_colors():
-    return {str(c).removeprefix(str(GQ)): PALETTE[int(i) % len(PALETTE)] for c, i in ontology().subject_objects(GQ.classId)}
+    return {c: PALETTE[i % len(PALETTE)] for c, i in class_ids().items()}
 
 
 def decode(segmentation):

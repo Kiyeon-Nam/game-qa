@@ -14,15 +14,15 @@ import json
 import sys
 from pathlib import Path
 
-from game_qa.inferlib.concepts import CLASS_CONCEPTS
 from game_qa.inferlib.infer import PARAMS, infer_frame
+from game_qa.ontology.game_ui import class_ids
 
 
 def load(model_path):
     from ultralytics import YOLO  # 학습 환경 의존성. 다른 함수는 없이 사용 가능
 
     model = YOLO(str(model_path), task="segment")
-    unknown = sorted(set(model.names.values()) - set(CLASS_CONCEPTS))
+    unknown = sorted(set(model.names.values()) - class_ids().keys())
     if unknown:
         raise ValueError(f"라벨링 클래스가 아닌 모델 클래스: {', '.join(unknown)}")
     return model

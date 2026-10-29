@@ -7,14 +7,13 @@
 """
 
 import re
-from pathlib import Path
 
 from rdflib import RDF, BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import XSD
 
-GQ = Namespace("https://github.com/Kiyeon-Nam/game-qa/ontology#")
+from game_qa.ontology.game_ui import GQ
+
 INST = Namespace("urn:game-qa:instance:")
-ONTOLOGY = Path(__file__).resolve().parents[1] / "ontology" / "game_ui.ttl"
 SCREEN = "ScreenBounds"
 
 
@@ -56,6 +55,3 @@ def to_graph(result):
         g.add((n, GQ.value, Literal(m["value"], datatype=XSD.double)))
     return g
 
-
-def ontology():
-    return Graph().parse(ONTOLOGY)
