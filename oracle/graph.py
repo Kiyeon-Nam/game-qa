@@ -6,6 +6,7 @@
 - 측정값: Measurement 노드 (measuredSubject, measuredObject, value)
 """
 
+import re
 from pathlib import Path
 
 from rdflib import RDF, BNode, Graph, Literal, Namespace, URIRef
@@ -30,6 +31,11 @@ def instance_id(uri):
 def measurement_class(name):
     """측정값 이름(snake_case)을 온톨로지 클래스로. overlap_ratio → OverlapRatio"""
     return GQ["".join(part.capitalize() for part in name.split("_"))]
+
+
+def measurement_name(cls):
+    """measurement_class의 역. OverlapRatio → overlap_ratio"""
+    return re.sub(r"(?<!^)(?=[A-Z])", "_", str(cls).removeprefix(str(GQ))).lower()
 
 
 def to_graph(result):

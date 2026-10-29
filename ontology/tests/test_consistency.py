@@ -109,3 +109,16 @@ def test_rules():
     for name, shape in shapes.items():
         message = str(rules.value(rules.value(shape, SH.sparql), SH.message))
         assert message.split()[0] == name[:5], name
+
+
+def test_rule_requirements(graph):
+    """형상마다 선언한 파라미터·측정값 클래스가 질의가 읽는 것과 같음"""
+    rules = rdflib.Graph().parse(ROOT / "rules.ttl")
+    gqr = Namespace("https://github.com/Kiyeon-Nam/game-qa/rules#")
+    measurements = {local(s) for s in graph.subjects(RDFS.subClassOf, GQ.Measurement)}
+    for shape in rules.subjects(RDF.type, SH.NodeShape):
+        query = str(rules.value(rules.value(shape, SH.sparql), SH.select))
+        params = {str(p) for p in rules.objects(shape, gqr.param)}
+        assert params == set(re.findall(r'gqr:name\s+"(\w+)"', query)), local(shape)
+        declared = {local(rules.value(m, gqr.measurement)) for m in rules.objects(shape, gqr.measures)}
+        assert declared == set(re.findall(r"a gq:(\w+)", query)) & measurements, local(shape)

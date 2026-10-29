@@ -3,12 +3,10 @@
 - 검증 엔진: pySHACL. 그래프 저장소는 Oxigraph(oxrdflib)로 두어 SPARQL을 Oxigraph가 실행
   (rdflib 기본 저장소는 조인이 많은 규칙에서 프레임 하나에 수십 초 이상)
 - 상위 개념: 검증 시 추론 대신 온톨로지의 하위 클래스 관계로 인스턴스 타입을 미리 펼침
-- 검증 전 확인: 규칙이 읽는 파라미터, 규칙이 쓰는 측정값의 누락 (빠지면 위반이 조용히 바뀜)
+- 검증 전 확인: 규칙 형상이 선언한 파라미터·측정값의 누락 (빠지면 위반이 조용히 바뀜)
 """
 
-import re
 from functools import cache
-from itertools import combinations
 from pathlib import Path
 
 import owlrl
@@ -16,7 +14,7 @@ from pyshacl import validate as shacl_validate
 from rdflib import RDF, RDFS, BNode, Graph, Literal, Namespace
 from rdflib.namespace import SH, XSD
 
-from game_qa.oracle.graph import GQ, instance_id, ontology, to_graph
+from game_qa.oracle.graph import GQ, instance_id, measurement_name, ontology, to_graph
 
 GQR = Namespace("https://github.com/Kiyeon-Nam/game-qa/rules#")
 RULES = Path(__file__).resolve().parents[1] / "ontology" / "rules.ttl"
@@ -36,10 +34,6 @@ def superclasses():
 @cache
 def rules():
     return Graph().parse(RULES)
-
-
-def has(cls, concept):
-    return GQ[cls] == GQ[concept] or GQ[concept] in superclasses().get(GQ[cls], ())
 
 
 def data_graph(result, params, store="Oxigraph"):
@@ -62,31 +56,37 @@ def data_graph(result, params, store="Oxigraph"):
 
 
 def required_params():
-    """규칙 질의가 읽는 파라미터 이름"""
-    queries = " ".join(str(q) for q in rules().objects(None, SH.select))
-    return set(re.findall(r'gqr:name\s+"(\w+)"', queries))
+    """규칙 형상이 선언한 파라미터 이름 (gqr:param)"""
+    return {str(p) for p in rules().objects(None, GQR.param)}
+
+
+@cache
+def required_measurements():
+    """규칙 형상이 선언한 측정값 (gqr:measures). (측정값 이름, 주체 개념, 대상 개념, 대칭 여부) 집합"""
+    g = rules()
+    return {
+        (measurement_name(g.value(n, GQR.measurement)), frozenset(g.objects(n, GQR.subject)), frozenset(g.objects(n, GQR.object)), bool(g.value(n, GQR.symmetric)))
+        for n in g.objects(None, GQR.measures)
+    }
 
 
 def missing_measurements(result):
-    """규칙이 쓰는 측정값 중 추론 결과에 없는 것. (측정값 이름, 인자) 목록"""
+    """규칙이 선언한 측정값 중 추론 결과에 없는 것. (측정값 이름, 인자) 목록, 이름·인자 순"""
     have = {(m["name"], tuple(m["args"])) for m in result["measurements"]}
-    classes = {x["id"]: x["class"] for x in result["instances"]}
+    classes = {x["id"]: GQ[x["class"]] for x in result["instances"]}
 
-    def of(*concepts):
-        return [i for i, c in classes.items() if all(has(c, k) for k in concepts)]
+    def of(concepts):
+        return [i for i, c in classes.items() if concepts <= {c} | superclasses().get(c, set())]
 
-    world = of("Display", "World")
-    need = [("distance", (i, e)) for i in world for e in of("Entity")]
-    need += [("foreground_coverage", (i,)) for i in world + of("GroundedObject")]
-    need += [("overlap_ratio", (a,)) for a in of("Character") + of("LooseObject")]
-    need += [("support_gap", (o,)) for o in of("GroundedObject")]
-    need += [("edge_distance", (q, c)) for q in of("Equipment") for c in of("Character")]
-    need += [("contain_ratio", (p, x)) for p in of("UIPanel") for x in of("TextLabel")]
-    missing = [n for n in need if n not in have]
-    for a, b in combinations(of("HUDElement"), 2):
-        if ("mutual_overlap", (a, b)) not in have and ("mutual_overlap", (b, a)) not in have:
-            missing.append(("mutual_overlap", (a, b)))
-    return missing
+    missing = set()
+    for name, subject, object_, symmetric in required_measurements():
+        need = [(i, e) for i in of(subject) for e in of(object_)] if object_ else [(i,) for i in of(subject)]
+        if symmetric:
+            need = {tuple(sorted(p)) for p in need if p[0] != p[1]}
+        for args in need:
+            if (name, args) not in have and not (symmetric and (name, args[::-1]) in have):
+                missing.add((name, args))
+    return sorted(missing)
 
 
 def violations(result, params, store="Oxigraph"):

@@ -96,7 +96,7 @@ ontology/
 ├── 2_concepts.md    [절차 5] 축, 개념 정의, 조합 개념·라벨링 클래스
 ├── 3_relations.md   [절차 6] 관계, 측정값
 ├── game_ui.ttl      [절차 5, 6] 온톨로지 파일 (OWL). 개념, 라벨링 클래스, 관계, 측정값 정의
-├── rules.ttl        [절차 3, 4] 규칙 SHACL 형상 (SHACL-SPARQL). 파라미터는 검증 시 데이터로 추가
+├── rules.ttl        [절차 3, 4] 규칙 SHACL 형상 (SHACL-SPARQL). 형상마다 읽는 파라미터·측정값 선언. 파라미터 값은 검증 시 데이터로 추가
 ├── tests/           md와 온톨로지 파일 정의 일치 테스트
 └── mappings/        [절차 7] 게임별 매핑. 첫 매핑 작성 시 생성
 ```
