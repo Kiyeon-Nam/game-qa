@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 import rdflib
 from rdflib import OWL, RDF, RDFS, SH, Namespace
+from rdflib.plugins.sparql import prepareQuery
 
 ROOT = Path(__file__).resolve().parents[1]
 GQ = Namespace("https://github.com/Kiyeon-Nam/game-qa/ontology#")
@@ -123,6 +124,26 @@ def test_rules():
     for name, shape in shapes.items():
         message = str(rules.value(rules.value(shape, SH.sparql), SH.message))
         assert message.split()[0] == name[:5], name
+
+
+def test_rule_messages():
+    """결과 메시지 형식 "<규칙 ID> <대상 ...>"이 질의와 맞음 (validate.py가 메시지에서 대상을 읽음)
+    - 대상 변수: SELECT 변수와 순서까지 같음
+    - "|": 마지막 변수 앞에만, 그 변수는 GROUP_CONCAT 목록"""
+    rules = rdflib.Graph().parse(ROOT / "rules.ttl")
+    for shape in rules.subjects(RDF.type, SH.NodeShape):
+        sparql = rules.value(shape, SH.sparql)
+        prefixes = {str(rules.value(d, SH.prefix)): str(rules.value(d, SH.namespace)) for d in rules.objects(rules.value(sparql, SH.prefixes), SH.declare)}
+        query = str(rules.value(sparql, SH.select))
+        projected = [str(v) for v in prepareQuery(query, initNs=prefixes).algebra["PV"]]
+        _, *parts = str(rules.value(sparql, SH.message)).split()
+        variables = [re.fullmatch(r"\{[?$](\w+)\}", p).group(1) for p in parts if p != "|"]
+        assert variables == projected, local(shape)
+        lists = re.findall(r"GROUP_CONCAT\(.*?\)\s+AS\s+\?(\w+)", query, re.S)
+        if "|" in parts:
+            assert parts.index("|") == len(parts) - 2 and lists == variables[-1:], local(shape)
+        else:
+            assert not lists, local(shape)
 
 
 def test_rule_requirements(graph):
