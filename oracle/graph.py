@@ -7,14 +7,13 @@
 """
 
 import re
-from pathlib import Path
 
 from rdflib import RDF, BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import XSD
 
-GQ = Namespace("https://github.com/Kiyeon-Nam/game-qa/ontology#")
+from game_qa.ontology.game_ui import GQ, ONTOLOGY
+
 INST = Namespace("urn:game-qa:instance:")
-ONTOLOGY = Path(__file__).resolve().parents[1] / "ontology" / "game_ui.ttl"
 SCREEN = "ScreenBounds"
 
 

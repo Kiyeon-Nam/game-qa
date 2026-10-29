@@ -11,8 +11,8 @@ from pathlib import Path
 import numpy as np
 
 from game_qa.inferlib import measurements, relations
-from game_qa.inferlib.concepts import has
 from game_qa.inferlib.masks import decode, encode
+from game_qa.ontology.game_ui import has
 
 PARAMS = ("search_radius", "fg_search_radius", "support_gap_max")
 SCREEN = "ScreenBounds"

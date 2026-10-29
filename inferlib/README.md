@@ -1,7 +1,6 @@
 4. C++ 추론 라이브러리
 
 python_ref/ : 후처리 Python 구현 (정답지)
-- `concepts.py`: 라벨링 클래스별 개념
 - `masks.py`: COCO 마스크 변환, bbox, 이웃 픽셀
 - `measurements.py`: 측정값 계산
 - `relations.py`: 관계 결정
