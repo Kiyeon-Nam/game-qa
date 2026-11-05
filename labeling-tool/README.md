@@ -1,8 +1,9 @@
-3. AI 라벨링 도구
+# AI 라벨링 도구
+
 - `labeling_guide_v0.md`: 클래스 목록, 라벨링 가이드
 - 초기 라벨링: 자체 도구 전까지 Label Studio 사용
   - `from_label_studio.py`: Label Studio JSON 내보내기를 라벨 파일(`schemas/label.schema.json`)로 변환
-  - 설치: `pip install label-studio`, 레포 루트에서 `pip install -e .`, `pip install -r labeling-tool/requirements.txt`
+  - 설치: [환경 세팅](../README.md#환경-세팅-방법) 후 `pip install label-studio`, `pip install -r labeling-tool/requirements.txt`
   - 실행: `label-studio start` 후 브라우저에서 프로젝트 생성
     - 라벨링 설정: `python -m game_qa.labeling_tool.from_label_studio --config` 출력을 붙여넣기
     - 이미지 가져오기, 라벨링 후 JSON 형식으로 내보내기

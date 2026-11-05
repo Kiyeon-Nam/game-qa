@@ -17,9 +17,10 @@
 - 접근:검사할 상황을 열거하는 대신 화면 요소들이 항상 만족해야 하는 관계를 규칙으로 정의하고 위반을 검사하며, 개념과 규칙을 온톨로지로 구성
 - 구성 요소
     - 게임 UI 온톨로지: 개념 계층·관계·규칙 정의. 사용자는 자기 게임 요소를 개념에 연결만 함
+    - 판정기: 추론 결과를 그래프로 바꿔 규칙으로 검증하고, 위반 규칙·대상 객체를 리포트·시각화로 제시
     - 세그멘테이션 모델: 화면을 공통 개념의 객체로 인식 (인스턴스 세그멘테이션)
     - AI 라벨링 도구: 모델 사전 라벨링으로 학습 데이터 구축 공수 절감
-    - C++ 추론 라이브러리: Python 외 환경에서도 동일한 추론·후처리 제공 (기업 연계)
+    - 추론 라이브러리: 세그멘테이션 결과에서 측정값·관계 계산. C++ 라이브러리로 Python 외 환경에서도 동일한 추론·후처리 제공 (기업 연계)
 - 검증: 버그 주입 테스트셋으로 판정 정확도·근거 일치율 측정, 신규 게임 적용 시 온톨로지 규칙과 하드코딩 규칙의 수정량 비교
 
 ### 기대효과
@@ -35,12 +36,12 @@
 
 ```
 입력(플레이 녹화/스크린샷)
- → ① 프레임 추출           inferlib/
+ → ① 프레임 추출           oracle/
  → ② 세그멘테이션          training/, inferlib/
  → ③ 후처리·공간 관계 계산  inferlib/
  → ④ 그래프 변환           oracle/
  → ⑤ 규칙 검증             oracle/ + ontology/
- → ⑥ 리포트 생성           oracle/
+ → ⑥ 리포트·시각화         oracle/
 ```
 
 구성 요소 사이에 주고받는 JSON 형식은 `schemas/`에 정의
@@ -51,18 +52,25 @@
 game-qa/
 ├── docs/               설계 문서
 ├── ontology/           게임 UI 온톨로지: 개념, 관계, 규칙 정의
-├── oracle/             판정기: 그래프 변환, 규칙 검증, 판정 리포트
+├── oracle/             판정기: 프레임 추출, 그래프 변환, 규칙 검증, 리포트·시각화
 ├── training/           세그멘테이션 모델과 학습 파이프라인
 ├── labeling-tool/      AI 라벨링 도구
-├── inferlib/           C++ 추론 라이브러리
-│   ├── cpp/            C++ 구현
-│   ├── python_ref/     후처리 Python 구현 (C++ 구현의 정답지)
-│   └── bindings/       Python 바인딩
+├── inferlib/           추론 라이브러리
+│   ├── python_ref/     Python 구현 (C++ 구현의 정답지)
+│   ├── cpp/            C++ 구현 (비어 있음)
+│   └── bindings/       Python 바인딩 (비어 있음)
 ├── schemas/            구성 요소 간 JSON 형식
 └── data/               데이터셋
-    └── labels/         라벨 (COCO instance segmentation + relations)
+    ├── labels/         라벨 (COCO instance segmentation + relations)
+    └── screens/        화면 수집 목록 (이미지는 레포 밖)
 ```
 
 ## 환경 세팅 방법
 
-작성 예정
+- Python 3.10 이상
+- 레포 루트에서 `pip install -e .`
+  - 모듈 폴더를 `game_qa` 패키지로 연결 (`game_qa.ontology`, `game_qa.oracle`, `game_qa.inferlib`, `game_qa.training`, `game_qa.labeling_tool`)
+  - 온톨로지·스키마 파일을 레포 경로로 읽으므로 편집 모드 설치만 지원
+- 모듈별 의존성: 각 모듈 README의 설치 항목
+- 실행: `python -m game_qa.<모듈>.<파일>` (예: `python -m game_qa.oracle.run`)
+- 테스트: `pytest ontology/tests inferlib/python_ref oracle training labeling-tool`

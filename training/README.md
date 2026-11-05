@@ -1,10 +1,11 @@
-2. 세그멘테이션 모델 및 학습 파이프라인
+# 세그멘테이션 모델 및 학습 파이프라인
+
 - 라벨 → YOLO 데이터셋 변환, 학습, ONNX 내보내기 (구축 루프 ②·③·출력)
 - `convert.py`: 라벨(`schemas/label.schema.json`)을 Ultralytics YOLO 세그멘테이션 데이터셋으로 변환, 학습·검증 분할
 - `train.py`: 설정 파일로 학습 후 ONNX 내보내기
 - `configs/`: 모델별 학습 설정. 기본 `yolo11n-seg`, 비교용 `yolo26n-seg`
   - 모델 비교는 같은 data.yaml로 설정 파일만 바꿔 학습
-- 설치: torch를 실행 환경(CPU·GPU)에 맞게 설치한 뒤 레포 루트에서 `pip install -e .`, `pip install -r training/requirements.txt`
+- 설치: [환경 세팅](../README.md#환경-세팅-방법) 후 torch를 실행 환경(CPU·GPU)에 맞게 설치하고 `pip install -r training/requirements.txt`
 - 실행
   - 변환: `python -m game_qa.training.convert <이미지 폴더> <출력 폴더> <라벨.json ...> [--val 0.2] [--seed 0]`
   - 학습: `python -m game_qa.training.train <설정.yaml> <data.yaml> <출력 폴더> [인자=값 ...]`
