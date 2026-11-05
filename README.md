@@ -52,7 +52,7 @@
 game-qa/
 ├── docs/               설계 문서
 ├── ontology/           게임 UI 온톨로지: 개념, 관계, 규칙 정의
-├── oracle/             판정기: 그래프 변환, 규칙 검증, 판정 리포트
+├── oracle/             판정기: 프레임 추출, 그래프 변환, 규칙 검증, 리포트·시각화
 ├── training/           세그멘테이션 모델과 학습 파이프라인
 ├── labeling-tool/      AI 라벨링 도구
 ├── inferlib/           추론 라이브러리
@@ -61,7 +61,8 @@ game-qa/
 │   └── bindings/       Python 바인딩 (비어 있음)
 ├── schemas/            구성 요소 간 JSON 형식
 └── data/               데이터셋
-    └── labels/         라벨 (COCO instance segmentation + relations)
+    ├── labels/         라벨 (COCO instance segmentation + relations)
+    └── screens/        화면 수집 목록 (이미지는 레포 밖)
 ```
 
 ## 환경 세팅 방법
