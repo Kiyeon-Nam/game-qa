@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 import rdflib
-from rdflib import OWL, RDF, RDFS, SH, Namespace
+from rdflib import OWL, RDF, RDFS, SH, Literal, Namespace
 from rdflib.plugins.sparql import prepareQuery
 from rdflib.plugins.sparql.parserutils import CompValue
 
@@ -114,7 +114,7 @@ def test_measurements(graph):
     ttl_sigs = {signature(comment(graph, local(s))) for s in graph.subjects(RDFS.subClassOf, GQ.Measurement)}
     assert md_sigs == ttl_sigs
     md_symmetric = {signature(r[0])[0] for r in rows(md("3_relations.md"), 4)[1:] if "인자 순서 무관" in r[2]}
-    ttl_symmetric = {signature(comment(graph, local(s)))[0] for s in graph.subjects(GQ.symmetric, None)}
+    ttl_symmetric = {signature(comment(graph, local(s)))[0] for s in graph.subjects(GQ.symmetric, Literal(True))}
     assert md_symmetric == ttl_symmetric
 
 
@@ -171,7 +171,7 @@ def test_rule_messages():
 def test_rule_requirements(graph):
     """형상마다 선언한 파라미터·측정값 클래스가 질의가 읽는 것과 같음
     - 측정값 선언의 주체·대상 개념 중에 형상의 대상 클래스(sh:targetClass)가 있음
-    - 관계로 한정한 측정값은 질의가 그 관계를 읽음"""
+    - 관계로 한정한 측정값: 관계가 온톨로지에 있고, 정의역·치역이 선언의 주체·대상 개념과 같음(owl:inverseOf면 반대), 질의가 그 관계를 읽음"""
     rules = rdflib.Graph().parse(ROOT / "rules.ttl")
     gqr = Namespace("https://github.com/Kiyeon-Nam/game-qa/rules#")
     measurements = {local(s) for s in graph.subjects(RDFS.subClassOf, GQ.Measurement)}
@@ -187,5 +187,11 @@ def test_rule_requirements(graph):
             assert target in concepts, local(shape)
             rel = rules.value(m, gqr.relation)
             if rel is not None:
-                name = local(rules.value(rel, OWL.inverseOf) or rel)
-                assert f"gq:{name}" in query, local(shape)
+                inverse = rules.value(rel, OWL.inverseOf)
+                prop = inverse if inverse is not None else rel
+                assert (prop, RDF.type, OWL.ObjectProperty) in graph, local(shape)
+                ends = [class_names(graph, graph.value(prop, p)) for p in (RDFS.domain, RDFS.range)]
+                subject, object_ = ends[::-1] if inverse is not None else ends
+                assert subject == {local(c) for c in rules.objects(m, gqr.subject)}, local(shape)
+                assert object_ == {local(c) for c in rules.objects(m, gqr.object)}, local(shape)
+                assert f"gq:{local(prop)}" in query, local(shape)
