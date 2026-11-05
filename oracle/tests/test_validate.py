@@ -174,3 +174,16 @@ def test_missing_measurement_raises():
     f = frame([(1, "HealthBar"), (2, "Character")])
     with pytest.raises(ValueError):
         violations(f, PARAMS)
+
+
+def test_relation_scoped_measurements():
+    """R-008·R-010 조건 1의 측정값은 attachedTo·belongsTo로 이은 쌍만 필요"""
+    loose = {
+        "instances": [{"id": 1, "class": "Equipment"}, {"id": 2, "class": "Character"}, {"id": 3, "class": "TextLabel"}, {"id": 4, "class": "UIPanel"}],
+        "relations": [],
+        "measurements": [],
+    }
+    assert not any(name in ("edge_distance", "contain_ratio") for name, _ in missing_measurements(loose))
+    linked = dict(loose, relations=[{"type": "attachedTo", "subject": 1, "object": 2}, {"type": "belongsTo", "subject": 3, "object": 4}])
+    absent = missing_measurements(linked)
+    assert ("edge_distance", (1, 2)) in absent and ("contain_ratio", (4, 3)) in absent

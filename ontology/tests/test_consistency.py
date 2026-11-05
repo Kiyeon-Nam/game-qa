@@ -113,6 +113,9 @@ def test_measurements(graph):
     md_sigs = {signature(r[0]) for r in rows(md("3_relations.md"), 4)[1:]}
     ttl_sigs = {signature(comment(graph, local(s))) for s in graph.subjects(RDFS.subClassOf, GQ.Measurement)}
     assert md_sigs == ttl_sigs
+    md_symmetric = {signature(r[0])[0] for r in rows(md("3_relations.md"), 4)[1:] if "인자 순서 무관" in r[2]}
+    ttl_symmetric = {signature(comment(graph, local(s)))[0] for s in graph.subjects(GQ.symmetric, None)}
+    assert md_symmetric == ttl_symmetric
 
 
 def test_rules():
@@ -166,7 +169,9 @@ def test_rule_messages():
 
 
 def test_rule_requirements(graph):
-    """형상마다 선언한 파라미터·측정값 클래스가 질의가 읽는 것과 같음"""
+    """형상마다 선언한 파라미터·측정값 클래스가 질의가 읽는 것과 같음
+    - 측정값 선언의 주체·대상 개념 중에 형상의 대상 클래스(sh:targetClass)가 있음
+    - 관계로 한정한 측정값은 질의가 그 관계를 읽음"""
     rules = rdflib.Graph().parse(ROOT / "rules.ttl")
     gqr = Namespace("https://github.com/Kiyeon-Nam/game-qa/rules#")
     measurements = {local(s) for s in graph.subjects(RDFS.subClassOf, GQ.Measurement)}
@@ -176,3 +181,11 @@ def test_rule_requirements(graph):
         assert params == set(re.findall(r'gqr:name\s+"(\w+)"', query)), local(shape)
         declared = {local(rules.value(m, gqr.measurement)) for m in rules.objects(shape, gqr.measures)}
         assert declared == set(re.findall(r"a gq:(\w+)", query)) & measurements, local(shape)
+        target = local(rules.value(shape, SH.targetClass))
+        for m in rules.objects(shape, gqr.measures):
+            concepts = {local(c) for p in (gqr.subject, gqr.object) for c in rules.objects(m, p)}
+            assert target in concepts, local(shape)
+            rel = rules.value(m, gqr.relation)
+            if rel is not None:
+                name = local(rules.value(rel, OWL.inverseOf) or rel)
+                assert f"gq:{name}" in query, local(shape)
