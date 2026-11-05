@@ -65,3 +65,9 @@ def tagged_relations():
 
     relations = sorted(set(g.subjects(GQ.labelingSubject, None)), key=local)
     return {local(r): (having(r, GQ.labelingSubject), having(r, GQ.labelingObject)) for r in relations}
+
+
+@cache
+def symmetric_measurements():
+    """인자 순서와 무관한 측정값 클래스 이름 (gq:symmetric)"""
+    return {local(c) for c, v in graph().subject_objects(GQ.symmetric) if v.toPython() is True}

@@ -9,6 +9,7 @@
 
 gq:axis a owl:AnnotationProperty ; rdfs:comment "개념이 속한 축" .
 gq:classId a owl:AnnotationProperty ; rdfs:comment "라벨링 클래스 ID" .
+gq:symmetric a owl:AnnotationProperty ; rdfs:comment "인자 순서를 바꿔도 값이 같은 측정값" .
 gq:labelingSubject a owl:AnnotationProperty ; rdfs:comment "라벨링에서 태깅하는 관계의 주체 개념 (값이 여럿이면 모두 만족)" .
 gq:labelingObject a owl:AnnotationProperty ; rdfs:comment "라벨링에서 태깅하는 관계의 대상 개념 (값이 여럿이면 모두 만족)" .
 
@@ -79,7 +80,7 @@ gq:Distance a owl:Class ; rdfs:subClassOf gq:Measurement ;
     rdfs:comment "distance(i, e)" .
 gq:OverlapRatio a owl:Class ; rdfs:subClassOf gq:Measurement ;
     rdfs:comment "overlap_ratio(a)" .
-gq:MutualOverlap a owl:Class ; rdfs:subClassOf gq:Measurement ;
+gq:MutualOverlap a owl:Class ; rdfs:subClassOf gq:Measurement ; gq:symmetric true ;
     rdfs:comment "mutual_overlap(a, b)" .
 gq:ContainRatio a owl:Class ; rdfs:subClassOf gq:Measurement ;
     rdfs:comment "contain_ratio(p, x)" .
