@@ -11,9 +11,9 @@ from pathlib import Path
 
 from pyshacl import validate as shacl_validate
 from rdflib import RDF, RDFS, BNode, Graph, Literal, Namespace
-from rdflib.namespace import SH, XSD
+from rdflib.namespace import OWL, SH, XSD
 
-from game_qa.ontology.game_ui import graph, has, local, superclasses
+from game_qa.ontology.game_ui import graph, has, local, superclasses, symmetric_measurements
 from game_qa.oracle.graph import GQ, instance_id, measurement_name, to_graph
 
 GQR = Namespace("https://github.com/Kiyeon-Nam/game-qa/rules#")
@@ -49,12 +49,26 @@ def required_params():
     return {str(p) for p in rules().objects(None, GQR.param)}
 
 
+def relation(node):
+    """gqr:relation 값을 (관계 이름, 반대 방향 여부)로. 없으면 None"""
+    g = rules()
+    if node is None:
+        return None
+    inverse = g.value(node, OWL.inverseOf)
+    return (local(inverse), True) if inverse is not None else (local(node), False)
+
+
 @cache
 def required_measurements():
-    """규칙 형상이 선언한 측정값 (gqr:measures). (측정값 이름, 주체 개념, 대상 개념, 대칭 여부) 집합"""
+    """규칙 형상이 선언한 측정값 (gqr:measures). (측정값 이름, 주체 개념, 대상 개념, 관계) 집합"""
     g = rules()
     return {
-        (measurement_name(g.value(n, GQR.measurement)), frozenset(map(local, g.objects(n, GQR.subject))), frozenset(map(local, g.objects(n, GQR.object))), bool(g.value(n, GQR.symmetric)))
+        (
+            measurement_name(g.value(n, GQR.measurement)),
+            frozenset(map(local, g.objects(n, GQR.subject))),
+            frozenset(map(local, g.objects(n, GQR.object))),
+            relation(g.value(n, GQR.relation)),
+        )
         for n in g.objects(None, GQR.measures)
     }
 
@@ -63,17 +77,31 @@ def missing_measurements(result):
     """규칙이 선언한 측정값 중 추론 결과에 없는 것. (측정값 이름, 인자) 목록, 이름·인자 순"""
     have = {(m["name"], tuple(m["args"])) for m in result["measurements"]}
     classes = {x["id"]: x["class"] for x in result["instances"]}
+    links = {}
+    for r in result["relations"]:
+        links.setdefault(r["type"], []).append((r["subject"], r["object"]))
+    symmetric = {measurement_name(GQ[c]) for c in symmetric_measurements()}
 
     def of(concepts):
         return [i for i, c in classes.items() if has(c, *concepts)]
 
+    def linked(rel, subject, object_):
+        kind, inverse = rel
+        pairs = [p[::-1] if inverse else p for p in links.get(kind, [])]
+        return [(s, o) for s, o in pairs if s in classes and o in classes and has(classes[s], *subject) and has(classes[o], *object_)]
+
     missing = set()
-    for name, subject, object_, symmetric in required_measurements():
-        need = [(i, e) for i in of(subject) for e in of(object_)] if object_ else [(i,) for i in of(subject)]
-        if symmetric:
+    for name, subject, object_, rel in required_measurements():
+        if rel:
+            need = linked(rel, subject, object_)
+        elif object_:
+            need = [(i, e) for i in of(subject) for e in of(object_)]
+        else:
+            need = [(i,) for i in of(subject)]
+        if name in symmetric:
             need = {tuple(sorted(p)) for p in need if p[0] != p[1]}
         for args in need:
-            if (name, args) not in have and not (symmetric and (name, args[::-1]) in have):
+            if (name, args) not in have and not (name in symmetric and (name, args[::-1]) in have):
                 missing.add((name, args))
     return sorted(missing)
 

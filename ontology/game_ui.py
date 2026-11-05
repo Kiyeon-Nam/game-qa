@@ -4,6 +4,7 @@
 - 라벨링 클래스: classId가 있는 클래스
 - 태깅 관계: labelingSubject·labelingObject가 있는 관계
   - 주체·대상: 각 개념을 모두 가진 라벨링 클래스
+- 순서 무관 측정값: gq:symmetric true인 측정값 클래스
 """
 
 from functools import cache
@@ -65,3 +66,9 @@ def tagged_relations():
 
     relations = sorted(set(g.subjects(GQ.labelingSubject, None)), key=local)
     return {local(r): (having(r, GQ.labelingSubject), having(r, GQ.labelingObject)) for r in relations}
+
+
+@cache
+def symmetric_measurements():
+    """인자 순서와 무관한 측정값 클래스 이름 (gq:symmetric)"""
+    return {local(c) for c, v in graph().subject_objects(GQ.symmetric) if v.toPython() is True}
