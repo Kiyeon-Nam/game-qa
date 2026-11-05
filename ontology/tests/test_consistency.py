@@ -7,6 +7,7 @@ import pytest
 import rdflib
 from rdflib import OWL, RDF, RDFS, SH, Namespace
 from rdflib.plugins.sparql import prepareQuery
+from rdflib.plugins.sparql.parserutils import CompValue
 
 ROOT = Path(__file__).resolve().parents[1]
 GQ = Namespace("https://github.com/Kiyeon-Nam/game-qa/ontology#")
@@ -126,22 +127,40 @@ def test_rules():
         assert message.split()[0] == name[:5], name
 
 
+def nodes(algebra):
+    """SPARQL 대수 트리의 모든 노드"""
+    if isinstance(algebra, CompValue):
+        yield algebra
+        for v in algebra.values():
+            yield from nodes(v)
+    elif isinstance(algebra, list):
+        for v in algebra:
+            yield from nodes(v)
+
+
+def group_concat_lists(algebra):
+    """GROUP_CONCAT 결과를 받는 변수 → 구분자 (생략 시 SPARQL 기본값 공백)"""
+    separators = {str(n.res): str(n.separator if n.separator is not None else " ") for n in nodes(algebra) if n.name == "Aggregate_GroupConcat"}
+    return {str(n.var): separators[str(n.expr)] for n in nodes(algebra) if n.name == "Extend" and str(n.expr) in separators}
+
+
 def test_rule_messages():
     """결과 메시지 형식 "<규칙 ID> <대상 ...>"이 질의와 맞음 (validate.py가 메시지에서 대상을 읽음)
     - 대상 변수: SELECT 변수와 순서까지 같음
-    - "|": 마지막 변수 앞에만, 그 변수는 GROUP_CONCAT 목록"""
+    - "|": 마지막 변수 앞에만, 그 변수는 공백으로 이은 GROUP_CONCAT 목록"""
     rules = rdflib.Graph().parse(ROOT / "rules.ttl")
     for shape in rules.subjects(RDF.type, SH.NodeShape):
         sparql = rules.value(shape, SH.sparql)
         prefixes = {str(rules.value(d, SH.prefix)): str(rules.value(d, SH.namespace)) for d in rules.objects(rules.value(sparql, SH.prefixes), SH.declare)}
-        query = str(rules.value(sparql, SH.select))
-        projected = [str(v) for v in prepareQuery(query, initNs=prefixes).algebra["PV"]]
+        algebra = prepareQuery(str(rules.value(sparql, SH.select)), initNs=prefixes).algebra
+        projected = [str(v) for v in algebra["PV"]]
         _, *parts = str(rules.value(sparql, SH.message)).split()
         variables = [re.fullmatch(r"\{[?$](\w+)\}", p).group(1) for p in parts if p != "|"]
         assert variables == projected, local(shape)
-        lists = re.findall(r"GROUP_CONCAT\(.*?\)\s+AS\s+\?(\w+)", query, re.S)
+        lists = {v: sep for v, sep in group_concat_lists(algebra).items() if v in projected}
         if "|" in parts:
-            assert parts.index("|") == len(parts) - 2 and lists == variables[-1:], local(shape)
+            assert parts.index("|") == len(parts) - 2 and list(lists) == variables[-1:], local(shape)
+            assert lists[variables[-1]] == " ", local(shape)
         else:
             assert not lists, local(shape)
 
