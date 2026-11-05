@@ -10,10 +10,11 @@
 #   gqr:param: 파라미터 이름
 #   gqr:measures: 측정값. gqr:measurement 측정값 클래스, gqr:subject·gqr:object 인자의 개념 (값이 여럿이면 모두 만족)
 #     주체·대상 개념을 만족하는 인스턴스 조합마다 측정값 필요. gqr:symmetric true면 두 방향 중 하나만 있으면 됨
-# 결과 메시지 형식: "<규칙 ID> <대상 인스턴스 URI ...>". 대상 순서는 규칙 위반 조건의 변수 순서
+# 대상은 결과 메시지로 전달: SHACL 결과 노드의 대상은 focusNode·value 둘뿐이고,
+#   SELECT 변수를 결과에 넣는 sh:resultAnnotation(SHACL 1.2 초안의 선택 기능)은 pySHACL 미지원
+# 결과 메시지 형식: "<규칙 ID> <대상 인스턴스 URI ...>". 대상 순서는 규칙 위반 조건의 변수 순서 (= SELECT 변수 순서)
 # 거리가 같은 대상은 인스턴스 id 순으로 앞섬 (id = 인스턴스 URI의 "instance:" 뒤 정수)
-# "|" 뒤의 대상은 순서가 없는 목록. 검증 결과에서 id 순으로 정렬
-#   (대상이 여러 개라 SHACL 결과의 value 하나로 담을 수 없음)
+# "|" 뒤의 대상은 순서가 없는 목록 (GROUP_CONCAT). 검증 결과에서 id 순으로 정렬
 
 gqr:prefixes
     sh:declare [ sh:prefix "gq" ; sh:namespace "https://github.com/Kiyeon-Nam/game-qa/ontology#"^^xsd:anyURI ] ,
