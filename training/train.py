@@ -1,6 +1,7 @@
 """세그멘테이션 모델 학습과 ONNX 내보내기
 
 - 설정 파일: Ultralytics 학습 인자 (model 필수). 모델 비교는 설정 파일만 바꿔 같은 data.yaml로 학습
+  - export: ONNX 내보내기 인자 (선택). imgsz는 학습 값을 따름
 - 출력: <출력 폴더>/<설정 파일 이름>/weights/best.pt, best.onnx
 
 실행: python -m game_qa.training.train <설정.yaml> <data.yaml> <출력 폴더> [인자=값 ...]
@@ -16,10 +17,11 @@ from ultralytics import YOLO
 def train(config, data, out_dir, **overrides):
     """ONNX 파일 경로 반환"""
     args = {**yaml.safe_load(Path(config).read_text(encoding="utf-8")), **overrides}
+    export = args.pop("export", None) or {}
     model = YOLO(args.pop("model"))
     model.train(data=str(data), project=str(Path(out_dir).resolve()), name=Path(config).stem, exist_ok=True, **args)
     best = YOLO(model.trainer.best)
-    return Path(best.export(format="onnx", imgsz=args.get("imgsz", 640)))
+    return Path(best.export(format="onnx", imgsz=args.get("imgsz", 640), **export))
 
 
 def main(config, data, out_dir, *pairs):

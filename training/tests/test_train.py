@@ -4,6 +4,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+import yaml
 
 from game_qa.training.convert import convert
 
@@ -43,3 +44,8 @@ def test_train_and_export_onnx(tmp_path, config):
     data = convert(tmp_path, tmp_path / "dataset", [synthetic_labels(tmp_path)])
     onnx = train(CONFIGS / config, data, tmp_path / "runs", epochs=1, imgsz=SIZE, batch=2, device="cpu", workers=0, plots=False)
     assert onnx.suffix == ".onnx" and onnx.exists()
+    import onnx as onnx_lib
+
+    meta = {p.key: p.value for p in onnx_lib.load(str(onnx)).metadata_props}
+    nms_free = (yaml.safe_load((CONFIGS / config).read_text(encoding="utf-8")).get("export") or {}).get("nms") is False
+    assert (meta.get("end2end") == "True") == nms_free
