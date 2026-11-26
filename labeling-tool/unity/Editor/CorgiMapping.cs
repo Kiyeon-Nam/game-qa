@@ -35,12 +35,15 @@ namespace GameQa.Extract
             this.hudGroups = hudGroups;
             // 가이드 4장: Terrain은 캐릭터가 부딪히는 것, Platform은 아래에서 통과 가능한 것. 계단은 Terrain
             solid = reference.PlatformMask;
-            oneWay = reference.OneWayPlatformMask | reference.MovingOneWayPlatformMask | reference.MidHeightOneWayPlatformMask;
+            oneWay = OneWayMask(reference);
             stairs = reference.StairsMask;
             // 가이드 5장 7: 조준 표시는 v0에서 칠하지 않음
             reticles = new HashSet<GameObject>(Object.FindObjectsByType<WeaponAim>(FindObjectsSortMode.None)
                 .Select(a => ReticleField.GetValue(a) as GameObject).Where(r => r != null));
         }
+
+        /// <summary>아래에서 통과 가능한 발판 레이어</summary>
+        public static int OneWayMask(CorgiController c) => c.OneWayPlatformMask | c.MovingOneWayPlatformMask | c.MidHeightOneWayPlatformMask;
 
         // 가이드 1장: 이펙트·파티클은 칠하지 않음. 반투명이라 뒤가 보이므로 가리지도 않음 (2-1)
         public bool SeeThrough(Renderer r) => r is ParticleSystemRenderer || r is TrailRenderer;

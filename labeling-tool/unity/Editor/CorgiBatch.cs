@@ -133,7 +133,7 @@ namespace GameQa.Extract
             if (player.ConditionState.CurrentState != CharacterStates.CharacterConditions.Normal) return "상태 " + player.ConditionState.CurrentState;
             if (!controller.State.IsGrounded) return "공중";
             if (!bounds.Contains(new Vector3(player.transform.position.x, player.transform.position.y, bounds.center.z))) return "레벨 경계 밖";
-            int solidOnly = controller.PlatformMask & ~(controller.OneWayPlatformMask | controller.MovingOneWayPlatformMask | controller.MidHeightOneWayPlatformMask);
+            int solidOnly = controller.PlatformMask & ~CorgiMapping.OneWayMask(controller);
             if (Physics2D.OverlapBox(controller.ColliderCenterPosition, controller.ColliderSize * 0.9f, 0f, solidOnly) != null) return "지형과 겹침";
             return null;
         }
