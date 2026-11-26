@@ -7,6 +7,7 @@
 - `report.py`: 판정 리포트 생성. 위반 규칙·대상 인스턴스·프레임 (판정 파이프라인 ⑥)
 - `visualize.py`: 판정 결과 시각화. 원본 이미지에 클래스별 마스크, 위반 대상 상자·규칙 ID 표시 (판정 파이프라인 ⑥)
 - `run.py`: 영상·이미지 → 프레임 추출 → 세그멘테이션 → 리포트 → 시각화를 한 번에 실행
+- `evaluate.py`: 정답 위반과 판정 리포트 비교. (프레임, 규칙) 단위 precision·recall, 근거 일치율(위반 대상 집합 일치 비율)
 - 설치: [환경 세팅](../README.md#환경-세팅-방법) 후 `pip install -r oracle/requirements.txt`
 - 프레임 추출: `python -m game_qa.oracle.frames <출력 폴더> <영상·이미지 ...> [--step 1]`
   - 출력: 프레임 이미지, frames.json (file, source, index)
@@ -17,4 +18,7 @@
   - 파라미터 파일: 추론(`inferlib/README.md`)과 규칙이 읽는 값을 함께 담은 JSON
   - 추가 설치: `training/README.md`의 학습 환경, `inferlib/python_ref/requirements.txt`
   - 출력: frames/, results/(추론 결과), reports/(리포트), images/(시각화)
+- 평가: `python -m game_qa.oracle.evaluate <정답 폴더> <리포트 폴더> [--labels <라벨.json> --results <추론 결과 폴더>]`
+  - 정답: 판정 리포트 형식, 대상 id는 라벨 인스턴스 id
+  - 모델 추론 결과는 `--labels`·`--results`로 인스턴스를 라벨에 대응 (같은 클래스, 마스크 IoU 0.5 이상, 초안)
 - 테스트: `pytest oracle`
