@@ -54,7 +54,7 @@ game-qa/
 ├── ontology/           게임 UI 온톨로지: 개념, 관계, 규칙 정의
 ├── oracle/             판정기: 프레임 추출, 그래프 변환, 규칙 검증, 리포트·시각화
 ├── training/           세그멘테이션 모델과 학습 파이프라인
-├── labeling-tool/      AI 라벨링 도구
+├── labeling-tool/      라벨 구축: 라벨링 가이드, AI 라벨링 도구, 엔진 추출
 ├── inferlib/           추론 라이브러리
 │   ├── python_ref/     Python 구현 (C++ 구현의 정답지)
 │   ├── cpp/            C++ 구현 (비어 있음)
