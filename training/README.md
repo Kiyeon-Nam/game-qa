@@ -4,6 +4,7 @@
 - `convert.py`: 라벨(`schemas/label.schema.json`)을 Ultralytics YOLO 세그멘테이션 데이터셋으로 변환, 학습·검증 분할
 - `train.py`: 설정 파일로 학습 후 ONNX 내보내기
 - `configs/`: 모델별 학습 설정. 기본 `yolo11n-seg`, 비교용 `yolo26n-seg`
+  - `export`: ONNX 내보내기 인자. `yolo26n-seg`는 NMS 없는 출력 헤드(`nms: false`)
   - 모델 비교는 같은 data.yaml로 설정 파일만 바꿔 학습
 - 설치: [환경 세팅](../README.md#환경-세팅-방법) 후 torch를 실행 환경(CPU·GPU)에 맞게 설치하고 `pip install -r training/requirements.txt`
 - 실행

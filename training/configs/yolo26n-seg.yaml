@@ -1,3 +1,6 @@
 # 비교용 모델. model 외 인자는 Ultralytics 기본값
 model: yolo26n-seg.pt
 seed: 0
+# NMS 없는 출력 헤드로 내보냄. Ultralytics는 nms=False일 때만 이 헤드를 씀 (기본은 외부 NMS)
+export:
+  nms: false
