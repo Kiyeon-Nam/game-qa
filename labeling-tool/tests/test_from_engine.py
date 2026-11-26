@@ -7,7 +7,7 @@ import pytest
 from PIL import Image
 from pycocotools import mask as cocomask
 
-from game_qa.labeling_tool.from_engine import compose
+from game_qa.labeling_tool.from_engine import compose, main
 
 ROOT = Path(__file__).resolve().parents[2]
 H, W = 40, 60
@@ -26,6 +26,7 @@ def write(folder, world, ui=(), relations=(), occluder=None):
             rgb[m] = color(i)
         entries.append({"id": i, "color": color(i), "class": cls, "engine": f"e{i}"})
     Image.fromarray(rgb).save(folder / "ids.png")
+    Image.fromarray(np.zeros((H, W, 3), np.uint8)).save(folder / "frame.png")
     ui_entries = []
     for i, cls, m in ui:
         Image.fromarray(m.astype(np.uint8) * 255).save(folder / f"ui_{i}.png")
@@ -113,3 +114,25 @@ def test_relation_outside_guide_rejected(tmp_path):
 def test_unknown_class_rejected(tmp_path):
     with pytest.raises(ValueError):
         compose(write(tmp_path, [(1, "Spike", [box(10, 10, 20, 20)])]))
+
+
+def test_batch_folders_merged(tmp_path, capsys):
+    """일괄 추출 루트 → 이미지 폴더 이름으로 복사, 이미지·annotation id 이어서, 관계도 따라 이동. 매핑 누락은 경고"""
+    root = tmp_path / "batch"
+    a, b = root / "corgi_A_00", root / "corgi_B_00"
+    a.mkdir(parents=True)
+    b.mkdir()
+    write(a, [(1, "Character", [box(10, 10, 20, 20)])])
+    write(b, [(1, "Character", [box(10, 10, 20, 30)]), (2, "Equipment", [box(20, 20, 30, 25)])], relations=[("attachedTo", 2, 1)])
+    meta = json.loads((b / "meta.json").read_text(encoding="utf-8"))
+    meta["unmapped"] = ["Canvas/Logo"]
+    (b / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
+    out, images = tmp_path / "label.json", tmp_path / "images"
+    main([str(out), str(images), str(root)])
+    label = json.loads(out.read_text(encoding="utf-8"))
+    jsonschema.validate(label, json.loads((ROOT / "schemas" / "label.schema.json").read_text(encoding="utf-8")))
+    assert [(i["id"], i["file_name"]) for i in label["images"]] == [(1, "corgi_A_00.png"), (2, "corgi_B_00.png")]
+    assert sorted(p.name for p in images.iterdir()) == ["corgi_A_00.png", "corgi_B_00.png"]
+    assert [(x["id"], x["image_id"]) for x in label["annotations"]] == [(1, 1), (2, 2), (3, 2)]
+    assert label["relations"] == [{"type": "attachedTo", "subject": 3, "object": 2}]
+    assert "corgi_B_00" in capsys.readouterr().err
