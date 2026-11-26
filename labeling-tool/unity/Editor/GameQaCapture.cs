@@ -37,6 +37,8 @@ namespace GameQa.Extract
         Camera ScreenCamera { get; }
         /// <summary>렌더러의 인스턴스. 칠하지 않으면 null (그래도 뒤를 가림)</summary>
         Instance? Classify(Renderer renderer);
+        /// <summary>뒤가 비치는 효과(파티클 등): 월드 ID 렌더에서 그리지 않음</summary>
+        bool SeeThrough(Renderer renderer);
         /// <summary>월드 공간 UI 단위 (개체를 따라다니는 체력바 등). 월드 ID 렌더에 포함</summary>
         IEnumerable<Unit> WorldUnits();
         /// <summary>화면 UI 단위. visible: 보이는 화면 UI Graphic</summary>
@@ -59,6 +61,8 @@ namespace GameQa.Extract
             public List<WorldEntry> world = new List<WorldEntry>();
             public List<UiEntry> ui = new List<UiEntry>();
             public List<RelationEntry> relations = new List<RelationEntry>();
+            /// <summary>보이지만 어떤 화면 UI 단위에도 없는 Graphic (매핑 누락 검수용)</summary>
+            public List<string> unmapped = new List<string>();
         }
 
         /// <summary>ID → 색. R·G: ID, B: 검사값 (혼합된 픽셀 검출). 0은 배경</summary>
@@ -115,12 +119,19 @@ namespace GameQa.Extract
 
                 // 월드 ID 렌더: 모든 렌더러를 ID 단색으로 (칠하지 않는 것은 0으로 그려 뒤를 가림)
                 var renderers = new List<(Renderer, Material[])>();
+                var hidden = new List<Renderer>();
                 var graphics = new List<(Graphic, Material)>();
                 try
                 {
                     foreach (var r in Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None))
                     {
                         if (!r.enabled || !r.gameObject.activeInHierarchy) continue;
+                        if (mapping.SeeThrough(r))
+                        {
+                            r.enabled = false;
+                            hidden.Add(r);
+                            continue;
+                        }
                         var x = mapping.Classify(r);
                         var m = IdMaterial(x.HasValue ? IdOf(x.Value, PathOf(x.Value.Owner)) : 0);
                         renderers.Add((r, r.sharedMaterials));
@@ -145,6 +156,7 @@ namespace GameQa.Extract
                 finally
                 {
                     foreach (var (r, ms) in renderers) r.sharedMaterials = ms;
+                    foreach (var r in hidden) r.enabled = true;
                     foreach (var (g, m) in graphics) g.material = m;
                 }
 
@@ -164,9 +176,11 @@ namespace GameQa.Extract
                     try
                     {
                         int k = 0;
+                        var covered = new HashSet<Graphic>();
                         foreach (var u in mapping.ScreenUnits(visible))
                         {
                             var inUnit = new HashSet<Graphic>(u.Graphics);
+                            covered.UnionWith(inUnit);
                             foreach (var g in visible) g.material = inUnit.Contains(g) ? white : black;
                             Canvas.ForceUpdateCanvases();
                             RenderIds(screen, rt);
@@ -174,6 +188,7 @@ namespace GameQa.Extract
                             Save(name);
                             meta.ui.Add(new UiEntry { id = ids.Count + meta.ui.Count + 1, mask = name, @class = u.Instance.Class, engine = PathOf(u.Instance.Owner) });
                         }
+                        foreach (var g in visible) if (!covered.Contains(g)) meta.unmapped.Add(PathOf(g));
                         foreach (var g in visible) g.material = white;
                         Canvas.ForceUpdateCanvases();
                         RenderIds(screen, rt);
@@ -185,7 +200,7 @@ namespace GameQa.Extract
                     }
                 }
                 File.WriteAllText(Path.Combine(outDir, "meta.json"), JsonUtility.ToJson(meta, true));
-                return $"world {meta.world.Count}, ui {meta.ui.Count}, relations {meta.relations.Count}";
+                return $"world {meta.world.Count}, ui {meta.ui.Count}, relations {meta.relations.Count}, unmapped ui {meta.unmapped.Count}";
             }
             finally
             {
