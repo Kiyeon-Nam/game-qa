@@ -42,10 +42,13 @@ namespace GameQa.Extract
                 .Select(a => ReticleField.GetValue(a) as GameObject).Where(r => r != null));
         }
 
+        // 가이드 1장: 이펙트·파티클은 칠하지 않음. 반투명이라 뒤가 보이므로 가리지도 않음 (2-1)
+        public bool SeeThrough(Renderer r) => r is ParticleSystemRenderer || r is TrailRenderer;
+
         public Instance? Classify(Renderer r)
         {
-            // 가이드 1장: 이펙트·파티클은 칠하지 않음. 4장: 줄은 칠하지 않음
-            if (r is ParticleSystemRenderer || r is TrailRenderer || r is LineRenderer) return null;
+            // 가이드 4장: 줄은 칠하지 않음. 5장 7: 조준 표시는 v0에서 칠하지 않음
+            if (r is LineRenderer) return null;
             if (reticles.Contains(r.gameObject)) return null;
             // 무기는 캐릭터 아래에 붙으므로 캐릭터보다 먼저
             var weapon = r.GetComponentInParent<Weapon>();
@@ -55,10 +58,13 @@ namespace GameQa.Extract
             Component item = r.GetComponentInParent<PickableItem>();
             if (item == null) item = r.GetComponentInParent<ItemPicker>();
             if (item != null) return new Instance("LooseObject", item);
-            var collider = r.GetComponent<Collider2D>();
-            int bit = 1 << r.gameObject.layer;
-            if (collider != null && !collider.isTrigger && (solid & bit) != 0)
-                return new Instance((oneWay & bit) != 0 && (stairs & bit) == 0 ? "Platform" : "Terrain", r);
+            // 콜라이더가 부모에 있는 구조물 (이동 발판 등)
+            var collider = r.GetComponentInParent<Collider2D>();
+            if (collider == null) return null;
+            int bit = 1 << collider.gameObject.layer;
+            // 컨트롤러는 레이캐스트로 충돌을 판정하므로 queriesHitTriggers면 트리거 콜라이더도 부딪힘
+            if ((!collider.isTrigger || Physics2D.queriesHitTriggers) && (solid & bit) != 0)
+                return new Instance((oneWay & bit) != 0 && (stairs & bit) == 0 ? "Platform" : "Terrain", collider);
             return null;
         }
 
