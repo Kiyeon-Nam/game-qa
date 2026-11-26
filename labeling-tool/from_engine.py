@@ -6,11 +6,16 @@
 - HUDElement·UIPanel: 안쪽 구멍을 채운 전체 영역 (가이드 2-3)
 - 가로·세로 4px 미만 조각은 제외 (가이드 2-4). 조각이 모두 빠진 인스턴스와 그 관계는 제외
 - 관계: 가이드 6장 표(온톨로지 태깅 관계)의 주체·대상 클래스가 아니면 에러
+- 여러 추출 폴더: 이미지는 `<폴더 이름>.png`로 복사, 라벨은 파일 하나로 합침
+  - meta.json이 없는 폴더는 그 아래 추출 폴더들 (일괄 추출 출력 루트)
+  - 매핑되지 않은 화면 UI(meta의 unmapped)가 있는 폴더는 경고 출력
 
-실행: python -m game_qa.labeling_tool.from_engine <추출 폴더> <출력 라벨.json>
+실행: python -m game_qa.labeling_tool.from_engine <출력 라벨.json> <이미지 폴더> <추출 폴더 ...>
 """
 
+import argparse
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -39,7 +44,8 @@ def drop_small(mask):
     return mask
 
 
-def compose(folder):
+def compose(folder, file_name=None):
+    """추출 폴더 하나 → 이미지 하나짜리 라벨. file_name: 라벨의 이미지 이름 (없으면 meta의 원본 이름)"""
     d = Path(folder)
     meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
     ids = class_ids()
@@ -93,16 +99,53 @@ def compose(folder):
         relations.append({"type": r["type"], "subject": s, "object": o})
 
     return {
-        "images": [{"id": 1, "file_name": meta["image"], "width": meta["width"], "height": meta["height"]}],
+        "images": [{"id": 1, "file_name": file_name or meta["image"], "width": meta["width"], "height": meta["height"]}],
         "annotations": annotations,
         "categories": [{"id": i, "name": n} for n, i in sorted(ids.items(), key=lambda kv: kv[1])],
         "relations": relations,
     }
 
 
-def main(folder, out_path):
-    Path(out_path).write_text(json.dumps(compose(folder), ensure_ascii=False), encoding="utf-8")
+def merge(labels):
+    """이미지 하나짜리 라벨들 → 라벨 하나. 이미지·annotation id를 이어서 다시 매김"""
+    out = {"images": [], "annotations": [], "categories": labels[0]["categories"] if labels else [], "relations": []}
+    for label in labels:
+        image_id = len(out["images"]) + 1
+        offset = len(out["annotations"])
+        out["images"] += [{**img, "id": image_id} for img in label["images"]]
+        out["annotations"] += [{**a, "id": a["id"] + offset, "image_id": image_id} for a in label["annotations"]]
+        out["relations"] += [{**r, "subject": r["subject"] + offset, "object": r["object"] + offset} for r in label["relations"]]
+    return out
+
+
+def folders(paths):
+    """추출 폴더 목록. meta.json이 없는 폴더는 그 아래 추출 폴더들"""
+    for p in map(Path, paths):
+        if (p / "meta.json").exists():
+            yield p
+        else:
+            yield from sorted(c for c in p.iterdir() if (c / "meta.json").exists())
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="엔진 추출 결과 → 라벨")
+    parser.add_argument("out")
+    parser.add_argument("images")
+    parser.add_argument("folders", nargs="+")
+    args = parser.parse_args(argv)
+    images = Path(args.images)
+    images.mkdir(parents=True, exist_ok=True)
+    labels = []
+    for d in folders(args.folders):
+        meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+        if meta.get("unmapped"):
+            print(f"경고: {d.name} 매핑되지 않은 화면 UI {len(meta['unmapped'])}개: {', '.join(meta['unmapped'][:5])}", file=sys.stderr)
+        name = f"{d.name}.png"
+        shutil.copyfile(d / meta["image"], images / name)
+        labels.append(compose(d, name))
+    Path(args.out).write_text(json.dumps(merge(labels), ensure_ascii=False), encoding="utf-8")
+    print(f"이미지 {len(labels)}, 인스턴스 {sum(len(x['annotations']) for x in labels)}")
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:])
+    main()
