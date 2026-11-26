@@ -3,3 +3,6 @@ rdflib
 owlrl
 jsonschema
 pytest
+numpy
+scipy
+pillow
